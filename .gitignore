@@ -1,0 +1,11 @@
+# Node Modules
+node_modules/
+
+# Distribution files
+dist
+
+# ESLint
+.eslintcache
+
+# Junit results
+junit.xml

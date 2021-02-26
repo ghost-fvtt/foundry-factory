@@ -1,0 +1,46 @@
+image: node:lts
+
+stages:
+    - test
+    - build
+
+before_script:
+    - yarn install --immutable
+
+cache: &global_cache
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .npm/
+
+before_script:
+  - npm ci --cache .npm --prefer-offline
+
+lint:
+    stage: test
+    script:
+        - npm run lint
+    cache:
+        <<: *global_cache
+
+test:
+    stage: test
+    script:
+        - npm run test:ci
+    cache:
+        <<: *global_cache
+    artifacts:
+        when: always
+        reports:
+            junit:
+                - junit.xml
+
+build:
+    stage: build
+    script:
+        - npm run build
+    cache:
+        <<: *global_cache
+    artifacts:
+        paths:
+            - dist
+        expire_in: 1 week

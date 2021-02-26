@@ -1,0 +1,41 @@
+{
+    "name": "project-name",
+    "title": "project-name",
+    "description": "",
+    "version": "0.0.1",
+    "templateVersion": 1,
+    "author": "",
+    "authors": [
+        {
+            "name": "",
+            "email": ""
+        }
+    ],
+    "minimumCoreVersion": "0.7.9",
+    "compatibleCoreVersion": "0.7.9",
+    "scripts": [],
+    "esmodules": ["module/project-name.js"],
+    "styles": ["css/project-name.css"],
+    "packs": [],
+    "dependencies": [],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "socket": false,
+    "initiative": "",
+    "gridDistance": 1,
+    "gridUnits": "",
+    "primaryTokenAttribute": "",
+    "secondaryTokenAttribute": "",
+    "url": "",
+    "manifest": "",
+    "download": "https://host/path/to/${version}/.zip",
+    "license": "",
+    "readme": "",
+    "bugs": "",
+    "changelog": ""
+}
