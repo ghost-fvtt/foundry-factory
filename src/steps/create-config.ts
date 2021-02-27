@@ -14,7 +14,7 @@ export default async (options: Options): Promise<void> => {
   const spinner = ora('Creating configuration files').start();
 
   try {
-    await createTemplatedConfigsConfig(options);
+    await createTemplatedConfigs(options);
   } catch (err) {
     spinner.fail(chalk.red('Failed to create configuration files'));
     throw err;
@@ -22,7 +22,7 @@ export default async (options: Options): Promise<void> => {
   spinner.succeed(chalk.green('Created configuration files'));
 };
 
-async function createTemplatedConfigsConfig(options: Options) {
+async function createTemplatedConfigs(options: Options) {
   nunjucks.configure(templatePath);
 
   const entryPoint = path.join('src', 'module', `${options.name}${options.typescript ? '.ts' : '.js'}`);

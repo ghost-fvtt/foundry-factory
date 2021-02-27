@@ -7,6 +7,7 @@ import createTemplateJSONIfNeeded from './steps/create-template-json-if-needed';
 import createSource from './steps/create-source';
 import createStyles from './steps/create-styles';
 import createConfig from './steps/create-config';
+import createTestIfNeeded from './steps/create-test-if-needed';
 
 export default async (options: Options): Promise<void> => {
   await createWorkingDir(options);
@@ -16,5 +17,6 @@ export default async (options: Options): Promise<void> => {
   await createTemplateJSONIfNeeded(options);
   await createSource(options);
   await createStyles(options);
+  await createTestIfNeeded(options);
   await createConfig(options);
 };
