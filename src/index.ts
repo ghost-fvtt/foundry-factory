@@ -1,14 +1,13 @@
-#!/usr/bin/env node
 import chalk from 'chalk';
 import { Command } from 'commander';
 import fs from 'fs-extra';
 import path from 'path';
 
-import createProject from './create-project.js';
-import { CLIOptions, validateOptions as validateCLIOptions } from './options.js';
-import { projectRootPath } from './utils/file-utils.js';
+import createProject from './create-project';
+import { CLIOptions, validateOptions as validateCLIOptions } from './options';
+import { rootPath } from './utils/file-utils';
 
-const version: string = JSON.parse(fs.readFileSync(path.resolve(projectRootPath, 'package.json')).toString()).version;
+const version: string = JSON.parse(fs.readFileSync(path.resolve(rootPath, 'package.json')).toString()).version;
 
 const program = new Command();
 

@@ -1,10 +1,11 @@
-import { Options } from './options.js';
-import createWorkingDir from './steps/create-working-dir.js';
-import createPackageJSON from './steps/create-package-json.js';
-import createSourceDirectories from './steps/create-source-directories.js';
-import createManifestJSON from './steps/create-manifest-json.js';
-import createTemplateJSONIfNeeded from './steps/create-template-json-if-needed.js';
-import createSource from './steps/create-source.js';
+import { Options } from './options';
+import createWorkingDir from './steps/create-working-dir';
+import createPackageJSON from './steps/create-package-json';
+import createSourceDirectories from './steps/create-source-directories';
+import createManifestJSON from './steps/create-manifest-json';
+import createTemplateJSONIfNeeded from './steps/create-template-json-if-needed';
+import createSource from './steps/create-source';
+import createStyles from './steps/create-styles';
 
 export default async (options: Options): Promise<void> => {
   await createWorkingDir(options);
@@ -13,4 +14,5 @@ export default async (options: Options): Promise<void> => {
   await createManifestJSON(options);
   await createTemplateJSONIfNeeded(options);
   await createSource(options);
+  await createStyles(options);
 };

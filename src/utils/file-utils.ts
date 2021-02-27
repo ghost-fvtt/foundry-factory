@@ -14,4 +14,4 @@ export async function* getFilesRecursively(directory: string): AsyncGenerator<st
   }
 }
 
-export const projectRootPath = resolve(dirname(new URL(import.meta.url).pathname), '..', '..');
+export const rootPath = resolve(dirname(new URL(import.meta.url).pathname), '..');

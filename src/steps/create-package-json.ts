@@ -4,13 +4,14 @@ import ora from 'ora';
 import path from 'path';
 
 import { Options } from '../options';
+import { getFileTypeForCSSPreprocessor } from '../utils/css-preprocessor';
 
 export default async (options: Options): Promise<void> => {
   const spinner = ora(`Creating ${chalk.green('package.json')}`).start();
 
   try {
     const _package = generatePackage(options);
-    await fs.writeJSON(path.join(options.projectDirectory, 'package.json'), _package, { spaces: 2 });
+    await fs.writeJSON(path.resolve(options.projectDirectory, 'package.json'), _package, { spaces: 2 });
   } catch (err) {
     spinner.fail(chalk.red('Failed to create package.json'));
     throw err;
@@ -117,17 +118,4 @@ interface Package {
   };
   devDependencies: Record<string, never>;
   'lint-staged'?: Partial<Record<string, string>>;
-}
-
-function getFileTypeForCSSPreprocessor(preprocessor: 'less' | 'sass' | undefined) {
-  switch (preprocessor) {
-    case 'less':
-      return 'less';
-    case 'sass':
-      return 'scss';
-    case undefined:
-      return 'css';
-    default:
-      throw new Error(`Unsupported CSS preprocessor ${preprocessor}`);
-  }
 }

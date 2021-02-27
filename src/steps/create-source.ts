@@ -5,14 +5,14 @@ import ora from 'ora';
 import path from 'path';
 
 import { Options } from '../options';
-import { getFilesRecursively, projectRootPath as creatorRootPath } from '../utils/file-utils.js';
+import { getFilesRecursively, rootPath } from '../utils/file-utils';
 
 export default async (options: Options): Promise<void> => {
   const spinner = ora('Creating source files').start();
 
   try {
     const fileExtension = options.typescript ? '.ts' : '.js';
-    const templateDirectory = path.resolve(creatorRootPath, 'template');
+    const templateDirectory = path.resolve(rootPath, 'template');
     const sourceTemplateDirectory = path.resolve(templateDirectory, 'src', 'module');
     const sourceDirectory = path.resolve(options.projectDirectory, 'src', 'module');
 
