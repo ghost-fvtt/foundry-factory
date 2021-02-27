@@ -8,9 +8,8 @@ import { Options } from '../options';
 export default async (options: Options): Promise<void> => {
   const spinner = ora(`Creating ${chalk.green('package.json')}`).start();
 
-  const _package = generatePackage(options);
-
   try {
+    const _package = generatePackage(options);
     await fs.writeJSON(path.join(options.projectDirectory, 'package.json'), _package, { spaces: 2 });
   } catch (err) {
     spinner.fail(chalk.red('Failed to create package.json'));
@@ -36,6 +35,7 @@ export function generatePackage(options: Options): Package {
     : undefined;
 
   const testScript = options.test ? 'jest' : undefined;
+  const testWatchScript = options.test ? 'jest --watch' : undefined;
   const testCIScript = options.test ? 'jest --ci --reporters=default --reporters=jest-junit' : undefined;
 
   const lintStagedConfiguration = options.lint
@@ -73,6 +73,7 @@ export function generatePackage(options: Options): Package {
       'lint:fix': lintFixScript,
       format: formatScript,
       test: testScript,
+      'test:watch': testWatchScript,
       'test:ci': testCIScript,
     },
     devDependencies: {},
@@ -111,6 +112,7 @@ interface Package {
     'lint:fix'?: string;
     format?: string;
     test?: string;
+    'test:watch'?: string;
     'test:ci'?: string;
   };
   devDependencies: Record<string, never>;

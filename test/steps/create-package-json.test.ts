@@ -195,4 +195,28 @@ describe('generatePackageJSON', () => {
       });
     });
   });
+
+  describe('with test selected', () => {
+    const testOptions = { ...defaultOptions, test: true };
+
+    it('generates test scripts', () => {
+      const _package = generatePackage(testOptions);
+
+      expect(_package.scripts.test).toBe('jest');
+      expect(_package.scripts['test:watch']).toBe('jest --watch');
+      expect(_package.scripts['test:ci']).toBe('jest --ci --reporters=default --reporters=jest-junit');
+    });
+  });
+
+  describe('with test not selected', () => {
+    const noTestOptions = { ...defaultOptions, test: false };
+
+    it('generates no test scripts', () => {
+      const _package = generatePackage(noTestOptions);
+
+      expect(_package.scripts.test).toBeUndefined();
+      expect(_package.scripts['test:watch']).toBeUndefined();
+      expect(_package.scripts['test:ci']).toBeUndefined();
+    });
+  });
 });
