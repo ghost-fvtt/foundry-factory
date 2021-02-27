@@ -3,17 +3,16 @@ import fs from 'fs-extra';
 import nunjucks from 'nunjucks';
 import ora from 'ora';
 import path from 'path';
-import { URL } from 'url';
 
 import { Options } from '../options';
-import { getFilesRecursively } from '../utils/file-utils.js';
+import { getFilesRecursively, projectRootPath as creatorRootPath } from '../utils/file-utils.js';
 
 export default async (options: Options): Promise<void> => {
   const spinner = ora('Creating source files').start();
 
   try {
     const fileExtension = options.typescript ? '.ts' : '.js';
-    const templateDirectory = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..', 'template');
+    const templateDirectory = path.resolve(creatorRootPath, 'template');
     const sourceTemplateDirectory = path.resolve(templateDirectory, 'src', 'module');
     const sourceDirectory = path.resolve(options.projectDirectory, 'src', 'module');
 

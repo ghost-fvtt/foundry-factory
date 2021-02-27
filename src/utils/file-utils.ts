@@ -1,5 +1,6 @@
 import { readdir } from 'fs/promises';
-import { resolve } from 'path';
+import { dirname, resolve } from 'path';
+import { URL } from 'url';
 
 export async function* getFilesRecursively(directory: string): AsyncGenerator<string> {
   const dirents = await readdir(directory, { withFileTypes: true });
@@ -12,3 +13,5 @@ export async function* getFilesRecursively(directory: string): AsyncGenerator<st
     }
   }
 }
+
+export const projectRootPath = resolve(dirname(new URL(import.meta.url).pathname), '..', '..');
