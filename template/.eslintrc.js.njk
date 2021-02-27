@@ -1,0 +1,25 @@
+module.exports = {
+{% if typescript %}  parser: '@typescript-eslint/parser',
+
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+  },
+
+{% endif %}  extends: [{% if typescript %}'plugin:@typescript-eslint/recommended'{% else %}'eslint:recommended'{% endif %}, 'plugin:prettier/recommended'],
+{% if typescript %}
+  plugins: ['@typescript-eslint'],
+{% endif %}
+  rules: {
+    // Specify any specific ESLint rules.
+  },
+{% if typescript %}
+  overrides: [
+    {
+      files: ['./*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+      },
+    },
+  ],
+{% endif %}};

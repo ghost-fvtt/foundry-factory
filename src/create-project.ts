@@ -6,6 +6,7 @@ import createManifestJSON from './steps/create-manifest-json';
 import createTemplateJSONIfNeeded from './steps/create-template-json-if-needed';
 import createSource from './steps/create-source';
 import createStyles from './steps/create-styles';
+import createConfig from './steps/create-config';
 
 export default async (options: Options): Promise<void> => {
   await createWorkingDir(options);
@@ -15,4 +16,5 @@ export default async (options: Options): Promise<void> => {
   await createTemplateJSONIfNeeded(options);
   await createSource(options);
   await createStyles(options);
+  await createConfig(options);
 };
