@@ -5,7 +5,6 @@ import ora from 'ora';
 import path from 'path';
 
 import { Options } from '../options';
-import { getFileTypeForCSSPreprocessor } from '../utils/css-preprocessor';
 import { rootPath } from '../utils/file-utils';
 
 const templatePath = path.resolve(rootPath, 'template');
