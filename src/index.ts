@@ -8,22 +8,24 @@ import path from 'path';
 import createProject from './create-project.js';
 import { CLIOptions, validateOptions as validateCLIOptions } from './options.js';
 
-const version = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url)).toString()).version;
+const version: string = JSON.parse(
+  fs.readFileSync(path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', 'package.json')).toString(),
+).version;
 
 const program = new Command();
 
 program
-  .version(version, '-v, --version', 'Checks the current version of Foundry Project Creator')
+  .version(version, '-v, --version', 'show the current version of Create Foundry Project 2')
   .arguments('<project-directory>')
   .usage(`${chalk.green('<project-directory>')} [options]`)
-  .option('-s, --system', 'Create a system instead of a module', false)
-  .option('-t, --typescript', 'Configures the project to use TypeScript', false)
-  .option('-l, --lint', 'Configures the project to use linting', false)
-  .option('--test', 'Configures the project to use testing', false)
-  .option('--css <preprocessor>', 'Configures the project to use a CSS preprocessor ("less", "sass")')
-  .option('-f, --force', 'Overwrite an existing project directory', false)
-  .option('--no-deps', 'Skip installing project dependencies', true)
-  .option('--no-git', 'Skip initializing Git repository', true)
+  .option('-s, --system', 'create a system instead of a module', false)
+  .option('-t, --typescript', 'configure the project to use TypeScript', false)
+  .option('-l, --lint', 'configure the project to use linting (ESLint)', false)
+  .option('--test', 'configure the project to use testing (Jest)', false)
+  .option('--css <preprocessor>', "configure the project to use a CSS preprocessor ('less', 'sass')")
+  .option('-f, --force', 'overwrite data in the project directory if it already exists', false)
+  .option('--no-deps', 'skip installing project dependencies', true)
+  .option('--no-git', 'skip initializing Git repository', true)
   .action((projectDir: string, options: CLIOptions, program: Command) => {
     if (validateCLIOptions(options, program)) {
       const projectDirectory = path.resolve(projectDir);
