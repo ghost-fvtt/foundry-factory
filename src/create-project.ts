@@ -4,6 +4,7 @@ import createPackageJSON from './steps/create-package-json.js';
 import createSourceDirectories from './steps/create-source-directories.js';
 import createManifestJSON from './steps/create-manifest-json.js';
 import createTemplateJSONIfNeeded from './steps/create-template-json-if-needed.js';
+import createSource from './steps/create-source.js';
 
 export default async (options: Options): Promise<void> => {
   await createWorkingDir(options);
@@ -11,4 +12,5 @@ export default async (options: Options): Promise<void> => {
   await createSourceDirectories(options);
   await createManifestJSON(options);
   await createTemplateJSONIfNeeded(options);
+  await createSource(options);
 };
