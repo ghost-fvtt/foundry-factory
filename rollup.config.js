@@ -8,4 +8,5 @@ export default {
     sourcemap: true,
   },
   plugins: [typescript({})],
+  external: ['commander', 'fs-extra', 'path', 'chalk', 'fs/promises', 'url', 'ora', 'nunjucks', 'inquirer'],
 };
