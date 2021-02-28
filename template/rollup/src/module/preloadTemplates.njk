@@ -1,5 +1,5 @@
 export async function preloadTemplates(){% if useTypeScript %}: Promise<Handlebars.TemplateDelegate[]>{% endif %} {
-  const templatePaths = [
+  const templatePaths{% if useTypeScript %}: string[]{% endif %} = [
     // Add paths to "{{ type }}s/{{ name }}/templates"
   ];
 
