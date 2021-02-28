@@ -70,7 +70,8 @@ export function generatePackage(name: string, rollupOptions: RollupOptions): Pac
       build: 'gulp build',
       'build:watch': 'gulp watch',
       'link-project': 'gulp link',
-      clean: 'gulp clean && gulp link --clean',
+      clean: 'gulp clean',
+      'clean:link': 'gulp link --clean',
       updateFoundryVTTTypes: updateFoundryVTTTypesScript,
       'bump-version': 'gulp bumpVersion',
       lint: lintScript,
@@ -110,6 +111,7 @@ interface Package {
     'build:watch': string;
     'link-project': string;
     clean: string;
+    'clean:link': string;
     updateFoundryVTTTypes?: string;
     'bump-version': string;
     lint?: string;
