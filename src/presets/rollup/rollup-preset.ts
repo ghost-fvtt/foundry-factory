@@ -66,6 +66,8 @@ export class RollupPreset implements Preset {
 
       if (this.rollupOptions.useTypeScript) {
         devDependencies = devDependencies.concat('@typescript-eslint/eslint-plugin', '@typescript-eslint/parser');
+      } else {
+        devDependencies = devDependencies.concat('@typhonjs-fvtt/eslint-config-foundry.js@0.7.9');
       }
 
       if (this.rollupOptions.useTesting) {
@@ -89,7 +91,9 @@ export class RollupPreset implements Preset {
   }
 
   async getPostInstallationCommands(): Promise<string[]> {
-    return this.rollupOptions.useLinting && this.options.deps ? ['npm exec husky init'] : [];
+    return this.rollupOptions.useLinting && this.options.deps
+      ? ['npm exec husky install', "npx husky add .husky/pre-commit 'npx lint-staged'", 'npm run format']
+      : [];
   }
 
   static async create(name: string, options: Options): Promise<RollupPreset> {

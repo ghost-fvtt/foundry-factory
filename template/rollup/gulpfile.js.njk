@@ -98,15 +98,15 @@ async function clean() {
 /**
  * Get the data path of Foundry VTT based on what is configured in `foundryconfig.json`
  */
-async function getDataPath() {
+function getDataPath() {
   const config = fs.readJSONSync('foundryconfig.json');
 
   if (config?.dataPath) {
-    if (!fs.existsSync(path.join(config.dataPath, 'Data'))) {
+    if (!fs.existsSync(path.resolve(config.dataPath))) {
       throw new Error('User Data path invalid, no Data directory found');
     }
 
-    return path.join(config.dataPath, 'Data');
+    return path.resolve(config.dataPath);
   } else {
     throw new Error('No User Data path defined in foundryconfig.json');
   }
@@ -123,7 +123,7 @@ async function linkUserData() {
     throw new Error(`Could not find ${chalk.blueBright('{{ type }}.json')}`);
   }
 
-  const linkDirectory = path.join(await getDataPath(), destinationDirectory, name);
+  const linkDirectory = path.resolve(getDataPath(), destinationDirectory, name);
 
   if (argv.clean || argv.c) {
     console.log(chalk.yellow(`Removing build in ${chalk.blueBright(linkDirectory)}.`));

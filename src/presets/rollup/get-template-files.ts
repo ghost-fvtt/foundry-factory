@@ -22,7 +22,15 @@ function getConfigTemplateFiles(
   { useLinting, useTesting, useTypeScript }: RollupOptions,
   templateDirectory: string,
 ): Record<TargetFilePath, TemplateFilePath> {
-  const configFileNames = ['rollup.config.js', 'README.md', '.editorconfig', '.nvmrc', '.gitignore', 'gulpfile.js'];
+  const configFileNames = [
+    'rollup.config.js',
+    'README.md',
+    '.editorconfig',
+    '.nvmrc',
+    '.gitignore',
+    'gulpfile.js',
+    'foundryconfig.json',
+  ];
 
   if (useTesting) {
     configFileNames.push('jest.config.js');

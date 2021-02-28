@@ -38,6 +38,7 @@ export function generatePackage(name: string, rollupOptions: RollupOptions): Pac
   const testScript = rollupOptions.useTesting ? 'jest' : undefined;
   const testWatchScript = rollupOptions.useTesting ? 'jest --watch' : undefined;
   const testCIScript = rollupOptions.useTesting ? 'jest --ci --reporters=default --reporters=jest-junit' : undefined;
+  const postinstallScript = rollupOptions.useLinting ? 'husky install' : undefined;
 
   const lintStagedConfiguration = rollupOptions.useLinting
     ? {
@@ -80,6 +81,7 @@ export function generatePackage(name: string, rollupOptions: RollupOptions): Pac
       test: testScript,
       'test:watch': testWatchScript,
       'test:ci': testCIScript,
+      postinstall: postinstallScript,
     },
     devDependencies: {},
     'lint-staged': lintStagedConfiguration,
@@ -120,6 +122,7 @@ interface Package {
     test?: string;
     'test:watch'?: string;
     'test:ci'?: string;
+    postinstall?: string;
   };
   devDependencies: Record<string, never>;
   'lint-staged'?: Partial<Record<string, string>>;

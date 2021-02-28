@@ -6,12 +6,24 @@ module.exports = {
     sourceType: 'module',
   },
 
-  extends: [{% if useTypeScript %}'plugin:@typescript-eslint/recommended'{% else %}'eslint:recommended'{% endif %}, {% if useTesting %}'plugin:jest/recommended', {% endif %}'plugin:prettier/recommended'],
+  env: {
+    browser: true,
+  },
+
+  extends: [{% if useTypeScript %}
+    'plugin:@typescript-eslint/recommended',{% else %}
+    'eslint:recommended',
+    '@typhonjs-fvtt/eslint-config-foundry.js/0.7.9',{% endif %}{% if useTesting %}
+    'plugin:jest/recommended',{% endif %}
+    'plugin:prettier/recommended',
+  ],
 
   plugins: [{{ eslintPlugins | join(", ") | safe }}],
+
   rules: {
     // Specify any specific ESLint rules.
   },
+
   overrides: [{% if useTypeScript %}
     {
       files: ['./*.js'],
