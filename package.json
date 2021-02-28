@@ -1,11 +1,9 @@
 {
-  "name": "create-foundry-project-2",
+  "name": "create-foundry-vtt-project",
   "version": "0.0.1",
   "description": "A command line tool to create new modules and systems for Foundry VTT",
-  "main": "dist/index",
-  "bin": {
-    "create-foundry-project-2": "dist/index.js"
-  },
+  "main": "./dist/index.mjs",
+  "bin": "./dist/index.mjs",
   "type": "module",
   "dependencies": {
     "chalk": "^4.1.0",
@@ -16,7 +14,6 @@
     "ora": "^5.3.0"
   },
   "devDependencies": {
-    "@types/commander": "^2.12.2",
     "@types/fs-extra": "^9.0.7",
     "@types/inquirer": "^7.3.1",
     "@types/jest": "^26.0.20",
@@ -33,9 +30,10 @@
     "pinst": "^2.1.6",
     "prettier": "^2.2.1",
     "rollup": "^2.40.0",
+    "rollup-plugin-preserve-shebang": "^1.0.1",
     "rollup-plugin-typescript2": "^0.30.0",
     "ts-jest": "^26.5.1",
-    "tslib": "^1.14.1",
+    "tslib": "^2.1.0",
     "typescript": "^4.2.2"
   },
   "scripts": {
@@ -58,18 +56,21 @@
     }
   ],
   "license": "MIT",
-  "homepage": "https://git.f3l.de/ghost/create-foundry-project-2",
+  "homepage": "https://git.f3l.de/ghost/create-foundry-vtt-project",
   "repository": {
     "type": "git",
-    "url": "git+https://git.f3l.de/ghost/create-foundry-project-2.git"
+    "url": "git+https://git.f3l.de/ghost/create-foundry-vtt-project.git"
   },
   "bugs": {
-    "url": "https://git.f3l.de/ghost/create-foundry-project-2/-/issues"
+    "url": "https://git.f3l.de/ghost/create-foundry-vtt-project/-/issues"
   },
   "files": [
     "template",
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "lint-staged": {
     "*.(js|ts)": "eslint --fix",
     "*.(json)": "prettier --write"

@@ -6,12 +6,16 @@ import path from 'path';
 
 import { Options } from '../options';
 import { Preset } from '../presets/preset';
+import { rootPath } from '../utils/file-utils';
 
 export default async (name: string, targetDirectory: string, options: Options, preset: Preset): Promise<void> => {
   const spinner = ora(`Creating files from templates`).start();
   try {
     const templateFiles = await preset.getTemplateFiles();
     const templateVariables = { name, ...options, ...(await preset.getTemplateVariables()) };
+    const templateDirectory = path.resolve(rootPath, 'template');
+
+    nunjucks.configure(templateDirectory);
 
     for (const file of Object.entries(templateFiles)) {
       const targetFile = path.resolve(targetDirectory, file[0]);
