@@ -14,8 +14,8 @@ sass.compiler = require('sass');{% endif %}
 /********************/
 
 const name = path.basename(path.resolve('.'));
-const sourceDirectory = 'src';
-const distDirectory = 'dist';
+const sourceDirectory = './src';
+const distDirectory = './dist';
 const stylesDirectory = path.join(sourceDirectory, 'styles');
 const stylesExtension = '.{{ styleType }}';
 const sourceFileExtension = '.{% if useTypeScript %}ts{% else %}js{% endif %}';
@@ -60,8 +60,8 @@ async function copyFiles() {
  * Watch for changes for each build step
  */
 function buildWatch() {
-  gulp.watch(path.join(sourceDirectory, '**', sourceFileExtension), { ignoreInitial: false }, buildCode);
-  gulp.watch(path.join(stylesDirectory, '**', `*.${stylesExtension}`), { ignoreInitial: false }, buildStyles);
+  gulp.watch(path.join(sourceDirectory, '**', `*${sourceFileExtension}`), { ignoreInitial: false }, buildCode);
+  gulp.watch(path.join(stylesDirectory, '**', `*${stylesExtension}`), { ignoreInitial: false }, buildStyles);
   gulp.watch(
     staticFiles.map((file) => path.join(sourceDirectory, file)),
     { ignoreInitial: false },
