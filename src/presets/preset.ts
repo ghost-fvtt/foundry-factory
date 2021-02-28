@@ -1,0 +1,49 @@
+import { Options } from '../options';
+
+/**
+ * An absolute path to a template file.
+ */
+export type TemplateFilePath = string;
+
+/**
+ * A path to a file to create, relative to the target directory.
+ */
+export type TargetFilePath = string;
+
+export interface Preset {
+  /**
+   * Returns a map between target files and the strings to write them.
+   */
+  getProgrammaticFiles(): Promise<Record<TargetFilePath, string>>;
+
+  /**
+   * Returns a map between target files and templates which are rendered to the corresponding files.
+   */
+  getTemplateFiles(): Promise<Record<TargetFilePath, TemplateFilePath>>;
+
+  /**
+   * Returns template variables to provide to the templates in addition to the options and the name when rendering them.
+   */
+  getTemplateVariables(): Promise<Record<string, unknown>>;
+
+  /**
+   * Returns a list of additional directory paths to create, relative to the target directory.
+   * They will be filled with `.gitkeep` files if they are not empty.
+   */
+  getEmptyDirectories(): Promise<string[]>;
+
+  /**
+   * Returns a list of dependencies to install.
+   */
+  getDependencies(): Promise<string[]>;
+
+  /**
+   * Returns a list of development dependencies to install.
+   */
+  getDevDependencies(): Promise<string[]>;
+}
+
+export interface PresetConstructor {
+  create(name: string, options: Options): Promise<Preset>;
+  createDefault(name: string, options: Options): Promise<Preset>;
+}

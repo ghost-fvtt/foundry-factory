@@ -1,30 +1,40 @@
 import type { Command } from 'commander';
 import chalk from 'chalk';
+import { PresetKey } from './presets/presets';
 
 export interface CLIOptions {
-  system: boolean;
-  typescript: boolean;
-  lint: boolean;
-  test: boolean;
-  css?: string;
+  type?: 'module' | 'system';
+  preset?: PresetKey;
+  default: boolean;
+  config: boolean;
   force: boolean;
   deps: boolean;
   git: boolean;
 }
 
-export interface ValidatedCLIOptions extends CLIOptions {
-  css?: 'less' | 'sass';
+interface PresetOptions extends CLIOptions {
+  preset: PresetKey;
+  default: false;
 }
 
+interface DefaultOptions extends CLIOptions {
+  preset?: undefined;
+  default: true;
+}
+
+interface RegularOptions extends CLIOptions {
+  preset?: undefined;
+  default: boolean;
+}
+
+export type ValidatedCLIOptions = PresetOptions | DefaultOptions | RegularOptions;
+
+export type Options = ValidatedCLIOptions & { type: 'module' | 'system' };
+
 export function validateOptions(options: CLIOptions, program: Command): options is ValidatedCLIOptions {
-  if (options.css !== undefined && !['less', 'sass'].includes(options.css)) {
-    console.error(chalk.red("Only 'less' or 'sass' may be specified as css preprocessor!"));
+  if (options.default && options.preset !== undefined) {
+    console.error(chalk.red("The 'preset' and 'default' options are mutually exclusive"));
     program.help();
   }
   return true;
-}
-
-export interface Options extends ValidatedCLIOptions {
-  name: string;
-  projectDirectory: string;
 }

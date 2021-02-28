@@ -2,28 +2,40 @@ import fs from 'fs-extra';
 import chalk from 'chalk';
 import ora from 'ora';
 import { Options } from '../options';
+import inquirer from 'inquirer';
 
-export default async ({ projectDirectory, force }: Options): Promise<void> => {
+export default async (targetDirectory: string, { force }: Options): Promise<void> => {
   const spinner = ora('Initializing working directory').start();
 
   try {
-    if (fs.existsSync(projectDirectory)) {
-      const content = await fs.readdir(projectDirectory);
-      if (content.length !== 0) {
-        if (force) {
-          spinner.warn(chalk.yellow(`The specified path ${chalk.green(projectDirectory)} is not empty`));
-          console.log(chalk.yellow("  '--force' was set, existing files will be lost"));
-          console.log(chalk.yellow('  Overwriting...'));
-          await fs.emptyDir(projectDirectory);
-        } else {
-          spinner.fail(chalk.red(`The specified path ${chalk.green(projectDirectory)} is not empty`));
-          console.error(chalk.red(`  Use ${chalk.blueBright('-f, --force')} to overwrite an existing directory`));
-          console.error(chalk.red('  Aborting...'));
-          throw new Error('The specified path is not empty');
+    if (fs.existsSync(targetDirectory)) {
+      if (force) {
+        await fs.remove(targetDirectory);
+      } else {
+        spinner.stop();
+        const { action }: { action: 'overwrite' | 'merge' | 'cancel' } = await inquirer.prompt([
+          {
+            name: 'action',
+            type: 'list',
+            message: `Target directory ${chalk.blue(targetDirectory)} already exists. Pick an action:`,
+            choices: [
+              { name: 'Overwrite', value: 'overwrite' },
+              { name: 'Merge', value: 'merge' },
+              { name: 'Cancel', value: 'cancel' },
+            ],
+          },
+        ]);
+        spinner.start();
+        if (action === 'cancel') {
+          spinner.warn(chalk.yellow('Cancelled...'));
+          process.exit();
+        }
+        if (action === 'overwrite') {
+          await fs.emptyDir(targetDirectory);
         }
       }
     }
-    await fs.ensureDir(projectDirectory);
+    await fs.ensureDir(targetDirectory);
   } catch (err) {
     spinner.fail(chalk.red('Failed to create working directory'));
     throw err;

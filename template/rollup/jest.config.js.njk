@@ -1,7 +1,7 @@
 module.exports = {
-{% if typescript %}    preset: 'ts-jest',
+{% if useTypeScript %}    preset: 'ts-jest',
 {% endif %}    testEnvironment: 'node',
-{% if typescript %}    globals: {
+{% if useTypeScript %}    globals: {
         'ts-jest': {
             tsconfig: '<rootDir>/test/tsconfig.test.json',
         },

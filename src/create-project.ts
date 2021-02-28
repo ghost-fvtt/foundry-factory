@@ -1,22 +1,18 @@
-import { Options } from './options';
+import { ValidatedCLIOptions } from './options';
+import createFilesFromTemplates from './steps/create-files-from-templates';
+import createProgrammaticFiles from './steps/create-programmatic-files';
 import createWorkingDir from './steps/create-working-dir';
-import createPackageJSON from './steps/create-package-json';
-import createSourceDirectories from './steps/create-source-directories';
-import createManifestJSON from './steps/create-manifest-json';
-import createTemplateJSONIfNeeded from './steps/create-template-json-if-needed';
-import createSource from './steps/create-source';
-import createStyles from './steps/create-styles';
-import createConfig from './steps/create-config';
-import createTestIfNeeded from './steps/create-test-if-needed';
+import getPreset from './steps/get-preset';
+import selectTypeIfNeeded from './steps/select-type-if-needed';
 
-export default async (options: Options): Promise<void> => {
-  await createWorkingDir(options);
-  await createPackageJSON(options);
-  await createSourceDirectories(options);
-  await createManifestJSON(options);
-  await createTemplateJSONIfNeeded(options);
-  await createSource(options);
-  await createStyles(options);
-  await createTestIfNeeded(options);
-  await createConfig(options);
+export default async (
+  name: string,
+  targetDirectory: string,
+  validatedCLIOptions: ValidatedCLIOptions,
+): Promise<void> => {
+  const options = await selectTypeIfNeeded(validatedCLIOptions);
+  await createWorkingDir(targetDirectory, options);
+  const preset = await getPreset(name, options);
+  await createProgrammaticFiles(name, targetDirectory, options, preset);
+  await createFilesFromTemplates(name, targetDirectory, options, preset);
 };

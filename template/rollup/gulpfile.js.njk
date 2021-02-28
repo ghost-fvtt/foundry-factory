@@ -6,7 +6,7 @@ const gulp = require('gulp');
 const path = require('path');
 const rollupConfig = require('./rollup.config');
 const semver = require('semver');
-{% if css == 'less' %}const less = require('gulp-less');{% elif css == 'sass' %}const sass = require('gulp-sass');
+{% if styleType == 'less' %}const less = require('gulp-less');{% elif styleType == 'scss' %}const sass = require('gulp-sass');
 sass.compiler = require('sass');{% endif %}
 
 /********************/
@@ -17,8 +17,8 @@ const name = path.basename(path.resolve('.'));
 const sourceDirectory = 'src';
 const distDirectory = 'dist';
 const stylesDirectory = path.join(sourceDirectory, 'styles');
-const stylesExtension = '{{ stylesExtension }}';
-const sourceFileExtension = '{{ sourceFileExtension }}';
+const stylesExtension = '.{{ styleType }}';
+const sourceFileExtension = '.{% if useTypeScript %}ts{% else %}js{% endif %}';
 const staticFiles = ['assets', 'fonts', 'lang', 'packs', 'templates', '{{ type }}.json'{% if type == 'system' %}, 'template.json'{% endif %}];
 const getDownloadURL = (version) => `https://host/path/to/${version}.zip`;
 
@@ -40,8 +40,8 @@ async function buildCode() {
 function buildStyles() {
   return gulp
     .src(path.join(stylesDirectory, `${name}${stylesExtension}`))
-{%if css == 'sass' %}    .pipe(sass().on('error', sass.logError))
-{% elif css == 'less' %}    .pipe(less())
+{%if styleType == 'scss' %}    .pipe(sass().on('error', sass.logError))
+{% elif styleType == 'less' %}    .pipe(less())
 {% endif %}    .pipe(gulp.dest(path.join(distDirectory, 'css')));
 }
 

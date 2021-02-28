@@ -11,12 +11,14 @@
     "chalk": "^4.1.0",
     "commander": "^7.1.0",
     "fs-extra": "^9.1.0",
+    "inquirer": "^8.0.0",
     "nunjucks": "^3.2.3",
     "ora": "^5.3.0"
   },
   "devDependencies": {
     "@types/commander": "^2.12.2",
     "@types/fs-extra": "^9.0.7",
+    "@types/inquirer": "^7.3.1",
     "@types/jest": "^26.0.20",
     "@types/nunjucks": "^3.1.4",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
@@ -70,6 +72,6 @@
   ],
   "lint-staged": {
     "*.(js|ts)": "eslint --fix",
-    "*.(json|scss|less)": "prettier --write"
+    "*.(json)": "prettier --write"
   }
 }
