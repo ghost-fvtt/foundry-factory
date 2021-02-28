@@ -1,5 +1,6 @@
 # Node Modules
 node_modules/
+.npm
 
 # Distribution files
 dist

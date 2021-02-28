@@ -1,6 +1,5 @@
 import path from 'path';
 
-import { getFilesRecursively, rootPath } from '../../utils/file-utils';
 import { TargetFilePath, TemplateFilePath } from '../preset';
 import { RollupOptions } from './rollup-preset';
 
@@ -8,12 +7,12 @@ export default async (
   name: string,
   rollupOptions: RollupOptions,
 ): Promise<Record<TargetFilePath, TemplateFilePath>> => {
-  const templateDirectory = path.resolve(rootPath, 'template', 'rollup');
+  const templateDirectory = 'rollup';
   const sourceFileExtension = rollupOptions.useTypeScript ? '.ts' : '.js';
 
   return {
     ...getConfigTemplateFiles(rollupOptions, templateDirectory),
-    ...(await getSourceTemplateFiles(name, templateDirectory, sourceFileExtension)),
+    ...getSourceTemplateFiles(name, templateDirectory, sourceFileExtension),
     ...getTestTemplateFiles(rollupOptions, templateDirectory),
   };
 };
@@ -49,26 +48,27 @@ function getConfigTemplateFiles(
 
   const configTemplateFiles = configFileNames.map((configFileName) => [
     configFileName,
-    path.resolve(templateDirectory, `${configFileName}.njk`),
+    path.join(templateDirectory, `${configFileName}.njk`),
   ]);
   return Object.fromEntries(configTemplateFiles);
 }
 
-async function getSourceTemplateFiles(name: string, templateDirectory: string, sourceFileExtension: string) {
-  const sourceTemplateFiles: [TargetFilePath, TemplateFilePath][] = [];
-  const sourceTemplateDirectory = path.resolve(templateDirectory, 'src', 'module');
-  for await (const templateFileName of getFilesRecursively(sourceTemplateDirectory)) {
-    const sourceFileName = getNameForSourceTemplate(templateFileName, sourceFileExtension, name).replace(
-      `${templateDirectory}/`,
-      '',
-    );
-    sourceTemplateFiles.push([sourceFileName, templateFileName]);
-  }
-  return Object.fromEntries(sourceTemplateFiles);
+function getSourceTemplateFiles(name: string, templateDirectory: string, sourceFileExtension: string) {
+  const relativeSourceDirectory = path.join('src', 'module');
+  const templateFileNames = ['entryPoint.njk', 'preloadTemplates.njk', 'settings.njk'];
+
+  return Object.fromEntries(
+    templateFileNames
+      .map((templateFileName) => path.join(relativeSourceDirectory, templateFileName))
+      .map((templateFilePath) => [
+        getNameForSourceTemplate(templateFilePath, sourceFileExtension, name),
+        path.join(templateDirectory, templateFilePath),
+      ]),
+  );
 }
 
-function getNameForSourceTemplate(templateFileName: string, sourceFileExtension: string, name: string): string {
-  return templateFileName.replace('entryPoint.njk', `${name}.njk`).replace('.njk', sourceFileExtension);
+function getNameForSourceTemplate(fileName: string, sourceFileExtension: string, name: string): string {
+  return fileName.replace('entryPoint.njk', `${name}.njk`).replace('.njk', sourceFileExtension);
 }
 
 function getTestTemplateFiles({ useTypeScript, useTesting }: RollupOptions, templateDirectory: string) {
@@ -81,6 +81,6 @@ function getTestTemplateFiles({ useTypeScript, useTesting }: RollupOptions, temp
     testTemplateFiles.push(['tsconfig.test.json', 'tsconfig.test.json.njk']);
   }
   return Object.fromEntries(
-    testTemplateFiles.map((pair) => [path.join('test', pair[0]), path.resolve(templateDirectory, 'test', pair[1])]),
+    testTemplateFiles.map((pair) => [path.join('test', pair[0]), path.join(templateDirectory, 'test', pair[1])]),
   );
 }

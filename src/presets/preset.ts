@@ -1,7 +1,7 @@
 import { Options } from '../options';
 
 /**
- * An absolute path to a template file.
+ * A path to a template file, relative to the template directory.
  */
 export type TemplateFilePath = string;
 
