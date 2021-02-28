@@ -1,4 +1,5 @@
 import { ValidatedCLIOptions } from './options';
+import createAdditionalDirectories from './steps/create-additional-directories';
 import createFilesFromTemplates from './steps/create-files-from-templates';
 import createProgrammaticFiles from './steps/create-programmatic-files';
 import createWorkingDir from './steps/create-working-dir';
@@ -13,6 +14,7 @@ export default async (
   const options = await selectTypeIfNeeded(validatedCLIOptions);
   await createWorkingDir(targetDirectory, options);
   const preset = await getPreset(name, options);
-  await createProgrammaticFiles(name, targetDirectory, options, preset);
+  await createProgrammaticFiles(targetDirectory, preset);
   await createFilesFromTemplates(name, targetDirectory, options, preset);
+  await createAdditionalDirectories(targetDirectory, options, preset);
 };

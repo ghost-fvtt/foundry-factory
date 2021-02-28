@@ -1,13 +1,11 @@
 import path from 'path';
 
-import { Options } from '../../options';
 import { getFilesRecursively, rootPath } from '../../utils/file-utils';
 import { TargetFilePath, TemplateFilePath } from '../preset';
 import { RollupOptions } from './rollup-preset';
 
 export default async (
   name: string,
-  options: Options,
   rollupOptions: RollupOptions,
 ): Promise<Record<TargetFilePath, TemplateFilePath>> => {
   const templateDirectory = path.resolve(rootPath, 'template', 'rollup');
@@ -74,9 +72,7 @@ function getTestTemplateFiles({ useTypeScript, useTesting }: RollupOptions, temp
   if (useTypeScript) {
     testTemplateFiles.push(['tsconfig.test.json', 'tsconfig.test.json.njk']);
   }
-  const result = Object.fromEntries(
+  return Object.fromEntries(
     testTemplateFiles.map((pair) => [path.join('test', pair[0]), path.resolve(templateDirectory, 'test', pair[1])]),
   );
-  console.log(result);
-  return result;
 }

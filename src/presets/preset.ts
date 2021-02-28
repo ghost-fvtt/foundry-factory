@@ -10,6 +10,9 @@ export type TemplateFilePath = string;
  */
 export type TargetFilePath = string;
 
+/**
+ * The interface that all presets must implement.
+ */
 export interface Preset {
   /**
    * Returns a map between target files and the strings to write them.
@@ -28,9 +31,9 @@ export interface Preset {
 
   /**
    * Returns a list of additional directory paths to create, relative to the target directory.
-   * They will be filled with `.gitkeep` files if they are not empty.
+   * Unless git initialization is skipped, they are filled with `.gitkeep` files if they are empty.
    */
-  getEmptyDirectories(): Promise<string[]>;
+  getAdditionalDirectories(): Promise<string[]>;
 
   /**
    * Returns a list of dependencies to install.
@@ -43,6 +46,10 @@ export interface Preset {
   getDevDependencies(): Promise<string[]>;
 }
 
+/**
+ * An interface describing an object that can create presets.
+ * Typically this will be the constructor object of a class implementing {@link Preset}.
+ */
 export interface PresetConstructor {
   create(name: string, options: Options): Promise<Preset>;
   createDefault(name: string, options: Options): Promise<Preset>;

@@ -1,4 +1,5 @@
 import inquirer from 'inquirer';
+import path from 'path';
 
 import { Options } from '../../options';
 import { Preset, TargetFilePath, TemplateFilePath } from '../preset';
@@ -21,15 +22,15 @@ export class RollupPreset implements Preset {
   }
 
   async getTemplateFiles(): Promise<Record<TargetFilePath, TemplateFilePath>> {
-    return getTemplateFiles(this.name, this.options, this.rollupOptions);
+    return getTemplateFiles(this.name, this.rollupOptions);
   }
 
   async getTemplateVariables(): Promise<Record<string, unknown>> {
     return { ...this.rollupOptions };
   }
 
-  async getEmptyDirectories(): Promise<string[]> {
-    throw new Error('Method not implemented.');
+  async getAdditionalDirectories(): Promise<string[]> {
+    return ['assets', 'fonts', 'lang', 'packs'].map((directory) => path.join('src', directory));
   }
 
   async getDependencies(): Promise<string[]> {

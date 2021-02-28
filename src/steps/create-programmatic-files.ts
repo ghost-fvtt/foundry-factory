@@ -3,10 +3,9 @@ import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
 
-import { Options } from '../options';
 import { Preset } from '../presets/preset';
 
-export default async (name: string, targetDirectory: string, options: Options, preset: Preset): Promise<void> => {
+export default async (targetDirectory: string, preset: Preset): Promise<void> => {
   const spinner = ora(`Creating programmatic files`).start();
   try {
     const programmaticFiles = await preset.getProgrammaticFiles();
