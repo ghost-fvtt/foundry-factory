@@ -34,11 +34,47 @@ export class RollupPreset implements Preset {
   }
 
   async getDependencies(): Promise<string[]> {
-    throw new Error('Method not implemented.');
+    return [];
   }
 
   async getDevDependencies(): Promise<string[]> {
-    throw new Error('Method not implemented.');
+    let devDependencies = ['@rollup/plugin-node-resolve', 'chalk', 'fs-extra', 'gulp', 'rollup', 'semver', 'yargs'];
+    if (this.rollupOptions.useTypeScript) {
+      devDependencies = devDependencies.concat([
+        'foundry-vtt-types@github:League-of-Foundry-Developers/foundry-vtt-types#906f1cef577eac1fae22103b5875c13fbb08addf',
+        'rollup-plugin-typescript2',
+        'tslib',
+        'typescript',
+      ]);
+    }
+    if (this.rollupOptions.useLinting) {
+      devDependencies = devDependencies.concat([
+        'eslint',
+        'eslint-config-prettier',
+        'eslint-plugin-prettier',
+        'husky',
+        'lint-staged',
+        'prettier',
+      ]);
+
+      if (this.rollupOptions.useTypeScript) {
+        devDependencies = devDependencies.concat('@typescript-eslint/eslint-plugin', '@typescript-eslint/parser');
+      }
+    }
+    if (this.rollupOptions.useTesting) {
+      devDependencies = devDependencies.concat(['jest', 'jest-junit']);
+
+      if (this.rollupOptions.useTypeScript) {
+        devDependencies = devDependencies.concat(['@types/jest', 'ts-jest']);
+      }
+    }
+    if (this.rollupOptions.styleType === 'less') {
+      devDependencies = devDependencies.concat(['gulp-less', 'less@3']);
+    }
+    if (this.rollupOptions.styleType === 'scss') {
+      devDependencies = devDependencies.concat(['gulp-sass', 'sass']);
+    }
+    return devDependencies;
   }
 
   static async create(name: string, options: Options): Promise<RollupPreset> {

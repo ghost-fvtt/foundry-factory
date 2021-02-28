@@ -5,6 +5,7 @@ import createProgrammaticFiles from './steps/create-programmatic-files';
 import createWorkingDir from './steps/create-working-dir';
 import getPreset from './steps/get-preset';
 import initializeGit from './steps/initialize-git';
+import installDependencies from './steps/install-dependencies';
 import selectTypeIfNeeded from './steps/select-type-if-needed';
 
 export default async (
@@ -18,5 +19,6 @@ export default async (
   await createProgrammaticFiles(targetDirectory, preset);
   await createFilesFromTemplates(name, targetDirectory, options, preset);
   await createAdditionalDirectories(targetDirectory, options, preset);
+  await installDependencies(targetDirectory, options, preset);
   await initializeGit(targetDirectory, options);
 };

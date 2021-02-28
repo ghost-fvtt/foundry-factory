@@ -1,4 +1,4 @@
-export async function preloadTemplates(){% if typescript %}: Promise<Handlebars.TemplateDelegate[]>{% endif %} {
+export async function preloadTemplates(){% if useTypeScript %}: Promise<Handlebars.TemplateDelegate[]>{% endif %} {
   const templatePaths = [
     // Add paths to "{{ type }}s/{{ name }}/templates"
   ];

@@ -1,5 +1,5 @@
 /**
- * This is your {{ language }} entry file for Foundry VTT.
+ * This is your {% if useTypeScript %}TypeScript{% else %}JavaScript{% endif %} entry file for Foundry VTT.
  * Register custom settings, sheets, and constants using the Foundry API.
  * Change this heading to be more descriptive to your {{ type }}, or remove it.
  * Author: [your name]
@@ -10,13 +10,13 @@
  * 					 determines how others may use and modify your {{ type }}.
  */
 
-// Import {{ language }} modules
-import { registerSettings } from './settings{% if not typescript %}.js{% endif %}';
-import { preloadTemplates } from './preloadTemplates{% if not typescript %}.js{% endif %}';
+// Import {% if useTypeScript %}TypeScript{% else %}JavaScript{% endif %} modules
+import { registerSettings } from './settings{% if not useTypeScript %}.js{% endif %}';
+import { preloadTemplates } from './preloadTemplates{% if not useTypeScript %}.js{% endif %}';
 
 // Initialize {{ type }}
 Hooks.once('init', async () => {
-  console.log('{{ shortTitle }} | Initializing {{ longTitle }}');
+  console.log('{{ name }} | Initializing {{ name }}');
 
   // Assign custom classes and constants here
 
