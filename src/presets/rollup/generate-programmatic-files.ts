@@ -140,7 +140,7 @@ export function generateManifest(name: string, { type }: Options): Manifest {
     compatibleCoreVersion: '0.7.9',
     scripts: [],
     esmodules: [`module/${name}.js`],
-    styles: [`styles/${name}.js`],
+    styles: [`styles/${name}.css`],
     packs: [],
     dependencies: [],
     languages: [

@@ -26,7 +26,14 @@ export class RollupPreset implements Preset {
   }
 
   async getTemplateVariables(): Promise<Record<string, unknown>> {
-    return { ...this.rollupOptions };
+    const eslintPlugins = [];
+    if (this.rollupOptions.useTypeScript) {
+      eslintPlugins.push("'@typescript-eslint'");
+    }
+    if (this.rollupOptions.useTesting) {
+      eslintPlugins.push("'jest'");
+    }
+    return { ...this.rollupOptions, eslintPlugins };
   }
 
   async getAdditionalDirectories(): Promise<string[]> {
@@ -60,6 +67,10 @@ export class RollupPreset implements Preset {
       if (this.rollupOptions.useTypeScript) {
         devDependencies = devDependencies.concat('@typescript-eslint/eslint-plugin', '@typescript-eslint/parser');
       }
+
+      if (this.rollupOptions.useTesting) {
+        devDependencies = devDependencies.concat('eslint-plugin-jest');
+      }
     }
     if (this.rollupOptions.useTesting) {
       devDependencies = devDependencies.concat(['jest', 'jest-junit']);
@@ -78,7 +89,7 @@ export class RollupPreset implements Preset {
   }
 
   async getPostInstallationCommands(): Promise<string[]> {
-    return this.rollupOptions.useLinting ? ['npm exec husky init'] : [];
+    return this.rollupOptions.useLinting && this.options.deps ? ['npm exec husky init'] : [];
   }
 
   static async create(name: string, options: Options): Promise<RollupPreset> {

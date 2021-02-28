@@ -5,8 +5,8 @@ const fs = require('fs-extra');
 const gulp = require('gulp');
 const path = require('path');
 const rollupConfig = require('./rollup.config');
-const semver = require('semver');
-{% if styleType == 'less' %}const less = require('gulp-less');{% elif styleType == 'scss' %}const sass = require('gulp-sass');
+const semver = require('semver');{% if styleType == 'less' %}
+const less = require('gulp-less');{% elif styleType == 'scss' %}const sass = require('gulp-sass');
 sass.compiler = require('sass');{% endif %}
 
 /********************/

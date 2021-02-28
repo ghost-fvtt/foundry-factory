@@ -1,25 +1,35 @@
 module.exports = {
 {% if useTypeScript %}  parser: '@typescript-eslint/parser',
 
-  parserOptions: {
+{% endif %}  parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
 
-{% endif %}  extends: [{% if useTypeScript %}'plugin:@typescript-eslint/recommended'{% else %}'eslint:recommended'{% endif %}, 'plugin:prettier/recommended'],
-{% if useTypeScript %}
-  plugins: ['@typescript-eslint'],
-{% endif %}
+  extends: [{% if useTypeScript %}'plugin:@typescript-eslint/recommended'{% else %}'eslint:recommended'{% endif %}, {% if useTesting %}'plugin:jest/recommended', {% endif %}'plugin:prettier/recommended'],
+
+  plugins: [{{ eslintPlugins | join(", ") | safe }}],
   rules: {
     // Specify any specific ESLint rules.
   },
-{% if useTypeScript %}
-  overrides: [
+  overrides: [{% if useTypeScript %}
     {
       files: ['./*.js'],
       rules: {
         '@typescript-eslint/no-var-requires': 'off',
       },
-    },
+    },{% else %}
+    {
+      files: ['./*.js'],
+      env: {
+        node: true,
+      },
+    },{% endif %}{% if useTesting %}
+    {
+      files: ['./test/**/*.js'],
+      env: {
+        'jest/globals': true,
+      },
+    },{% endif %}
   ],
-{% endif %}};
+};

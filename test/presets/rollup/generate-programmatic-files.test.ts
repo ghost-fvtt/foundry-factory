@@ -254,7 +254,7 @@ describe('generateManifest', () => {
         compatibleCoreVersion: '0.7.9',
         scripts: [],
         esmodules: [`module/name-of-the-project.js`],
-        styles: [`styles/name-of-the-project.js`],
+        styles: [`styles/name-of-the-project.css`],
         packs: [],
         dependencies: [],
         languages: [
@@ -303,7 +303,7 @@ describe('generateManifest', () => {
         compatibleCoreVersion: '0.7.9',
         scripts: [],
         esmodules: [`module/name-of-the-project.js`],
-        styles: [`styles/name-of-the-project.js`],
+        styles: [`styles/name-of-the-project.css`],
         packs: [],
         dependencies: [],
         languages: [
