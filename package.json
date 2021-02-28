@@ -1,7 +1,7 @@
 {
-  "name": "create-foundry-vtt-project",
-  "version": "0.0.1",
-  "description": "A command line tool to create new modules and systems for Foundry VTT",
+  "name": "foundry-factory",
+  "version": "0.0.0",
+  "description": "An interactive command line tool to bootstrap modules and systems for Foundry Virtual Tabletop",
   "main": "./dist/index.mjs",
   "bin": "./dist/index.mjs",
   "type": "module",
@@ -56,13 +56,13 @@
     }
   ],
   "license": "MIT",
-  "homepage": "https://git.f3l.de/ghost/create-foundry-vtt-project",
+  "homepage": "https://github.com/ghost91-/foundry-factory",
   "repository": {
     "type": "git",
-    "url": "git+https://git.f3l.de/ghost/create-foundry-vtt-project.git"
+    "url": "git+https://github.com/ghost91-/foundry-factory.git"
   },
   "bugs": {
-    "url": "https://git.f3l.de/ghost/create-foundry-vtt-project/-/issues"
+    "url": "https://github.com/ghost91-/foundry-factory/issues"
   },
   "files": [
     "template",

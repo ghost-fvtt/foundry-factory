@@ -17,7 +17,7 @@ export default async (
   targetDirectory: string,
   validatedCLIOptions: ValidatedCLIOptions,
 ): Promise<void> => {
-  console.log(chalk.bold(chalk.cyan(`Create Foundry VTT Project v${version}`)));
+  console.log(chalk.bold(chalk.cyan(`Foundry Factory ${version}`)));
 
   const options = await selectTypeIfNeeded(validatedCLIOptions);
   await createWorkingDir(targetDirectory, options);

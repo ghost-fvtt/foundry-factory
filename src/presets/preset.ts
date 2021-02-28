@@ -56,6 +56,17 @@ export interface Preset {
  * Typically this will be the constructor object of a class implementing {@link Preset}.
  */
 export interface PresetConstructor {
+  /**
+   * Create a new preset, possibly interactively configuring it.
+   * @param name The name of the project being created
+   * @param options The passed command line options
+   */
   create(name: string, options: Options): Promise<Preset>;
+
+  /**
+   * Create a new preset, using the default configuration of the preset.
+   * @param name The name of the project being created
+   * @param options The passed command line options
+   */
   createDefault(name: string, options: Options): Promise<Preset>;
 }

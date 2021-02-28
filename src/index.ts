@@ -10,7 +10,7 @@ import { version } from './utils/version';
 const program = new Command();
 
 program
-  .version(version, '-v, --version', 'Show the version number of Create Foundry VTT Project')
+  .version(version, '-v, --version', 'Show the version number of Foundry Factory')
   .addOption(new Option('-t, --type <type>', 'Create a project of this type').choices(['module', 'system']))
   .addOption(new Option('-p, --preset <preset>', 'Use this preset').choices(Object.keys(presets)))
   .option('-d, --default', 'Use the default preset', false)
