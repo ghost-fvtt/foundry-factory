@@ -3,7 +3,7 @@
 Foundry Factory is an interactive CLI tool that developers can use to
 bootstrap modules and systems for [Foundry Virtual Tabletop]. It allows developers to
 choose among different presets to initialize their projects (currently only one
-preset based on `gulp` and `rollup` is available).
+preset based on [Gulp] and [Rollup] is available).
 
 It is designed to be extendable so that adding additional presets is quite easy.
 
@@ -127,6 +127,8 @@ different design goals.
 Credit for the name "Foundry Factory" goes to [BadIdeasBureau].
 
 [Foundry Virtual Tabletop]: https://foundryvtt.com
+[Gulp]: https://gulpjs.com/
+[Rollup]: https://rollupjs.org/
 [issue tracker]: https://github.com/ghost91-/foundry-factory/issues
 [Nunjucks]: https://mozilla.github.io/nunjucks/
 [Foundry Project Creator]: https://gitlab.com/foundry-projects/foundry-pc/create-foundry-project
