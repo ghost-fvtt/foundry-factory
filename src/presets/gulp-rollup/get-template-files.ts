@@ -1,24 +1,24 @@
 import path from 'path';
 
 import { TargetFilePath, TemplateFilePath } from '../preset';
-import { RollupOptions } from './rollup-preset';
+import { GulpRollupOptions } from './gulp-rollup-preset';
 
 export default async (
   name: string,
-  rollupOptions: RollupOptions,
+  gulpRollupOptions: GulpRollupOptions,
 ): Promise<Record<TargetFilePath, TemplateFilePath>> => {
-  const templateDirectory = 'rollup';
-  const sourceFileExtension = rollupOptions.useTypeScript ? '.ts' : '.js';
+  const templateDirectory = 'gulp-rollup';
+  const sourceFileExtension = gulpRollupOptions.useTypeScript ? '.ts' : '.js';
 
   return {
-    ...getConfigTemplateFiles(rollupOptions, templateDirectory),
+    ...getConfigTemplateFiles(gulpRollupOptions, templateDirectory),
     ...getSourceTemplateFiles(name, templateDirectory, sourceFileExtension),
-    ...getTestTemplateFiles(rollupOptions, templateDirectory),
+    ...getTestTemplateFiles(gulpRollupOptions, templateDirectory),
   };
 };
 
 function getConfigTemplateFiles(
-  { useLinting, useTesting, useTypeScript }: RollupOptions,
+  { useLinting, useTesting, useTypeScript }: GulpRollupOptions,
   templateDirectory: string,
 ): Record<TargetFilePath, TemplateFilePath> {
   const configFileNames = [
@@ -71,7 +71,7 @@ function getNameForSourceTemplate(fileName: string, sourceFileExtension: string,
   return fileName.replace('entryPoint.njk', `${name}.njk`).replace('.njk', sourceFileExtension);
 }
 
-function getTestTemplateFiles({ useTypeScript, useTesting }: RollupOptions, templateDirectory: string) {
+function getTestTemplateFiles({ useTypeScript, useTesting }: GulpRollupOptions, templateDirectory: string) {
   if (!useTesting) {
     return {};
   }

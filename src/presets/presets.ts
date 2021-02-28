@@ -1,7 +1,7 @@
-import { RollupPreset } from './rollup/rollup-preset';
+import { GulpRollupPreset } from './gulp-rollup/gulp-rollup-preset';
 
-export const presets = { rollup: { name: 'Rollup', cls: RollupPreset } };
+export const presets = { 'gulp-rollup': { name: 'Gulp + Rollup', cls: GulpRollupPreset } };
 
-export const defaultPreset = RollupPreset;
+export const defaultPreset = GulpRollupPreset;
 
 export type PresetKey = keyof typeof presets;

@@ -6,34 +6,34 @@ import { Preset, TargetFilePath, TemplateFilePath } from '../preset';
 import generateProgrammaticFiles from './generate-programmatic-files';
 import getTemplateFiles from './get-template-files';
 
-export class RollupPreset implements Preset {
+export class GulpRollupPreset implements Preset {
   protected name: string;
   protected options: Options;
-  protected rollupOptions: RollupOptions;
+  protected gulpRollupOptions: GulpRollupOptions;
 
-  constructor(name: string, options: Options, rollupOptions: RollupOptions) {
+  constructor(name: string, options: Options, gulpRollupOptions: GulpRollupOptions) {
     this.name = name;
     this.options = options;
-    this.rollupOptions = rollupOptions;
+    this.gulpRollupOptions = gulpRollupOptions;
   }
 
   async getProgrammaticFiles(): Promise<Record<TargetFilePath, string>> {
-    return generateProgrammaticFiles(this.name, this.options, this.rollupOptions);
+    return generateProgrammaticFiles(this.name, this.options, this.gulpRollupOptions);
   }
 
   async getTemplateFiles(): Promise<Record<TargetFilePath, TemplateFilePath>> {
-    return getTemplateFiles(this.name, this.rollupOptions);
+    return getTemplateFiles(this.name, this.gulpRollupOptions);
   }
 
   async getTemplateVariables(): Promise<Record<string, unknown>> {
     const eslintPlugins = [];
-    if (this.rollupOptions.useTypeScript) {
+    if (this.gulpRollupOptions.useTypeScript) {
       eslintPlugins.push("'@typescript-eslint'");
     }
-    if (this.rollupOptions.useTesting) {
+    if (this.gulpRollupOptions.useTesting) {
       eslintPlugins.push("'jest'");
     }
-    return { ...this.rollupOptions, eslintPlugins };
+    return { ...this.gulpRollupOptions, eslintPlugins };
   }
 
   async getAdditionalDirectories(): Promise<string[]> {
@@ -46,7 +46,7 @@ export class RollupPreset implements Preset {
 
   async getDevDependencies(): Promise<string[]> {
     let devDependencies = ['@rollup/plugin-node-resolve', 'chalk', 'fs-extra', 'gulp', 'rollup', 'semver', 'yargs'];
-    if (this.rollupOptions.useTypeScript) {
+    if (this.gulpRollupOptions.useTypeScript) {
       devDependencies = devDependencies.concat([
         'foundry-vtt-types@github:League-of-Foundry-Developers/foundry-vtt-types#906f1cef577eac1fae22103b5875c13fbb08addf',
         'rollup-plugin-typescript2',
@@ -54,7 +54,7 @@ export class RollupPreset implements Preset {
         'typescript',
       ]);
     }
-    if (this.rollupOptions.useLinting) {
+    if (this.gulpRollupOptions.useLinting) {
       devDependencies = devDependencies.concat([
         'eslint',
         'eslint-config-prettier',
@@ -64,39 +64,39 @@ export class RollupPreset implements Preset {
         'prettier',
       ]);
 
-      if (this.rollupOptions.useTypeScript) {
+      if (this.gulpRollupOptions.useTypeScript) {
         devDependencies = devDependencies.concat('@typescript-eslint/eslint-plugin', '@typescript-eslint/parser');
       } else {
         devDependencies = devDependencies.concat('@typhonjs-fvtt/eslint-config-foundry.js@0.7.9');
       }
 
-      if (this.rollupOptions.useTesting) {
+      if (this.gulpRollupOptions.useTesting) {
         devDependencies = devDependencies.concat('eslint-plugin-jest');
       }
     }
-    if (this.rollupOptions.useTesting) {
+    if (this.gulpRollupOptions.useTesting) {
       devDependencies = devDependencies.concat(['jest', 'jest-junit']);
 
-      if (this.rollupOptions.useTypeScript) {
+      if (this.gulpRollupOptions.useTypeScript) {
         devDependencies = devDependencies.concat(['@types/jest', 'ts-jest']);
       }
     }
-    if (this.rollupOptions.styleType === 'less') {
+    if (this.gulpRollupOptions.styleType === 'less') {
       devDependencies = devDependencies.concat(['gulp-less', 'less@3']);
     }
-    if (this.rollupOptions.styleType === 'scss') {
+    if (this.gulpRollupOptions.styleType === 'scss') {
       devDependencies = devDependencies.concat(['gulp-sass', 'sass']);
     }
     return devDependencies;
   }
 
   async getPostInstallationCommands(): Promise<string[]> {
-    return this.rollupOptions.useLinting && this.options.deps
+    return this.gulpRollupOptions.useLinting && this.options.deps
       ? ['npm exec husky install', "npx husky add .husky/pre-commit 'npx lint-staged'", 'npm run format']
       : [];
   }
 
-  static async create(name: string, options: Options): Promise<RollupPreset> {
+  static async create(name: string, options: Options): Promise<GulpRollupPreset> {
     const { features }: { features: string[] } = await inquirer.prompt([
       {
         name: 'features',
@@ -122,11 +122,11 @@ export class RollupPreset implements Preset {
     const useCssPreProcessor = features.find((it) => it === 'cssPreProcessor') !== undefined;
     const styleType = await getStyleType(useCssPreProcessor);
 
-    return new RollupPreset(name, options, { useTypeScript, useLinting, useTesting, styleType });
+    return new GulpRollupPreset(name, options, { useTypeScript, useLinting, useTesting, styleType });
   }
 
-  static async createDefault(name: string, options: Options): Promise<RollupPreset> {
-    return new RollupPreset(name, options, RollupPreset.defaultRollupOptions);
+  static async createDefault(name: string, options: Options): Promise<GulpRollupPreset> {
+    return new GulpRollupPreset(name, options, GulpRollupPreset.defaultRollupOptions);
   }
 
   private static defaultRollupOptions = {
@@ -137,7 +137,7 @@ export class RollupPreset implements Preset {
   };
 }
 
-async function getStyleType(useCssPreProcessor: boolean): Promise<RollupOptions['styleType']> {
+async function getStyleType(useCssPreProcessor: boolean): Promise<GulpRollupOptions['styleType']> {
   if (!useCssPreProcessor) {
     return 'css';
   }
@@ -155,7 +155,7 @@ async function getStyleType(useCssPreProcessor: boolean): Promise<RollupOptions[
   return styleType;
 }
 
-export interface RollupOptions {
+export interface GulpRollupOptions {
   useTypeScript: boolean;
   useLinting: boolean;
   useTesting: boolean;
