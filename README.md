@@ -9,6 +9,21 @@ It is designed to be extendable so that adding additional presets is quite easy.
 
 ## Usage
 
+You can run Foundry Factory with `npx`:
+
+```
+npx @ghost-fvtt/foundry-factory <project-directory>
+```
+
+Alternatively you can install it globally and then execute it:
+
+```
+npm install -g @ghost-fvtt/foundry-factory
+foundry-factory <project-directory>
+```
+
+### Command Line Options
+
 ```
 Usage: foundry-factory [options] <project-directory>
 
