@@ -44,6 +44,11 @@ export interface Preset {
    * Returns a list of development dependencies to install.
    */
   getDevDependencies(): Promise<string[]>;
+
+  /**
+   * Returns a list of commands to execute after the rest of the installation has completed.
+   */
+  getPostInstallationCommands(): Promise<string[]>;
 }
 
 /**

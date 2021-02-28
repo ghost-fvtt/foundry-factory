@@ -1,13 +1,10 @@
 import { Command, Option } from 'commander';
-import fs from 'fs-extra';
 import path from 'path';
 
 import createProject from './create-project';
 import { CLIOptions, validateOptions as validateOptions } from './options';
 import { presets } from './presets/presets';
-import { rootPath } from './utils/file-utils';
-
-const version: string = JSON.parse(fs.readFileSync(path.resolve(rootPath, 'package.json')).toString()).version;
+import { version } from './utils/version';
 
 const program = new Command();
 

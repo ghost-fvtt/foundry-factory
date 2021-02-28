@@ -77,6 +77,10 @@ export class RollupPreset implements Preset {
     return devDependencies;
   }
 
+  async getPostInstallationCommands(): Promise<string[]> {
+    return this.rollupOptions.useLinting ? ['npm exec husky init'] : [];
+  }
+
   static async create(name: string, options: Options): Promise<RollupPreset> {
     const { features }: { features: string[] } = await inquirer.prompt([
       {
