@@ -124,9 +124,10 @@ While this is not a fork of [Foundry Project Creator], a lot of inspiration was
 taken from it. You could think if it more as a rewrite with a couple of
 different design goals.
 
-Credit for the name "Foundry Factory" goes to @BadIdeasBureau.
+Credit for the name "Foundry Factory" goes to [BadIdeasBureau].
 
 [Foundry Virtual Tabletop]: https://foundryvtt.com
 [issue tracker]: https://github.com/ghost91-/foundry-factory/issues
 [Nunjucks]: https://mozilla.github.io/nunjucks/
 [Foundry Project Creator]: https://gitlab.com/foundry-projects/foundry-pc/create-foundry-project
+[BadIdeasBureau]: https://github.com/BadIdeasBureau
