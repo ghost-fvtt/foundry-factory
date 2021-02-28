@@ -10,17 +10,5 @@ export default {
     sourcemap: true,
   },
   plugins: [typescript({}), shebang()],
-  external: [
-    'chalk',
-    'child_process',
-    'commander',
-    'fs-extra',
-    'fs/promises',
-    'inquirer',
-    'nunjucks',
-    'ora',
-    'path',
-    'url',
-    'util',
-  ],
+  external: ['chalk', 'child_process', 'commander', 'fs-extra', 'inquirer', 'nunjucks', 'ora', 'path', 'url', 'util'],
 };
