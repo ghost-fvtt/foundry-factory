@@ -91,8 +91,13 @@ export class GulpRollupPreset implements Preset {
   }
 
   async getPostInstallationCommands(): Promise<string[]> {
+    const huskyQuote = process.platform === 'win32' ? '\\"' : '"';
     return this.gulpRollupOptions.useLinting && this.options.deps
-      ? ['npm exec husky install', "npx husky add .husky/pre-commit 'npx lint-staged'", 'npm run format']
+      ? [
+          'npx husky install',
+          `npx husky add .husky/pre-commit ${huskyQuote}npx lint-staged${huskyQuote}`,
+          'npm run format',
+        ]
       : [];
   }
 

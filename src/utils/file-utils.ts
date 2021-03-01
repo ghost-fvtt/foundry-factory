@@ -1,4 +1,4 @@
 import { dirname, resolve } from 'path';
-import { URL } from 'url';
+import { URL, fileURLToPath } from 'url';
 
-export const rootPath = resolve(dirname(new URL(import.meta.url).pathname), '..');
+export const rootPath = resolve(dirname(fileURLToPath(new URL(import.meta.url))), '..');
