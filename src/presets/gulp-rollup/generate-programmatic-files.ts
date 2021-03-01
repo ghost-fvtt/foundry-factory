@@ -40,7 +40,7 @@ export function generatePackage(name: string, gulpRollupOptions: GulpRollupOptio
     ? `eslint --ext ${codeFileExtensions.join(',')} --fix .`
     : undefined;
   const formatScript = gulpRollupOptions.useLinting
-    ? `prettier --write './**/*.(${codeFileTypes.join('|')}|json|${gulpRollupOptions.styleType})'`
+    ? `prettier --write "./**/*.(${codeFileTypes.join('|')}|json|${gulpRollupOptions.styleType})"`
     : undefined;
 
   const testScript = gulpRollupOptions.useTesting ? 'jest' : undefined;
