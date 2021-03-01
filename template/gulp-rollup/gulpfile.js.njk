@@ -60,10 +60,18 @@ async function copyFiles() {
  * Watch for changes for each build step
  */
 function buildWatch() {
-  gulp.watch(path.join(sourceDirectory, '**', `*${sourceFileExtension}`), { ignoreInitial: false }, buildCode);
-  gulp.watch(path.join(stylesDirectory, '**', `*${stylesExtension}`), { ignoreInitial: false }, buildStyles);
   gulp.watch(
-    staticFiles.map((file) => path.join(sourceDirectory, file)),
+    path.join(sourceDirectory, '**', `*${sourceFileExtension}`).replace(/\\/g, '/'),
+    { ignoreInitial: false },
+    buildCode,
+  );
+  gulp.watch(
+    path.join(stylesDirectory, '**', `*${stylesExtension}`).replace(/\\/g, '/'),
+    { ignoreInitial: false },
+    buildStyles,
+  );
+  gulp.watch(
+    staticFiles.map((file) => path.join(sourceDirectory, file).replace(/\\/g, '/')),
     { ignoreInitial: false },
     copyFiles,
   );
