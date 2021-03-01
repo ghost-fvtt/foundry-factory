@@ -49,6 +49,7 @@ jobs:
         with:
           name: dist
           path: dist
+      - run: rm package.json
       - name: Download prepared package.json
         uses: actions/download-artifact@v2
         with:
