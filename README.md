@@ -119,7 +119,8 @@ couple of things you need to do:
   - The `getDevDependencies` method returns a list of development dependencies
     to install.
   - The `getPostInstallationCommands` method returns a list of shell commands to
-    run after the rest of the installation has completed.
+    run after the rest of the installation has completed. Make sure that they
+    work on both Unix-like systems and Windows.
 - If your preset does not need some of these features, simply return an empty
   list or object, depending on the method.
 - Add your preset to the `presets` constant in `src/presets/presets.ts`.

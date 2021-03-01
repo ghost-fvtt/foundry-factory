@@ -17,15 +17,22 @@ async function getPresetConstructor(options: Options): Promise<PresetConstructor
   if (options.default) {
     return defaultPreset;
   } else if (options.preset) {
-    return presets[options.preset].cls;
+    return presets[options.preset];
   }
 
   const { preset }: { preset: PresetConstructor } = await inquirer.prompt([
     {
       name: 'preset',
       type: 'list',
-      message: 'Please pick a preset:',
-      choices: Object.values(presets).map(({ name, cls }) => ({ name, value: cls })),
+      message: 'Please pick a preset (links point to the documentation of the preset):',
+      choices: Object.values(presets).map((cls) => {
+        const name = cls.presetName + (cls.documentationLink ? ` (${cls.documentationLink})` : '');
+        return {
+          name,
+          value: cls,
+          short: cls.presetName,
+        };
+      }),
     },
   ]);
   return preset;

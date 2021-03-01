@@ -31,7 +31,6 @@ export interface Preset {
 
   /**
    * Returns a list of additional directory paths to create, relative to the target directory.
-   * Unless git initialization is skipped, they are filled with `.gitkeep` files if they are empty.
    */
   getAdditionalDirectories(): Promise<string[]>;
 
@@ -69,4 +68,15 @@ export interface PresetConstructor {
    * @param options The passed command line options
    */
   createDefault(name: string, options: Options): Promise<Preset>;
+
+  /**
+   * The name of the preset. This is used when the user is prompted for preset selection.
+   */
+  readonly presetName: string;
+
+  /**
+   * A link to the documentation of the preset. If present, this will also be displayed in the preset selection, so use
+   * a short link.
+   */
+  readonly documentationLink?: string;
 }

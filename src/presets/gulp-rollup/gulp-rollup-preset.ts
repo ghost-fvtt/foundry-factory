@@ -37,7 +37,7 @@ export class GulpRollupPreset implements Preset {
   }
 
   async getAdditionalDirectories(): Promise<string[]> {
-    return ['assets', 'fonts', 'lang', 'packs'].map((directory) => path.join('src', directory));
+    return ['assets', 'fonts', 'lang', 'packs'].map((directory) => path.join('src', directory)).concat('dist');
   }
 
   async getDependencies(): Promise<string[]> {
@@ -112,10 +112,10 @@ export class GulpRollupPreset implements Preset {
             name: 'TypeScript',
             value: 'typescript',
           },
-          { name: 'Linter / Formatter', value: 'linter', checked: true },
-          { name: 'Unit Testing', value: 'test' },
+          { name: 'Linter & Formatter (ESLint & Prettier)', value: 'linter', checked: true },
+          { name: 'Unit Testing (Jest)', value: 'test' },
           {
-            name: 'CSS Pre-processor',
+            name: 'CSS Pre-processor (Less / SCSS)',
             value: 'cssPreProcessor',
           },
         ],
@@ -133,6 +133,10 @@ export class GulpRollupPreset implements Preset {
   static async createDefault(name: string, options: Options): Promise<GulpRollupPreset> {
     return new GulpRollupPreset(name, options, GulpRollupPreset.defaultRollupOptions);
   }
+
+  static readonly presetName = 'Gulp + Rollup';
+
+  static readonly documentationLink = 'https://git.io/Jtphw';
 
   private static defaultRollupOptions = {
     useTypeScript: false,
