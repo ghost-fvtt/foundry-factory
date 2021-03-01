@@ -41,6 +41,7 @@ This preset provides the following configuration options:
 - Option to choose a CSS preprocessor ([Less] or [SCSS])
 - Option to set up testing (based on [Jest])
 
+The default options are JavaScript, linting enabled, no CSS preprocessor, and no testing.
 ## Basic workflow
 
 Here are a couple of common commands that can be used when a project has been
@@ -75,6 +76,7 @@ npm run lint
 ```
 npm run bump-version -- --release minor
 ```
+
 [Gulp]: https://gulpjs.com/
 [Rollup]: https://rollupjs.org/
 [Foundry Project Creator]: https://gitlab.com/foundry-projects/foundry-pc/create-foundry-project
