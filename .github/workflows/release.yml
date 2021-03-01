@@ -30,6 +30,12 @@ jobs:
         with:
           name: dist
           path: dist
+      - run: npm run prepublishOnly
+      - name: Archive package.json
+        uses: actions/upload-artifact@v2
+        with:
+          name: package.json
+          path: package.json
   publish:
     needs: build
     runs-on: ubuntu-latest
@@ -43,9 +49,14 @@ jobs:
         with:
           name: dist
           path: dist
+      - name: Download prepared package.json
+        uses: actions/download-artifact@v2
+        with:
+          name: package.json
+          path: package.json
       - name: Publish
         run: |
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
-          npm publish
+          npm publish --ignore-scripts
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
