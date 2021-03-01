@@ -1,8 +1,8 @@
-name: CI
+name: Release
 
 on:
-  push:
-  pull_request:
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -25,3 +25,17 @@ jobs:
       - run: npm run lint
       - run: npm run test:ci
       - run: npm run build
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: Publish
+        run: |
+          npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+          npm publish --ignore-scripts
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
