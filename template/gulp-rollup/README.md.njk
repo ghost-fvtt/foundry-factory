@@ -47,17 +47,18 @@ to watch for changes and automatically build as necessary.
 ### Linking the built project to Foundry VTT
 
 In order to provide a fluent development experience, it is recommended to link
-the built {{ type }} to your local Foundry VTT installation's data folder. In order
-to do so, first add a file called `foundryconfig.json` to the project root with
-the following content:
+the built {{ type }} to your local Foundry VTT installation's data folder. In
+order to do so, first add a file called `foundryconfig.json` to the project root
+with the following content:
 
 ```
 {
-    "dataPath": "<path to your home directory>/.local/share/FoundryVTT"
+  "dataPath": "/absolute/path/to/your/FoundryVTT/Data"
 }
 ```
 
-On platforms other than Linux you need to adjust the path accordingly.
+(if you are using Windows, make sure to use `\` as a path separator instead of
+`/`)
 
 Then run
 

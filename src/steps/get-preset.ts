@@ -26,7 +26,7 @@ async function getPresetConstructor(options: Options): Promise<PresetConstructor
       type: 'list',
       message: 'Please pick a preset (links point to the documentation of the preset):',
       choices: Object.values(presets).map((cls) => {
-        const name = cls.presetName + (cls.documentationLink ? ` (${cls.documentationLink})` : '');
+        const name = cls.presetName + (cls.documentationLink ? ` – ${cls.documentationLink}` : '');
         return {
           name,
           value: cls,

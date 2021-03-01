@@ -55,6 +55,17 @@ npm run build
 
 ### Link the built project to foundry's `Data` folder
 
+Provide the path to your foundry data folder in the `foundryconfig.json` file in the project root, e.g.
+
+```json
+{
+  "dataPath": "/absolute/path/to/your/FoundryVTT/Data"
+}
+```
+
+(if you are using Windows, make sure to use `\` as a path separator instead of `/`)
+
+Then run
 ```
 npm run link-project
 ```
