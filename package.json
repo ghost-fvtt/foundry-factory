@@ -66,6 +66,11 @@
   "bugs": {
     "url": "https://github.com/ghost91-/foundry-factory/issues"
   },
+  "keywords": [
+    "foundry",
+    "foundry-vtt",
+    "cli"
+  ],
   "files": [
     "template",
     "dist"
