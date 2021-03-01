@@ -93,7 +93,7 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and css', () => {
           const _package = generatePackage(defaultName, cssOptions);
 
-          expect(_package.scripts.format).toBe("prettier --write './**/*.(ts|js|json|css)'");
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|css)"');
         });
 
         it('generates a lint-staged configuration for ts, js, json, and css', () => {
@@ -109,7 +109,7 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and less', () => {
           const _package = generatePackage(defaultName, lessOptions);
 
-          expect(_package.scripts.format).toBe("prettier --write './**/*.(ts|js|json|less)'");
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|less)"');
         });
 
         it('generates a lint-staged configuration for ts, js, json, and less', () => {
@@ -125,7 +125,7 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and scss', () => {
           const _package = generatePackage(defaultName, sassOptions);
 
-          expect(_package.scripts.format).toBe("prettier --write './**/*.(ts|js|json|scss)'");
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|scss)"');
         });
 
         it('generates a lint-staged configuration for ts, js, json, and scss', () => {
@@ -152,7 +152,7 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and css', () => {
           const _package = generatePackage(defaultName, cssOptions);
 
-          expect(_package.scripts.format).toBe("prettier --write './**/*.(js|json|css)'");
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|css)"');
         });
 
         it('generates a lint-staged configuration for js, json, and css', () => {
@@ -168,7 +168,7 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and less', () => {
           const _package = generatePackage(defaultName, lessOptions);
 
-          expect(_package.scripts.format).toBe("prettier --write './**/*.(js|json|less)'");
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|less)"');
         });
 
         it('generates a lint-staged configuration for js, json, and less', () => {
@@ -184,7 +184,7 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and scss', () => {
           const _package = generatePackage(defaultName, sassOptions);
 
-          expect(_package.scripts.format).toBe("prettier --write './**/*.(js|json|scss)'");
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|scss)"');
         });
 
         it('generates a lint-staged configuration for js, json, and scss', () => {
