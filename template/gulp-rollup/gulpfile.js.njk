@@ -139,6 +139,7 @@ async function linkUserData() {
     await fs.remove(linkDirectory);
   } else if (!fs.existsSync(linkDirectory)) {
     console.log(chalk.green(`Copying build to ${chalk.blueBright(linkDirectory)}.`));
+    await fs.ensureDir(path.resolve(linkDirectory, '..'));
     await fs.symlink(path.resolve('.', distDirectory), linkDirectory);
   }
 }
