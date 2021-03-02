@@ -1,3 +1,4 @@
+import { Options } from '../../../src/options';
 import {
   generateManifest,
   generatePackage,
@@ -7,6 +8,16 @@ import {
 describe('generatePackageJSON', () => {
   const defaultName = 'name-of-the-project';
 
+  const defaultOptions: Options = {
+    type: 'module',
+    preset: 'gulp-rollup',
+    default: false,
+    config: true,
+    force: false,
+    git: false,
+    deps: true,
+  };
+
   const defaultRollupOptions = {
     useTypeScript: false,
     useLinting: false,
@@ -15,13 +26,13 @@ describe('generatePackageJSON', () => {
   };
 
   it('includes the name given in the options', () => {
-    const _package = generatePackage(defaultName, defaultRollupOptions);
+    const _package = generatePackage(defaultName, defaultOptions, defaultRollupOptions);
 
     expect(_package.name).toBe('name-of-the-project');
   });
 
   it('includes all static properties', () => {
-    const _package = generatePackage(defaultName, defaultRollupOptions);
+    const _package = generatePackage(defaultName, defaultOptions, defaultRollupOptions);
 
     expect(_package.private).toBe(true);
     expect(_package.version).toBe('0.0.0');
@@ -38,7 +49,7 @@ describe('generatePackageJSON', () => {
     const typescriptOptions = { ...defaultRollupOptions, useTypeScript: true };
 
     it('generates the updateFoundryVTTType script if typescript is selected', () => {
-      const _package = generatePackage(defaultName, typescriptOptions);
+      const _package = generatePackage(defaultName, defaultOptions, typescriptOptions);
 
       expect(_package.scripts.updateFoundryVTTTypes).toBe(
         'npm install --save-dev github:League-of-Foundry-Developers/foundry-vtt-types#foundry-0.7.9',
@@ -50,7 +61,7 @@ describe('generatePackageJSON', () => {
     const noTypescriptOptions = { ...defaultRollupOptions, useTypeScript: false };
 
     it('does not generate the updateFoundryVTTType script if typescript is not selected', () => {
-      const _package = generatePackage(defaultName, noTypescriptOptions);
+      const _package = generatePackage(defaultName, defaultOptions, noTypescriptOptions);
 
       expect(_package.scripts.updateFoundryVTTTypes).toBeUndefined();
     });
@@ -60,7 +71,7 @@ describe('generatePackageJSON', () => {
     const noLintingOptions = { ...defaultRollupOptions, useLinting: false };
 
     it('does not generate lint or format scripts', () => {
-      const _package = generatePackage(defaultName, noLintingOptions);
+      const _package = generatePackage(defaultName, defaultOptions, noLintingOptions);
 
       expect(_package.scripts.lint).toBeUndefined();
       expect(_package.scripts['lint:fix']).toBeUndefined();
@@ -68,7 +79,7 @@ describe('generatePackageJSON', () => {
     });
 
     it('does not generate a lint-staged configuration', () => {
-      const _package = generatePackage(defaultName, noLintingOptions);
+      const _package = generatePackage(defaultName, defaultOptions, noLintingOptions);
 
       expect(_package['lint-staged']).toBeUndefined();
     });
@@ -81,25 +92,38 @@ describe('generatePackageJSON', () => {
       const typescriptOptions = { ...lintingOptions, useTypeScript: true };
 
       it('generates lint scripts that lint ts and js', () => {
-        const _package = generatePackage(defaultName, typescriptOptions);
+        const _package = generatePackage(defaultName, defaultOptions, typescriptOptions);
 
         expect(_package.scripts.lint).toBe('eslint --ext .ts,.js .');
         expect(_package.scripts['lint:fix']).toBe('eslint --ext .ts,.js --fix .');
+      });
+
+      describe('and not git initialization', () => {
+        it('does not generate a lint-staged configuration', () => {
+          const _package = generatePackage(defaultName, { ...defaultOptions, git: false }, lintingOptions);
+          console.log(defaultOptions);
+          expect(_package['lint-staged']).toBeUndefined();
+        });
       });
 
       describe('and no CSS preprocessor selected', () => {
         const cssOptions = { ...typescriptOptions, styleType: 'css' as const };
 
         it('generates a format script that formats ts, js, json, and css', () => {
-          const _package = generatePackage(defaultName, cssOptions);
+          const _package = generatePackage(defaultName, defaultOptions, cssOptions);
 
           expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|css)"');
         });
 
-        it('generates a lint-staged configuration for ts, js, json, and css', () => {
-          const _package = generatePackage(defaultName, cssOptions);
+        describe('and git initialization', () => {
+          it('generates a lint-staged configuration for ts, js, json, and css', () => {
+            const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, cssOptions);
 
-          expect(_package['lint-staged']).toEqual({ '*.(ts|js)': 'eslint --fix', '*.(json|css)': 'prettier --write' });
+            expect(_package['lint-staged']).toEqual({
+              '*.(ts|js)': 'eslint --fix',
+              '*.(json|css)': 'prettier --write',
+            });
+          });
         });
       });
 
@@ -107,15 +131,20 @@ describe('generatePackageJSON', () => {
         const lessOptions = { ...typescriptOptions, styleType: 'less' as const };
 
         it('generates a format script that formats ts, js, json, and less', () => {
-          const _package = generatePackage(defaultName, lessOptions);
+          const _package = generatePackage(defaultName, defaultOptions, lessOptions);
 
           expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|less)"');
         });
 
-        it('generates a lint-staged configuration for ts, js, json, and less', () => {
-          const _package = generatePackage(defaultName, lessOptions);
+        describe('and git initialization', () => {
+          it('generates a lint-staged configuration for ts, js, json, and less', () => {
+            const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, lessOptions);
 
-          expect(_package['lint-staged']).toEqual({ '*.(ts|js)': 'eslint --fix', '*.(json|less)': 'prettier --write' });
+            expect(_package['lint-staged']).toEqual({
+              '*.(ts|js)': 'eslint --fix',
+              '*.(json|less)': 'prettier --write',
+            });
+          });
         });
       });
 
@@ -123,15 +152,20 @@ describe('generatePackageJSON', () => {
         const sassOptions = { ...typescriptOptions, styleType: 'scss' as const };
 
         it('generates a format script that formats ts, js, json, and scss', () => {
-          const _package = generatePackage(defaultName, sassOptions);
+          const _package = generatePackage(defaultName, defaultOptions, sassOptions);
 
           expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|scss)"');
         });
 
-        it('generates a lint-staged configuration for ts, js, json, and scss', () => {
-          const _package = generatePackage(defaultName, sassOptions);
+        describe('and git initialization', () => {
+          it('generates a lint-staged configuration for ts, js, json, and scss', () => {
+            const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, sassOptions);
 
-          expect(_package['lint-staged']).toEqual({ '*.(ts|js)': 'eslint --fix', '*.(json|scss)': 'prettier --write' });
+            expect(_package['lint-staged']).toEqual({
+              '*.(ts|js)': 'eslint --fix',
+              '*.(json|scss)': 'prettier --write',
+            });
+          });
         });
       });
     });
@@ -140,7 +174,7 @@ describe('generatePackageJSON', () => {
       const noTypescriptOptions = { ...lintingOptions, useTypeScript: false };
 
       it('generates lint scripts that lint js', () => {
-        const _package = generatePackage(defaultName, noTypescriptOptions);
+        const _package = generatePackage(defaultName, defaultOptions, noTypescriptOptions);
 
         expect(_package.scripts.lint).toBe('eslint --ext .js .');
         expect(_package.scripts['lint:fix']).toBe('eslint --ext .js --fix .');
@@ -150,15 +184,17 @@ describe('generatePackageJSON', () => {
         const cssOptions = { ...noTypescriptOptions, styleType: 'css' as const };
 
         it('generates a format script that formats ts, js, json, and css', () => {
-          const _package = generatePackage(defaultName, cssOptions);
+          const _package = generatePackage(defaultName, defaultOptions, cssOptions);
 
           expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|css)"');
         });
 
-        it('generates a lint-staged configuration for js, json, and css', () => {
-          const _package = generatePackage(defaultName, cssOptions);
+        describe('and git initialization', () => {
+          it('generates a lint-staged configuration for js, json, and css', () => {
+            const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, cssOptions);
 
-          expect(_package['lint-staged']).toEqual({ '*.(js)': 'eslint --fix', '*.(json|css)': 'prettier --write' });
+            expect(_package['lint-staged']).toEqual({ '*.(js)': 'eslint --fix', '*.(json|css)': 'prettier --write' });
+          });
         });
       });
 
@@ -166,15 +202,17 @@ describe('generatePackageJSON', () => {
         const lessOptions = { ...noTypescriptOptions, styleType: 'less' as const };
 
         it('generates a format script that formats ts, js, json, and less', () => {
-          const _package = generatePackage(defaultName, lessOptions);
+          const _package = generatePackage(defaultName, defaultOptions, lessOptions);
 
           expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|less)"');
         });
 
-        it('generates a lint-staged configuration for js, json, and less', () => {
-          const _package = generatePackage(defaultName, lessOptions);
+        describe('and git initialization', () => {
+          it('generates a lint-staged configuration for js, json, and less', () => {
+            const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, lessOptions);
 
-          expect(_package['lint-staged']).toEqual({ '*.(js)': 'eslint --fix', '*.(json|less)': 'prettier --write' });
+            expect(_package['lint-staged']).toEqual({ '*.(js)': 'eslint --fix', '*.(json|less)': 'prettier --write' });
+          });
         });
       });
 
@@ -182,15 +220,17 @@ describe('generatePackageJSON', () => {
         const sassOptions = { ...noTypescriptOptions, styleType: 'scss' as const };
 
         it('generates a format script that formats ts, js, json, and scss', () => {
-          const _package = generatePackage(defaultName, sassOptions);
+          const _package = generatePackage(defaultName, defaultOptions, sassOptions);
 
           expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|scss)"');
         });
 
-        it('generates a lint-staged configuration for js, json, and scss', () => {
-          const _package = generatePackage(defaultName, sassOptions);
+        describe('and git initialization', () => {
+          it('generates a lint-staged configuration for js, json, and scss', () => {
+            const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, sassOptions);
 
-          expect(_package['lint-staged']).toEqual({ '*.(js)': 'eslint --fix', '*.(json|scss)': 'prettier --write' });
+            expect(_package['lint-staged']).toEqual({ '*.(js)': 'eslint --fix', '*.(json|scss)': 'prettier --write' });
+          });
         });
       });
     });
@@ -200,7 +240,7 @@ describe('generatePackageJSON', () => {
     const testOptions = { ...defaultRollupOptions, useTesting: true };
 
     it('generates test scripts', () => {
-      const _package = generatePackage(defaultName, testOptions);
+      const _package = generatePackage(defaultName, defaultOptions, testOptions);
 
       expect(_package.scripts.test).toBe('jest');
       expect(_package.scripts['test:watch']).toBe('jest --watch');
@@ -212,7 +252,7 @@ describe('generatePackageJSON', () => {
     const noTestOptions = { ...defaultRollupOptions, useTesting: false };
 
     it('generates no test scripts', () => {
-      const _package = generatePackage(defaultName, noTestOptions);
+      const _package = generatePackage(defaultName, defaultOptions, noTestOptions);
 
       expect(_package.scripts.test).toBeUndefined();
       expect(_package.scripts['test:watch']).toBeUndefined();

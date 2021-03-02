@@ -21,11 +21,11 @@ export default async (
 
   const options = await selectTypeIfNeeded(validatedCLIOptions);
   await createWorkingDir(targetDirectory, options);
+  await initializeGit(targetDirectory, options);
   const preset = await getPreset(name, options);
   await createProgrammaticFiles(targetDirectory, preset);
   await createFilesFromTemplates(name, targetDirectory, options, preset);
   await createAdditionalDirectories(targetDirectory, preset);
   await installDependencies(targetDirectory, options, preset);
-  await initializeGit(targetDirectory, options);
   await executePostInstallationCommands(targetDirectory, preset);
 };

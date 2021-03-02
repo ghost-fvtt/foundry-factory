@@ -7,11 +7,18 @@ import { Options } from '../options';
 
 const execAsync = promisify(exec);
 
-export default async (targetDirectory: string, { git }: Options): Promise<void> => {
-  if (!git) {
+export default async (targetDirectory: string, options: Options): Promise<void> => {
+  if (!options.git) {
     return;
   }
   const spinner = ora('Initializing git repository').start();
+  try {
+    await execAsync('git --version');
+  } catch (err) {
+    spinner.warn(chalk.yellow('Skipped initializing git repository because git does not seem to be installed'));
+    options.git = false;
+    return;
+  }
   try {
     try {
       await execAsync('git rev-parse --show-toplevel', { cwd: targetDirectory });
@@ -24,5 +31,5 @@ export default async (targetDirectory: string, { git }: Options): Promise<void> 
     spinner.fail(chalk.red('Failed to initialize git repository'));
     throw err;
   }
-  spinner.succeed(chalk.green('Initialized new Git repository'));
+  spinner.succeed(chalk.green('Initialized new git repository'));
 };

@@ -59,10 +59,12 @@ export class GulpRollupPreset implements Preset {
         'eslint',
         'eslint-config-prettier',
         'eslint-plugin-prettier',
-        'husky',
-        'lint-staged',
         'prettier',
       ]);
+
+      if (this.options.git) {
+        devDependencies = devDependencies.concat(['husky', 'lint-staged']);
+      }
 
       if (this.gulpRollupOptions.useTypeScript) {
         devDependencies = devDependencies.concat('@typescript-eslint/eslint-plugin', '@typescript-eslint/parser');
@@ -92,7 +94,7 @@ export class GulpRollupPreset implements Preset {
 
   async getPostInstallationCommands(): Promise<string[]> {
     const huskyQuote = process.platform === 'win32' ? '\\"' : '"';
-    return this.gulpRollupOptions.useLinting && this.options.deps
+    return this.gulpRollupOptions.useLinting && this.options.deps && this.options.git
       ? [
           'npx husky install',
           `npx husky add .husky/pre-commit ${huskyQuote}npx lint-staged${huskyQuote}`,
