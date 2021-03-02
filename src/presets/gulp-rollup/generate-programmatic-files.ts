@@ -11,7 +11,7 @@ export default (
 ): Record<TargetFilePath, string> => {
   const programmaticFiles: Record<string, string> = {};
 
-  programmaticFiles['package.json'] = JSON.stringify(generatePackage(name, gulpRollupOptions), undefined, 2);
+  programmaticFiles['package.json'] = JSON.stringify(generatePackage(name, options, gulpRollupOptions), undefined, 2);
   programmaticFiles[path.join('src', `${options.type}.json`)] = JSON.stringify(
     generateManifest(name, options),
     undefined,
@@ -27,7 +27,7 @@ export default (
   return programmaticFiles;
 };
 
-export function generatePackage(name: string, gulpRollupOptions: GulpRollupOptions): Package {
+export function generatePackage(name: string, options: Options, gulpRollupOptions: GulpRollupOptions): Package {
   const codeFileTypes = gulpRollupOptions.useTypeScript ? ['ts', 'js'] : ['js'];
   const codeFileExtensions = codeFileTypes.map((fileType) => `.${fileType}`);
 
@@ -48,14 +48,15 @@ export function generatePackage(name: string, gulpRollupOptions: GulpRollupOptio
   const testCIScript = gulpRollupOptions.useTesting
     ? 'jest --ci --reporters=default --reporters=jest-junit'
     : undefined;
-  const postinstallScript = gulpRollupOptions.useLinting ? 'husky install' : undefined;
+  const postinstallScript = gulpRollupOptions.useLinting && options.git ? 'husky install' : undefined;
 
-  const lintStagedConfiguration = gulpRollupOptions.useLinting
-    ? {
-        [`*.(${codeFileTypes.join('|')})`]: 'eslint --fix',
-        [`*.(json|${gulpRollupOptions.styleType})`]: 'prettier --write',
-      }
-    : undefined;
+  const lintStagedConfiguration =
+    gulpRollupOptions.useLinting && options.git
+      ? {
+          [`*.(${codeFileTypes.join('|')})`]: 'eslint --fix',
+          [`*.(json|${gulpRollupOptions.styleType})`]: 'prettier --write',
+        }
+      : undefined;
 
   return {
     private: true,
