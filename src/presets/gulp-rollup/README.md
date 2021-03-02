@@ -70,6 +70,9 @@ Then run
 npm run link-project
 ```
 
+On Windows, creating symlinks requires administrator privileges so unfortunately
+you need to run the above command in an administrator terminal for it to work.
+
 ### Run the tests (if testing was set up)
 
 ```
