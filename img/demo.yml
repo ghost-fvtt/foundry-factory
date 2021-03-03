@@ -1,0 +1,361 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: /bin/zsh
+  
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /home/ghost
+  
+  # Export additional ENV variables
+  env:
+    recording: true
+  
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 80
+  
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 24
+  
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+  
+  # Quality
+  # 1 - 100
+  quality: 100
+  
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+  
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+  
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: solid
+    title: null
+    style:
+      boxShadow: none
+      margin: 0px
+      backgroundColor: "#282c34"
+  
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+  
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+  
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Fira Code, Monaco, Lucida Console, Ubuntu Mono, Monospace"
+  
+  # The size of the font
+  fontSize: 14
+  
+  # The height of lines
+  lineHeight: 1
+  
+  # The spacing between letters
+  letterSpacing: 0
+  
+  # Theme
+  theme:
+    background:    "transparent"
+    foreground:    "#abb2bf"
+    cursor:        "#abb2bf"
+    black:         "#282c34"
+    red:           "#e06c75"
+    green:         "#98c379"
+    yellow:        "#e5c07b"
+    blue:          "#61afef"
+    magenta:       "#c678dd"
+    cyan:          "#56b6c2"
+    white:         "#abb2bf"
+    brightBlack:   "#5c6370"
+    brightRed:     "#be5046"
+    brightGreen:   "#98c379"
+    brightYellow:  "#d19a66"
+    brightBlue:    "#61afef"
+    brightMagenta: "#c678dd"
+    brightCyan:    "#56b6c2"
+    brightWhite:   "#3e4451"
+  
+# Records, feel free to edit them
+records:
+  - delay: 0
+    content: "\e]0;ghost@home: ~\a\r\e[0m\e[27m\e[24m\e[J\e[1m\e[31m\e[39m\e[0m\e[34mghost\e[00m@\e[32mhome\e[00m:\e[35m~\e[00m> \e[K\e[?1h\e=\e[?2004h"
+  - delay: 750
+    content: f
+  - delay: 80
+    content: "\bfo"
+  - delay: 80
+    content: u
+  - delay: 80
+    content: 'n'
+  - delay: 80
+    content: d
+  - delay: 80
+    content: r
+  - delay: 80
+    content: 'y'
+  - delay: 80
+    content: '-'
+  - delay: 80
+    content: f
+  - delay: 80
+    content: a
+  - delay: 80
+    content: c
+  - delay: 80
+    content: t
+  - delay: 80
+    content: o
+  - delay: 80
+    content: r
+  - delay: 80
+    content: 'y'
+  - delay: 80
+    content: ' '
+  - delay: 80
+    content: d
+  - delay: 80
+    content: e
+  - delay: 80
+    content: m
+  - delay: 80
+    content: o
+  - delay: 750
+    content: "\e[?1l\e>\e[?2004l\r\r\n\e]0;ghost@home: foundry-factory demo\a"
+  - delay: 500
+    content: "\e[1m\e[36mFoundry Factory 0.3.1\e[39m\e[22m\r\n"
+  - delay: 9
+    content: "\e[?25l\e[32m?\e[39m \e[1mPlease select whether to create a module or a system:\e[22m\e[0m \e[0m\e[2m(Use arrow keys)\e[22m\r\n\e[36m❯ Module\e[39m \r\n  System \e[9D\e[9C"
+  - delay: 1000
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mPlease select whether to create a module or a system:\e[22m\e[0m \e[0m\r\n  Module \r\n\e[36m❯ System\e[39m \e[9D\e[9C"
+  - delay: 750
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mPlease select whether to create a module or a system:\e[22m\e[0m \e[0m\e[36mSystem\e[39m\e[62D\e[62C\r\n\e[?25h\e[?25l\e[36m⠋\e[39m Initializing working directory\e[2K\e[1G\e[?25h\e[32m✔\e[39m \e[32mCreated working directory\e[39m\r\n\e[?25l\e[36m⠋\e[39m Initializing git repository"
+  - delay: 43
+    content: "\e[2K\e[1G\e[?25h\e[32m✔\e[39m \e[32mInitialized new git repository\e[39m\r\n\e[?25l\e[32m?\e[39m \e[1mPlease pick a preset (links point to the documentation of the preset):\e[22m\e[0m \e[0m\e[2m(Use ar\r\nrow keys)\e[22m\r\n\e[36m❯ Gulp + Rollup – https://git.io/Jtphw\e[39m \e[39D\e[39C"
+  - delay: 1000
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mPlease pick a preset (links point to the documentation of the preset):\e[22m\e[0m \e[0m\e[36mGulp + \r\nRollup\e[39m\e[6D\e[6C\r\n\e[?25h\e[?25l\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to t\r\noggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection)\r\n\e[36m❯◯ TypeScript\e[39m\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n ◯ Unit Testing (Jest)\r\n ◯ CSS Pre-processor (Less / SCSS)\e[34D\e[34C"
+  - delay: 500
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to t\r\noggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection)\r\n ◯ TypeScript\r\n\e[36m❯\e[32m◉\e[39m\e[36m Linter & Formatter (ESLint & Prettier)\e[39m\r\n ◯ Unit Testing (Jest)\r\n ◯ CSS Pre-processor (Less / SCSS)\e[34D\e[34C"
+  - delay: 500
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to t\r\noggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection)\r\n ◯ TypeScript\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n\e[36m❯◯ Unit Testing (Jest)\e[39m\r\n ◯ CSS Pre-processor (Less / SCSS)\e[34D\e[34C"
+  - delay: 500
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to t\r\noggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection)\r\n ◯ TypeScript\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n ◯ Unit Testing (Jest)\r\n\e[36m❯◯ CSS Pre-processor (Less / SCSS)\e[39m\e[34D\e[34C"
+  - delay: 500
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m\r\n ◯ TypeScript\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n ◯ Unit Testing (Jest)\r\n\e[36m❯\e[32m◉\e[39m\e[36m CSS Pre-processor (Less / SCSS)\e[39m\e[34D\e[34C"
+  - delay: 750
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m\e[36mLinter & Formatter (ESLint & Prett\r\nier), CSS Pre-processor (Less / SCSS)\e[39m\e[37D\e[37C\r\n\e[?25h"
+  - delay: 5
+    content: "\e[?25l\e[32m?\e[39m \e[1mPick a CSS pre-processor\e[22m\e[0m \e[0m\e[2m(Use arrow keys)\e[22m\r\n\e[36m❯ Sass (.scss)\e[39m \r\n  Less \e[7D\e[7C"
+  - delay: 1000
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mPick a CSS pre-processor\e[22m\e[0m \e[0m\r\n  Sass (.scss) \r\n\e[36m❯ Less\e[39m \e[7D\e[7C"
+  - delay: 750
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mPick a CSS pre-processor\e[22m\e[0m \e[0m\e[36mLess\e[39m\e[31D\e[31C\r\n\e[?25h\e[?25l\e[36m⠋\e[39m Creating programmatic files"
+  - delay: 7
+    content: "\e[2K\e[1G\e[?25h\e[32m✔\e[39m \e[32mCreated programmatic files\e[39m\r\n\e[?25l\e[36m⠋\e[39m Creating files from templates"
+  - delay: 63
+    content: "\e[2K\e[1G\e[?25h\e[32m✔\e[39m \e[32mCreated files from templates\e[39m\r\n\e[?25l\e[36m⠋\e[39m Creating additional directories\e[2K\e[1G\e[?25h\e[32m✔\e[39m \e[32mCreated additional directories\e[39m\r\n\e[?25l\e[36m⠋\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠙\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠹\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠸\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠼\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠴\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠦\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠧\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠇\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠏\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠋\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠙\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠹\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠸\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠼\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠴\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠦\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠧\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠇\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠏\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠋\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠙\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠹\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠸\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠼\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠴\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠦\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠧\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠇\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠏\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠋\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠙\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠹\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠸\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠼\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠴\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠦\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠧\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠇\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠏\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠋\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠙\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠹\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠸\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠼\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠴\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠦\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠧\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠇\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠏\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠋\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠙\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠹\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠸\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠼\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠴\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠦\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠧\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠇\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠏\e[39m Installing dependencies"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠋\e[39m Installing dependencies"
+  - delay: 19
+    content: "\e[2K\e[1G\e[?25h\e[32m✔\e[39m \e[32mInstalled dependencies\e[39m\r\n\e[?25l\e[36m⠋\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠙\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠹\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠸\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠼\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠴\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠦\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠧\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠇\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠏\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠋\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠙\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠹\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠸\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠼\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠴\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠦\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠧\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠇\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠏\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠋\e[39m Executing post installation commands"
+  - delay: 80
+    content: "\e[2K\e[1G\e[36m⠙\e[39m Executing post installation commands"
+  - delay: 38
+    content: "\e[2K\e[1G\e[?25h\e[32m✔\e[39m \e[32mExecuted post installation commands\e[39m\r\n\e[?25h"
+  - delay: 5
+    content: "foundry-factory demo  14,01s user 1,97s system 66% cpu 24,099 total\r\n\e[1m\e[7m%\e[27m\e[1m\e[0m                                                                               \r \r"
+  - delay: 5
+    content: "\e]0;ghost@home: ~\a\r\e[0m\e[27m\e[24m\e[J\e[1m\e[31m\e[39m\e[0m\e[34mghost\e[00m@\e[32mhome\e[00m:\e[35m~\e[00m> \e[K\e[?1h\e=\e[?2004h"
+  - delay: 1000
+    content: "⁣"
