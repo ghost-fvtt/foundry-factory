@@ -31,10 +31,6 @@ export function generatePackage(name: string, options: Options, gulpRollupOption
   const codeFileTypes = gulpRollupOptions.useTypeScript ? ['ts', 'js'] : ['js'];
   const codeFileExtensions = codeFileTypes.map((fileType) => `.${fileType}`);
 
-  const updateFoundryVTTTypesScript = gulpRollupOptions.useTypeScript
-    ? 'npm install --save-dev github:League-of-Foundry-Developers/foundry-vtt-types#foundry-0.7.9'
-    : undefined;
-
   const lintScript = gulpRollupOptions.useLinting ? `eslint --ext ${codeFileExtensions.join(',')} .` : undefined;
   const lintFixScript = gulpRollupOptions.useLinting
     ? `eslint --ext ${codeFileExtensions.join(',')} --fix .`
@@ -84,7 +80,6 @@ export function generatePackage(name: string, options: Options, gulpRollupOption
       'link-project': 'gulp link',
       clean: 'gulp clean',
       'clean:link': 'gulp link --clean',
-      updateFoundryVTTTypes: updateFoundryVTTTypesScript,
       'bump-version': 'gulp bumpVersion',
       lint: lintScript,
       'lint:fix': lintFixScript,
@@ -125,7 +120,6 @@ interface Package {
     'link-project': string;
     clean: string;
     'clean:link': string;
-    updateFoundryVTTTypes?: string;
     'bump-version': string;
     lint?: string;
     'lint:fix'?: string;

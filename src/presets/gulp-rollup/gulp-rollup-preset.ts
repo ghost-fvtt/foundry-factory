@@ -48,7 +48,7 @@ export class GulpRollupPreset implements Preset {
     let devDependencies = ['@rollup/plugin-node-resolve', 'chalk', 'fs-extra', 'gulp', 'rollup', 'semver', 'yargs'];
     if (this.gulpRollupOptions.useTypeScript) {
       devDependencies = devDependencies.concat([
-        'foundry-vtt-types@github:League-of-Foundry-Developers/foundry-vtt-types#906f1cef577eac1fae22103b5875c13fbb08addf',
+        '@league-of-foundry-developers/foundry-vtt-types@ffvt-0.7.9',
         'rollup-plugin-typescript2',
         'tslib',
         'typescript',

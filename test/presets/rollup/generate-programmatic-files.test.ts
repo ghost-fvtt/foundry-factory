@@ -45,28 +45,6 @@ describe('generatePackageJSON', () => {
     expect(_package.devDependencies).toEqual({});
   });
 
-  describe('with typescript selected', () => {
-    const typescriptOptions = { ...defaultRollupOptions, useTypeScript: true };
-
-    it('generates the updateFoundryVTTType script if typescript is selected', () => {
-      const _package = generatePackage(defaultName, defaultOptions, typescriptOptions);
-
-      expect(_package.scripts.updateFoundryVTTTypes).toBe(
-        'npm install --save-dev github:League-of-Foundry-Developers/foundry-vtt-types#foundry-0.7.9',
-      );
-    });
-  });
-
-  describe('with typescript not selected', () => {
-    const noTypescriptOptions = { ...defaultRollupOptions, useTypeScript: false };
-
-    it('does not generate the updateFoundryVTTType script if typescript is not selected', () => {
-      const _package = generatePackage(defaultName, defaultOptions, noTypescriptOptions);
-
-      expect(_package.scripts.updateFoundryVTTTypes).toBeUndefined();
-    });
-  });
-
   describe('with lint not selected', () => {
     const noLintingOptions = { ...defaultRollupOptions, useLinting: false };
 
