@@ -7,6 +7,8 @@ preset based on [Gulp] and [Rollup] is available).
 
 It is designed to be extendable so that adding additional presets is quite easy.
 
+[![Foundry Factory Demo](./img/demo.gif)](./img/demo.gif)
+
 ## Usage
 
 You can run Foundry Factory with `npx`:
