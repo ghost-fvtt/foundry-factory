@@ -136,6 +136,10 @@ export class GulpRollupPreset implements Preset {
     return new GulpRollupPreset(name, options, GulpRollupPreset.defaultRollupOptions);
   }
 
+  static supports(): boolean {
+    return true;
+  }
+
   static readonly presetName = 'Gulp + Rollup';
 
   static readonly documentationLink = 'https://git.io/Jtphw';

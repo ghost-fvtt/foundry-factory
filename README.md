@@ -2,8 +2,7 @@
 
 Foundry Factory is an interactive CLI tool that developers can use to
 bootstrap modules and systems for [Foundry Virtual Tabletop]. It allows developers to
-choose among different presets to initialize their projects (currently only one
-preset based on [Gulp] and [Rollup] is available).
+choose among different presets to initialize their projects.
 
 It is designed to be extendable so that adding additional presets is quite easy.
 
@@ -50,6 +49,7 @@ Here is a list of available presets with links to their individual
 documentation:
 
 - [Gulp + Rollup](./src/presets/gulp-rollup/README.md)
+- [League Basic JS Module Template](https://github.com/League-of-Foundry-Developers/FoundryVTT-Module-Template/blob/master/README.md)
 
 ## Development
 

@@ -19,13 +19,18 @@ export default async (
 ): Promise<void> => {
   console.log(chalk.bold(chalk.cyan(`Foundry Factory ${version}`)));
 
-  const options = await selectTypeIfNeeded(validatedCLIOptions);
-  await createWorkingDir(targetDirectory, options);
-  await initializeGit(targetDirectory, options);
-  const preset = await getPreset(name, options);
-  await createProgrammaticFiles(targetDirectory, preset);
-  await createFilesFromTemplates(name, targetDirectory, options, preset);
-  await createAdditionalDirectories(targetDirectory, preset);
-  await installDependencies(targetDirectory, options, preset);
-  await executePostInstallationCommands(targetDirectory, preset);
+  try {
+    const options = await selectTypeIfNeeded(validatedCLIOptions);
+    await createWorkingDir(targetDirectory, options);
+    await initializeGit(targetDirectory, options);
+    const preset = await getPreset(name, options);
+    await createProgrammaticFiles(targetDirectory, preset);
+    await createFilesFromTemplates(name, targetDirectory, options, preset);
+    await createAdditionalDirectories(targetDirectory, preset);
+    await installDependencies(targetDirectory, options, preset);
+    await executePostInstallationCommands(targetDirectory, preset);
+  } catch (err) {
+    console.error(chalk.red(`Failed to create project at ${targetDirectory}`));
+    process.exit(1);
+  }
 };

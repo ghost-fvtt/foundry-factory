@@ -70,6 +70,13 @@ export interface PresetConstructor {
   createDefault(name: string, options: Options): Promise<Preset>;
 
   /**
+   * Whether or not the preset supports the given options. This will be used to decide if the preset should be displayed
+   * for selection.
+   * @param options The options that the project is being created with.
+   */
+  supports(options: Options): boolean;
+
+  /**
    * The name of the preset. This is used when the user is prompted for preset selection.
    */
   readonly presetName: string;
