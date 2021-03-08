@@ -32,7 +32,7 @@ Options:
   -v, --version          Show the version number of Foundry Factory
   -t, --type <type>      Create a project of this type (choices: "module",
                          "system")
-  -p, --preset <preset>  Use this preset (choices: "gulp-rollup")
+  -p, --preset <preset>  Use this preset (choices: "gulp-rollup", "league-js")
   -d, --default          Use the default preset (default: false)
   -n, --no-config        Skip the configuration prompts of the selected preset
                          and use its default configuration
