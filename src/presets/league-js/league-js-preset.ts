@@ -11,10 +11,6 @@ export class LeagueJSPreset implements Preset {
     this.options = options;
   }
 
-  async getProgrammaticFiles(): Promise<Record<string, string>> {
-    return {};
-  }
-
   async getTemplateFiles(): Promise<Record<string, string>> {
     return Object.fromEntries(
       [
@@ -28,26 +24,6 @@ export class LeagueJSPreset implements Preset {
         path.join('.github', 'workflows', 'main.yml'),
       ].map((file) => [file, path.join('league-js', `${file}.njk`)]),
     );
-  }
-
-  async getTemplateVariables(): Promise<Record<string, unknown>> {
-    return {};
-  }
-
-  async getAdditionalDirectories(): Promise<string[]> {
-    return [];
-  }
-
-  async getDependencies(): Promise<string[]> {
-    return [];
-  }
-
-  async getDevDependencies(): Promise<string[]> {
-    return [];
-  }
-
-  async getPostInstallationCommands(): Promise<string[]> {
-    return [];
   }
 
   static async create(name: string, options: Options): Promise<LeagueJSPreset> {

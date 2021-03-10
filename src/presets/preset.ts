@@ -17,37 +17,37 @@ export interface Preset {
   /**
    * Returns a map between target files and the strings to write them.
    */
-  getProgrammaticFiles(): Promise<Record<TargetFilePath, string>>;
+  getProgrammaticFiles?: () => Promise<Record<TargetFilePath, string>>;
 
   /**
    * Returns a map between target files and templates which are rendered to the corresponding files.
    */
-  getTemplateFiles(): Promise<Record<TargetFilePath, TemplateFilePath>>;
+  getTemplateFiles?: () => Promise<Record<TargetFilePath, TemplateFilePath>>;
 
   /**
    * Returns template variables to provide to the templates in addition to the options and the name when rendering them.
    */
-  getTemplateVariables(): Promise<Record<string, unknown>>;
+  getTemplateVariables?: () => Promise<Record<string, unknown>>;
 
   /**
    * Returns a list of additional directory paths to create, relative to the target directory.
    */
-  getAdditionalDirectories(): Promise<string[]>;
+  getAdditionalDirectories?: () => Promise<string[]>;
 
   /**
    * Returns a list of dependencies to install.
    */
-  getDependencies(): Promise<string[]>;
+  getDependencies?: () => Promise<string[]>;
 
   /**
    * Returns a list of development dependencies to install.
    */
-  getDevDependencies(): Promise<string[]>;
+  getDevDependencies?: () => Promise<string[]>;
 
   /**
    * Returns a list of commands to execute after the rest of the installation has completed.
    */
-  getPostInstallationCommands(): Promise<string[]>;
+  getPostInstallationCommands?: () => Promise<string[]>;
 }
 
 /**

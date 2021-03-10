@@ -9,13 +9,13 @@ import { Preset } from '../presets/preset';
 const execAsync = promisify(exec);
 
 export default async (targetDirectory: string, { deps }: Options, preset: Preset): Promise<void> => {
-  if (!deps) {
+  if (!deps || (!preset.getDependencies && !preset.getDevDependencies)) {
     return;
   }
   const spinner = ora('Installing dependencies').start();
   try {
-    const dependencies = await preset.getDependencies();
-    const devDependencies = await preset.getDevDependencies();
+    const dependencies = preset.getDependencies ? await preset.getDependencies() : [];
+    const devDependencies = preset.getDevDependencies ? await preset.getDevDependencies() : [];
     const baseCommand = ['npm', 'install', '--loglevel', 'error'];
 
     if (dependencies.length > 0) {

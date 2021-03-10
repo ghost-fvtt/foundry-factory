@@ -123,8 +123,9 @@ couple of things you need to do:
   - The `getPostInstallationCommands` method returns a list of shell commands to
     run after the rest of the installation has completed. Make sure that they
     work on both Unix-like systems and Windows.
-- If your preset does not need some of these features, simply return an empty
-  list or object, depending on the method.
+- If your preset does not need some of these features, simply omit the
+  corresponding methods. Except for the static methods, all of them are
+  optional.
 - Add your preset to the `presets` constant in `src/presets/presets.ts`.
 - Optionally, create a folder for your preset in the `template` directory,
   containing any Nunjucks templates you want to render.
