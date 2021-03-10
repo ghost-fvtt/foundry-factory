@@ -3,7 +3,7 @@ import {
   generateManifest,
   generatePackage,
   generateTemplate,
-} from '../../../src/presets/gulp-rollup/generate-programmatic-files';
+} from '../../../src/presets/ghost-gulp-rollup/generate-programmatic-files';
 
 describe('generatePackageJSON', () => {
   const defaultName = 'name-of-the-project';
