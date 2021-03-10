@@ -6,34 +6,34 @@ import { Preset, TargetFilePath, TemplateFilePath } from '../preset';
 import generateProgrammaticFiles from './generate-programmatic-files';
 import getTemplateFiles from './get-template-files';
 
-export class GulpRollupPreset implements Preset {
+export class GhostGulpRollupPreset implements Preset {
   protected name: string;
   protected options: Options;
-  protected gulpRollupOptions: GulpRollupOptions;
+  protected ghostGulpRollupOptions: GhostGulpRollupOptions;
 
-  constructor(name: string, options: Options, gulpRollupOptions: GulpRollupOptions) {
+  constructor(name: string, options: Options, ghostGulpRollupOptions: GhostGulpRollupOptions) {
     this.name = name;
     this.options = options;
-    this.gulpRollupOptions = gulpRollupOptions;
+    this.ghostGulpRollupOptions = ghostGulpRollupOptions;
   }
 
   async getProgrammaticFiles(): Promise<Record<TargetFilePath, string>> {
-    return generateProgrammaticFiles(this.name, this.options, this.gulpRollupOptions);
+    return generateProgrammaticFiles(this.name, this.options, this.ghostGulpRollupOptions);
   }
 
   async getTemplateFiles(): Promise<Record<TargetFilePath, TemplateFilePath>> {
-    return getTemplateFiles(this.name, this.gulpRollupOptions);
+    return getTemplateFiles(this.name, this.ghostGulpRollupOptions);
   }
 
   async getTemplateVariables(): Promise<Record<string, unknown>> {
     const eslintPlugins = [];
-    if (this.gulpRollupOptions.useTypeScript) {
+    if (this.ghostGulpRollupOptions.useTypeScript) {
       eslintPlugins.push("'@typescript-eslint'");
     }
-    if (this.gulpRollupOptions.useTesting) {
+    if (this.ghostGulpRollupOptions.useTesting) {
       eslintPlugins.push("'jest'");
     }
-    return { ...this.gulpRollupOptions, eslintPlugins };
+    return { ...this.ghostGulpRollupOptions, eslintPlugins };
   }
 
   async getAdditionalDirectories(): Promise<string[]> {
@@ -46,7 +46,7 @@ export class GulpRollupPreset implements Preset {
 
   async getDevDependencies(): Promise<string[]> {
     let devDependencies = ['@rollup/plugin-node-resolve', 'chalk', 'fs-extra', 'gulp', 'rollup', 'semver', 'yargs'];
-    if (this.gulpRollupOptions.useTypeScript) {
+    if (this.ghostGulpRollupOptions.useTypeScript) {
       devDependencies = devDependencies.concat([
         '@league-of-foundry-developers/foundry-vtt-types@fvtt-0.7.9',
         'rollup-plugin-typescript2',
@@ -54,7 +54,7 @@ export class GulpRollupPreset implements Preset {
         'typescript',
       ]);
     }
-    if (this.gulpRollupOptions.useLinting) {
+    if (this.ghostGulpRollupOptions.useLinting) {
       devDependencies = devDependencies.concat([
         'eslint',
         'eslint-config-prettier',
@@ -66,27 +66,27 @@ export class GulpRollupPreset implements Preset {
         devDependencies = devDependencies.concat(['husky', 'lint-staged']);
       }
 
-      if (this.gulpRollupOptions.useTypeScript) {
+      if (this.ghostGulpRollupOptions.useTypeScript) {
         devDependencies = devDependencies.concat('@typescript-eslint/eslint-plugin', '@typescript-eslint/parser');
       } else {
         devDependencies = devDependencies.concat('@typhonjs-fvtt/eslint-config-foundry.js@0.7.9');
       }
 
-      if (this.gulpRollupOptions.useTesting) {
+      if (this.ghostGulpRollupOptions.useTesting) {
         devDependencies = devDependencies.concat('eslint-plugin-jest');
       }
     }
-    if (this.gulpRollupOptions.useTesting) {
+    if (this.ghostGulpRollupOptions.useTesting) {
       devDependencies = devDependencies.concat(['jest', 'jest-junit']);
 
-      if (this.gulpRollupOptions.useTypeScript) {
+      if (this.ghostGulpRollupOptions.useTypeScript) {
         devDependencies = devDependencies.concat(['@types/jest', 'ts-jest']);
       }
     }
-    if (this.gulpRollupOptions.styleType === 'less') {
+    if (this.ghostGulpRollupOptions.styleType === 'less') {
       devDependencies = devDependencies.concat(['gulp-less', 'less@3']);
     }
-    if (this.gulpRollupOptions.styleType === 'scss') {
+    if (this.ghostGulpRollupOptions.styleType === 'scss') {
       devDependencies = devDependencies.concat(['gulp-sass', 'sass']);
     }
     return devDependencies;
@@ -94,7 +94,7 @@ export class GulpRollupPreset implements Preset {
 
   async getPostInstallationCommands(): Promise<string[]> {
     const huskyQuote = process.platform === 'win32' ? '\\"' : '"';
-    return this.gulpRollupOptions.useLinting && this.options.deps && this.options.git
+    return this.ghostGulpRollupOptions.useLinting && this.options.deps && this.options.git
       ? [
           'npx husky install',
           `npx husky add .husky/pre-commit ${huskyQuote}npx lint-staged${huskyQuote}`,
@@ -103,7 +103,7 @@ export class GulpRollupPreset implements Preset {
       : [];
   }
 
-  static async create(name: string, options: Options): Promise<GulpRollupPreset> {
+  static async create(name: string, options: Options): Promise<GhostGulpRollupPreset> {
     const { features }: { features: string[] } = await inquirer.prompt([
       {
         name: 'features',
@@ -129,18 +129,18 @@ export class GulpRollupPreset implements Preset {
     const useCssPreProcessor = features.find((it) => it === 'cssPreProcessor') !== undefined;
     const styleType = await getStyleType(useCssPreProcessor);
 
-    return new GulpRollupPreset(name, options, { useTypeScript, useLinting, useTesting, styleType });
+    return new GhostGulpRollupPreset(name, options, { useTypeScript, useLinting, useTesting, styleType });
   }
 
-  static async createDefault(name: string, options: Options): Promise<GulpRollupPreset> {
-    return new GulpRollupPreset(name, options, GulpRollupPreset.defaultRollupOptions);
+  static async createDefault(name: string, options: Options): Promise<GhostGulpRollupPreset> {
+    return new GhostGulpRollupPreset(name, options, GhostGulpRollupPreset.defaultRollupOptions);
   }
 
   static supports(): boolean {
     return true;
   }
 
-  static readonly presetName = 'Gulp + Rollup';
+  static readonly presetName = "ghost's Gulp + Rollup Preset";
 
   static readonly documentationLink = 'https://git.io/Jtphw';
 
@@ -152,7 +152,7 @@ export class GulpRollupPreset implements Preset {
   };
 }
 
-async function getStyleType(useCssPreProcessor: boolean): Promise<GulpRollupOptions['styleType']> {
+async function getStyleType(useCssPreProcessor: boolean): Promise<GhostGulpRollupOptions['styleType']> {
   if (!useCssPreProcessor) {
     return 'css';
   }
@@ -170,7 +170,7 @@ async function getStyleType(useCssPreProcessor: boolean): Promise<GulpRollupOpti
   return styleType;
 }
 
-export interface GulpRollupOptions {
+export interface GhostGulpRollupOptions {
   useTypeScript: boolean;
   useLinting: boolean;
   useTesting: boolean;

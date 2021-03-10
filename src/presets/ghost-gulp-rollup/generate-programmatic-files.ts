@@ -2,16 +2,20 @@ import path from 'path';
 
 import { Options } from '../../options';
 import { TargetFilePath } from '../preset';
-import { GulpRollupOptions } from './gulp-rollup-preset';
+import { GhostGulpRollupOptions } from './ghost-gulp-rollup-preset';
 
 export default (
   name: string,
   options: Options,
-  gulpRollupOptions: GulpRollupOptions,
+  ghostGulpRollupOptions: GhostGulpRollupOptions,
 ): Record<TargetFilePath, string> => {
   const programmaticFiles: Record<string, string> = {};
 
-  programmaticFiles['package.json'] = JSON.stringify(generatePackage(name, options, gulpRollupOptions), undefined, 2);
+  programmaticFiles['package.json'] = JSON.stringify(
+    generatePackage(name, options, ghostGulpRollupOptions),
+    undefined,
+    2,
+  );
   programmaticFiles[path.join('src', `${options.type}.json`)] = JSON.stringify(
     generateManifest(name, options),
     undefined,
@@ -20,37 +24,41 @@ export default (
   if (options.type === 'system') {
     programmaticFiles[path.join('src', 'template.json')] = JSON.stringify(generateTemplate(), undefined, 2);
   }
-  programmaticFiles[path.join('src', 'styles', `${name}.${gulpRollupOptions.styleType}`)] = generateStyle(
-    gulpRollupOptions,
+  programmaticFiles[path.join('src', 'styles', `${name}.${ghostGulpRollupOptions.styleType}`)] = generateStyle(
+    ghostGulpRollupOptions,
   );
 
   return programmaticFiles;
 };
 
-export function generatePackage(name: string, options: Options, gulpRollupOptions: GulpRollupOptions): Package {
-  const codeFileTypes = gulpRollupOptions.useTypeScript ? ['ts', 'js'] : ['js'];
+export function generatePackage(
+  name: string,
+  options: Options,
+  ghostGulpRollupOptions: GhostGulpRollupOptions,
+): Package {
+  const codeFileTypes = ghostGulpRollupOptions.useTypeScript ? ['ts', 'js'] : ['js'];
   const codeFileExtensions = codeFileTypes.map((fileType) => `.${fileType}`);
 
-  const lintScript = gulpRollupOptions.useLinting ? `eslint --ext ${codeFileExtensions.join(',')} .` : undefined;
-  const lintFixScript = gulpRollupOptions.useLinting
+  const lintScript = ghostGulpRollupOptions.useLinting ? `eslint --ext ${codeFileExtensions.join(',')} .` : undefined;
+  const lintFixScript = ghostGulpRollupOptions.useLinting
     ? `eslint --ext ${codeFileExtensions.join(',')} --fix .`
     : undefined;
-  const formatScript = gulpRollupOptions.useLinting
-    ? `prettier --write "./**/*.(${codeFileTypes.join('|')}|json|${gulpRollupOptions.styleType})"`
+  const formatScript = ghostGulpRollupOptions.useLinting
+    ? `prettier --write "./**/*.(${codeFileTypes.join('|')}|json|${ghostGulpRollupOptions.styleType})"`
     : undefined;
 
-  const testScript = gulpRollupOptions.useTesting ? 'jest' : undefined;
-  const testWatchScript = gulpRollupOptions.useTesting ? 'jest --watch' : undefined;
-  const testCIScript = gulpRollupOptions.useTesting
+  const testScript = ghostGulpRollupOptions.useTesting ? 'jest' : undefined;
+  const testWatchScript = ghostGulpRollupOptions.useTesting ? 'jest --watch' : undefined;
+  const testCIScript = ghostGulpRollupOptions.useTesting
     ? 'jest --ci --reporters=default --reporters=jest-junit'
     : undefined;
-  const postinstallScript = gulpRollupOptions.useLinting && options.git ? 'husky install' : undefined;
+  const postinstallScript = ghostGulpRollupOptions.useLinting && options.git ? 'husky install' : undefined;
 
   const lintStagedConfiguration =
-    gulpRollupOptions.useLinting && options.git
+    ghostGulpRollupOptions.useLinting && options.git
       ? {
           [`*.(${codeFileTypes.join('|')})`]: 'eslint --fix',
-          [`*.(json|${gulpRollupOptions.styleType})`]: 'prettier --write',
+          [`*.(json|${ghostGulpRollupOptions.styleType})`]: 'prettier --write',
         }
       : undefined;
 
@@ -277,7 +285,7 @@ interface Template {
   Item: Entity;
 }
 
-function generateStyle({ styleType }: GulpRollupOptions) {
+function generateStyle({ styleType }: GhostGulpRollupOptions) {
   const less = String.raw`/* ---------------------------- */
 /*             Less             */
 /* This is your Less entry file */

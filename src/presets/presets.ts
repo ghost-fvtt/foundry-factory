@@ -1,12 +1,12 @@
-import { GulpRollupPreset } from './gulp-rollup/gulp-rollup-preset';
+import { GhostGulpRollupPreset } from './ghost-gulp-rollup/ghost-gulp-rollup-preset';
 import { LeagueJSPreset } from './league-js/league-js-preset';
 import { PresetConstructor } from './preset';
 
 export const presets: Record<string, PresetConstructor> = {
-  'gulp-rollup': GulpRollupPreset,
+  'ghost-gulp-rollup': GhostGulpRollupPreset,
   'league-js': LeagueJSPreset,
 };
 
-export const defaultPreset: PresetConstructor = GulpRollupPreset;
+export const defaultPreset: PresetConstructor = GhostGulpRollupPreset;
 
 export type PresetKey = keyof typeof presets;

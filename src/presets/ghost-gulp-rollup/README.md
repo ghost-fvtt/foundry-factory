@@ -1,4 +1,4 @@
-# Gulp + Rollup Preset for Foundry Factory
+# ghost's Gulp + Rollup Preset for Foundry Factory
 
 The preset will create a project based on [Gulp] and [Rollup]. It is inspired
 by the project structure that [Foundry Project Creator] but differs from it in
