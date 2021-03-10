@@ -31,6 +31,7 @@ export default async (
     await executePostInstallationCommands(targetDirectory, preset);
   } catch (err) {
     console.error(chalk.red(`Failed to create project at ${targetDirectory}`));
+    console.error(chalk.red(err));
     process.exit(1);
   }
 };
