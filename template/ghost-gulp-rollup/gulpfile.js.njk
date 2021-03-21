@@ -184,7 +184,7 @@ function bumpVersion(cb) {
   if (!manifest) cb(Error(chalk.red('Manifest JSON not found')));
 
   try {
-    const release = argv.release || argv.u;
+    const release = argv.release || argv.r;
 
     const currentVersion = packageJson.version;
 

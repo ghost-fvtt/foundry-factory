@@ -36,12 +36,12 @@ module.exports = {
       env: {
         node: true,
       },
-    },{% endif %}{% if useTesting %}
+    },{% if useTesting %}
     {
       files: ['./test/**/*.js'],
       env: {
         'jest/globals': true,
       },
-    },{% endif %}
+    },{% endif %}{% endif %}
   ],
 };
