@@ -42,6 +42,14 @@ This preset provides the following configuration options:
 - Option to set up testing (based on [Jest])
 
 The default options are JavaScript, linting enabled, no CSS preprocessor, and no testing.
+
+## Things to adjust manually
+
+- `src/module.json` and `src/system.json` respectively need adjustments for author, url etc.
+- You should add metadata (such as author etc.) to `package.json`.
+- If you want to use the `bump-version` command, you need to adjust the `getDownloadURL` in `gulpfile.js` the return the
+  correct download URL for a given version.
+
 ## Basic workflow
 
 Here are a couple of common commands that can be used when a project has been
