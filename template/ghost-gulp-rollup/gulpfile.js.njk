@@ -88,7 +88,7 @@ async function clean() {
   const files = [...staticFiles, 'module'];
 
   if (fs.existsSync(path.join(stylesDirectory, `${name}${stylesExtension}`))) {
-    files.push('css');
+    files.push('styles');
   }
 
   console.log(' ', chalk.yellow('Files to clean:'));
