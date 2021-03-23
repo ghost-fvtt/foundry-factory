@@ -42,7 +42,7 @@ function buildStyles() {
     .src(path.join(stylesDirectory, `${name}${stylesExtension}`))
 {%if styleType == 'scss' %}    .pipe(sass().on('error', sass.logError))
 {% elif styleType == 'less' %}    .pipe(less())
-{% endif %}    .pipe(gulp.dest(path.join(distDirectory, 'css')));
+{% endif %}    .pipe(gulp.dest(path.join(distDirectory, 'styles')));
 }
 
 /**
