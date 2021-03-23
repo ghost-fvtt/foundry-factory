@@ -16,9 +16,9 @@ sass.compiler = require('sass');{% endif %}
 const name = path.basename(path.resolve('.'));
 const sourceDirectory = './src';
 const distDirectory = './dist';
-const stylesDirectory = path.join(sourceDirectory, 'styles');
-const stylesExtension = '.{{ styleType }}';
-const sourceFileExtension = '.{% if useTypeScript %}ts{% else %}js{% endif %}';
+const stylesDirectory = `${sourceDirectory}/styles`;
+const stylesExtension = '{{ styleType }}';
+const sourceFileExtension = '{% if useTypeScript %}ts{% else %}js{% endif %}';
 const staticFiles = ['assets', 'fonts', 'lang', 'packs', 'templates', '{{ type }}.json'{% if type == 'system' %}, 'template.json'{% endif %}];
 const getDownloadURL = (version) => `https://host/path/to/${version}.zip`;
 
@@ -39,10 +39,10 @@ async function buildCode() {
  */
 function buildStyles() {
   return gulp
-    .src(path.join(stylesDirectory, `${name}${stylesExtension}`))
+    .src(`${stylesDirectory}/${name}.${stylesExtension}`)
 {%if styleType == 'scss' %}    .pipe(sass().on('error', sass.logError))
 {% elif styleType == 'less' %}    .pipe(less())
-{% endif %}    .pipe(gulp.dest(path.join(distDirectory, 'styles')));
+{% endif %}    .pipe(gulp.dest(`${distDirectory}/styles`));
 }
 
 /**
@@ -50,8 +50,8 @@ function buildStyles() {
  */
 async function copyFiles() {
   for (const file of staticFiles) {
-    if (fs.existsSync(path.join(sourceDirectory, file))) {
-      await fs.copy(path.join(sourceDirectory, file), path.join(distDirectory, file));
+    if (fs.existsSync(`${sourceDirectory}/${file}`)) {
+      await fs.copy(`${sourceDirectory}/${file}`, `${distDirectory}/${file}`);
     }
   }
 }
@@ -60,18 +60,10 @@ async function copyFiles() {
  * Watch for changes for each build step
  */
 function buildWatch() {
+  gulp.watch(`${sourceDirectory}/**/*.${sourceFileExtension}`, { ignoreInitial: false }, buildCode);
+  gulp.watch(`${stylesDirectory}/**/*.${stylesExtension}`, { ignoreInitial: false }, buildStyles);
   gulp.watch(
-    path.join(sourceDirectory, '**', `*${sourceFileExtension}`).replace(/\\/g, '/'),
-    { ignoreInitial: false },
-    buildCode,
-  );
-  gulp.watch(
-    path.join(stylesDirectory, '**', `*${stylesExtension}`).replace(/\\/g, '/'),
-    { ignoreInitial: false },
-    buildStyles,
-  );
-  gulp.watch(
-    staticFiles.map((file) => path.join(sourceDirectory, file).replace(/\\/g, '/')),
+    staticFiles.map((file) => `${sourceDirectory}/${file}`),
     { ignoreInitial: false },
     copyFiles,
   );
@@ -87,7 +79,7 @@ function buildWatch() {
 async function clean() {
   const files = [...staticFiles, 'module'];
 
-  if (fs.existsSync(path.join(stylesDirectory, `${name}${stylesExtension}`))) {
+  if (fs.existsSync(`${stylesDirectory}/${name}.${stylesExtension}`)) {
     files.push('styles');
   }
 
@@ -95,7 +87,7 @@ async function clean() {
   console.log('   ', chalk.blueBright(files.join('\n    ')));
 
   for (const filePath of files) {
-    await fs.remove(path.join(distDirectory, filePath));
+    await fs.remove(`${distDirectory}/${filePath}`);
   }
 }
 
@@ -125,7 +117,7 @@ function getDataPath() {
  */
 async function linkUserData() {
   let destinationDirectory;
-  if (fs.existsSync(path.resolve('.', sourceDirectory, '{{ type }}.json'))) {
+  if (fs.existsSync(path.resolve(sourceDirectory, '{{ type }}.json'))) {
     destinationDirectory = '{{ type }}s';
   } else {
     throw new Error(`Could not find ${chalk.blueBright('{{ type }}.json')}`);
@@ -138,9 +130,9 @@ async function linkUserData() {
 
     await fs.remove(linkDirectory);
   } else if (!fs.existsSync(linkDirectory)) {
-    console.log(chalk.green(`Copying build to ${chalk.blueBright(linkDirectory)}.`));
+    console.log(chalk.green(`Linking dist to ${chalk.blueBright(linkDirectory)}.`));
     await fs.ensureDir(path.resolve(linkDirectory, '..'));
-    await fs.symlink(path.resolve('.', distDirectory), linkDirectory);
+    await fs.symlink(path.resolve(distDirectory), linkDirectory);
   }
 }
 
@@ -152,7 +144,7 @@ async function linkUserData() {
  * Get the contents of the manifest file as object.
  */
 function getManifest() {
-  const manifestPath = path.join(sourceDirectory, '{{ type }}.json');
+  const manifestPath = `${sourceDirectory}/{{ type }}.json`;
 
   if (fs.existsSync(manifestPath)) {
     return {
@@ -214,7 +206,7 @@ function bumpVersion(cb) {
 
     manifest.file.version = targetVersion;
     manifest.file.download = getDownloadURL(targetVersion);
-    fs.writeJSONSync(path.join(sourceDirectory, manifest.name), manifest.file, { spaces: 2 });
+    fs.writeJSONSync(`${sourceDirectory}/${manifest.name}`, manifest.file, { spaces: 2 });
 
     return cb();
   } catch (err) {
