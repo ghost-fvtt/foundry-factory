@@ -67,7 +67,7 @@ nvm install
 
 in the project's root directory.
 
-You also need to install the the project's dependencies. To do so, run
+You also need to install the project's dependencies. To do so, run
 
 ```
 npm install
@@ -137,7 +137,7 @@ couple of things you need to do:
 This software project is licensed under the MIT License, a copy of which can be
 found under [LICENSE](./LICENSE).
 
-## Acknowledgement
+## Acknowledgment
 
 While this is not a fork of [Foundry Project Creator], a lot of inspiration was
 taken from it. You could think if it more as a rewrite with a couple of
