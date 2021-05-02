@@ -99,7 +99,7 @@ npm test
 
 ## Contributing
 
-Contributions vie pull requests are very welcome. If you find any issues, please report them in the [issue tracker].
+Contributions via pull requests are very welcome. If you find any issues, please report them in the [issue tracker].
 
 ### Creating new presets
 
