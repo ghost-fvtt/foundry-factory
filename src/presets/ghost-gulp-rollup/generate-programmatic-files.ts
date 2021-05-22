@@ -24,9 +24,8 @@ export default (
   if (options.type === 'system') {
     programmaticFiles[path.join('src', 'template.json')] = JSON.stringify(generateTemplate(), undefined, 2);
   }
-  programmaticFiles[path.join('src', 'styles', `${name}.${ghostGulpRollupOptions.styleType}`)] = generateStyle(
-    ghostGulpRollupOptions,
-  );
+  programmaticFiles[path.join('src', 'styles', `${name}.${ghostGulpRollupOptions.styleType}`)] =
+    generateStyle(ghostGulpRollupOptions);
 
   return programmaticFiles;
 };
