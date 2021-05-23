@@ -16,6 +16,7 @@ describe('generatePackageJSON', () => {
     force: false,
     git: false,
     deps: true,
+    packageManager: 'npm',
   };
 
   const defaultRollupOptions = {
@@ -79,7 +80,6 @@ describe('generatePackageJSON', () => {
       describe('and not git initialization', () => {
         it('does not generate a lint-staged configuration', () => {
           const _package = generatePackage(defaultName, { ...defaultOptions, git: false }, lintingOptions);
-          console.log(defaultOptions);
           expect(_package['lint-staged']).toBeUndefined();
         });
       });
@@ -241,13 +241,14 @@ describe('generatePackageJSON', () => {
 
 describe('generateManifest', () => {
   const defaultName = 'name-of-the-project';
-  const defaultOptions = {
-    type: 'module' as const,
+  const defaultOptions: Options = {
+    type: 'module',
     default: false,
     config: true,
     force: false,
     deps: true,
     git: true,
+    packageManager: 'npm',
   };
 
   describe('with system set', () => {
