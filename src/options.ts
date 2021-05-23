@@ -10,7 +10,10 @@ export interface CLIOptions {
   force: boolean;
   deps: boolean;
   git: boolean;
+  packageManager: typeof packageManagers[number];
 }
+
+export const packageManagers = ['npm', 'yarn', 'yarn2'] as const;
 
 interface PresetOptions extends CLIOptions {
   preset: PresetKey;

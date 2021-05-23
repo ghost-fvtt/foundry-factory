@@ -3,7 +3,7 @@ import { Command, Option } from 'commander';
 import path from 'path';
 
 import createProject from './create-project';
-import { CLIOptions, validateOptions as validateOptions } from './options';
+import { CLIOptions, packageManagers, validateOptions as validateOptions } from './options';
 import { presets } from './presets/presets';
 import { version } from './utils/version';
 
@@ -22,6 +22,11 @@ program
   .option('-f, --force', 'Overwrite target directory if it exists', false)
   .option('--no-deps', 'Skip installing project dependencies', true)
   .option('--no-git', 'Skip git initialization', true)
+  .addOption(
+    new Option('-m, --packageManager <packageManager>', 'Use the specified npm client when installing dependencies')
+      .choices([...packageManagers])
+      .default(packageManagers[0]),
+  )
   .arguments('<project-directory>')
   .action(async (projectDirectory: string, options: CLIOptions, program: Command) => {
     if (validateOptions(options, program)) {
