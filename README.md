@@ -1,8 +1,8 @@
 # Foundry Factory
 
 Foundry Factory is an interactive CLI tool that developers can use to
-bootstrap modules and systems for [Foundry Virtual Tabletop]. It allows developers to
-choose among different presets to initialize their projects.
+bootstrap modules and systems for [Foundry Virtual Tabletop]. It allows
+developers to choose among different presets to initialize their projects.
 
 It is designed to be extendable so that adding additional presets is quite easy.
 
@@ -29,18 +29,16 @@ foundry-factory <project-directory>
 Usage: foundry-factory [options] <project-directory>
 
 Options:
-  -v, --version          Show the version number of Foundry Factory
-  -t, --type <type>      Create a project of this type (choices: "module",
-                         "system")
-  -p, --preset <preset>  Use this preset (choices: "ghost-gulp-rollup", "league-js")
-  -d, --default          Use the default preset (default: false)
-  -n, --no-config        Skip the configuration prompts of the selected preset
-                         and use its default configuration
-  -f, --force            Overwrite target directory if it exists (default:
-                         false)
-  --no-deps              Skip installing project dependencies
-  --no-git               Skip git initialization
-  -h, --help             display help for command
+  -v, --version                          Show the version number of Foundry Factory
+  -t, --type <type>                      Create a project of this type (choices: "module", "system")
+  -p, --preset <preset>                  Use this preset (choices: "ghost-gulp-rollup", "league-js")
+  -d, --default                          Use the default preset (default: false)
+  -n, --no-config                        Skip the configuration prompts of the selected preset and use its default configuration
+  -f, --force                            Overwrite target directory if it exists (default: false)
+  --no-deps                              Skip installing project dependencies
+  --no-git                               Skip git initialization
+  -m, --packageManager <packageManager>  Use the specified npm client when installing dependencies (choices: "npm", "yarn", "yarn2", default: "npm")
+  -h, --help                             display help for command
 ```
 
 ## Presets
@@ -99,7 +97,8 @@ npm test
 
 ## Contributing
 
-Contributions via pull requests are very welcome. If you find any issues, please report them in the [issue tracker].
+Contributions via pull requests are very welcome. If you find any issues, please
+report them in the [issue tracker].
 
 ### Creating new presets
 
