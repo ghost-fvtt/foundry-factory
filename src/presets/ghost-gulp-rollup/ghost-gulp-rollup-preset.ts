@@ -87,7 +87,7 @@ export class GhostGulpRollupPreset implements Preset {
       devDependencies = devDependencies.concat(['gulp-less', 'less@3']);
     }
     if (this.ghostGulpRollupOptions.styleType === 'scss') {
-      devDependencies = devDependencies.concat(['gulp-sass', 'sass']);
+      devDependencies = devDependencies.concat(['gulp-dart-sass']);
     }
     return devDependencies;
   }
