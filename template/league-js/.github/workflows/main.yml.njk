@@ -1,4 +1,4 @@
-name: Release Creation
+{% raw %}name: Release Creation
 
 on:
   release:
@@ -37,4 +37,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: './module.json, ./module.zip'
         tag: ${{ github.event.release.tag_name }}
-        body: ${{ github.event.release.body }}
+        body: ${{ github.event.release.body }}{% endraw %}
