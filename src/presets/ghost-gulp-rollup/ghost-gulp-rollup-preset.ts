@@ -94,14 +94,14 @@ export class GhostGulpRollupPreset implements Preset {
 
   async getPostInstallationCommands(): Promise<string[]> {
     const npx = this.options.packageManager === 'npm' ? 'npx' : 'yarn';
+    const huskyCommand =
+      this.options.packageManager === 'npm' && process.platform === 'win32'
+        ? path.join('.', 'node_modules', '.bin', 'husky')
+        : `${npx} husky`;
     const npmRun = this.options.packageManager === 'npm' ? 'npm run' : 'yarn';
-    const huskyQuote = process.platform === 'win32' ? '\\"' : '"';
+
     return this.ghostGulpRollupOptions.useLinting && this.options.deps && this.options.git
-      ? [
-          `${npx} husky install`,
-          `${npx} husky add .husky/pre-commit ${huskyQuote}${npx} lint-staged${huskyQuote}`,
-          `${npmRun} format`,
-        ]
+      ? [`${huskyCommand} install`, `${huskyCommand} add .husky/pre-commit "${npx} lint-staged"`, `${npmRun} format`]
       : [];
   }
 
