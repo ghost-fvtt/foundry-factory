@@ -144,7 +144,7 @@ export class GhostGulpRollupPreset implements Preset {
 
   static readonly presetName = "ghost's Gulp + Rollup Preset";
 
-  static readonly documentationLink = 'https://git.io/Jtphw';
+  static readonly documentationLink = 'https://git.io/JZMc0';
 
   private static defaultRollupOptions = {
     useTypeScript: false,
