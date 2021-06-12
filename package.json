@@ -1,6 +1,6 @@
 {
   "name": "@ghost-fvtt/foundry-factory",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "An interactive command line tool to bootstrap modules and systems for Foundry Virtual Tabletop",
   "main": "./dist/index.mjs",
   "bin": {
