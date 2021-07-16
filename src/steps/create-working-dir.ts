@@ -17,15 +17,14 @@ export default async (targetDirectory: string, { force }: Options): Promise<void
           {
             name: 'action',
             type: 'list',
-            message:
-              `Target directory ${chalk.blue(
-                targetDirectory,
-              )} already exists. Both overriding the directory and merging new files into it are possible. ` +
-              'Be aware that merging might result in errors if the directory already contains files that are incompatible with the ones being installed. ' +
-              'Pick an action:',
+            message: `Target directory ${chalk.blue(targetDirectory)} already exists. Pick an action:`,
             choices: [
               { name: 'Overwrite', value: 'overwrite' },
-              { name: 'Merge', value: 'merge' },
+              {
+                name: 'Merge (might result in errors if the directory contains incompatible files)',
+                value: 'merge',
+                short: 'Merge',
+              },
               { name: 'Cancel', value: 'cancel' },
             ],
           },
