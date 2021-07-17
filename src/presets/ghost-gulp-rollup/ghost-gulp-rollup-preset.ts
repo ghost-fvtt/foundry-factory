@@ -69,7 +69,7 @@ export class GhostGulpRollupPreset implements Preset {
       if (this.ghostGulpRollupOptions.useTypeScript) {
         devDependencies = devDependencies.concat('@typescript-eslint/eslint-plugin', '@typescript-eslint/parser');
       } else {
-        devDependencies = devDependencies.concat('@typhonjs-fvtt/eslint-config-foundry.js@0.7.9');
+        devDependencies = devDependencies.concat('@typhonjs-fvtt/eslint-config-foundry.js');
       }
 
       if (this.ghostGulpRollupOptions.useTesting) {

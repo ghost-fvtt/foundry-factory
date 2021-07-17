@@ -20,7 +20,11 @@ export default async (targetDirectory: string, { force }: Options): Promise<void
             message: `Target directory ${chalk.blue(targetDirectory)} already exists. Pick an action:`,
             choices: [
               { name: 'Overwrite', value: 'overwrite' },
-              { name: 'Merge', value: 'merge' },
+              {
+                name: 'Merge (might result in errors if the directory contains incompatible files)',
+                value: 'merge',
+                short: 'Merge',
+              },
               { name: 'Cancel', value: 'cancel' },
             ],
           },
