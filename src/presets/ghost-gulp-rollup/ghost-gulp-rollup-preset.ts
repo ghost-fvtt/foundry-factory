@@ -49,7 +49,7 @@ export class GhostGulpRollupPreset implements Preset {
     let devDependencies = ['@rollup/plugin-node-resolve', 'chalk', 'fs-extra', 'gulp', 'rollup', 'semver', 'yargs'];
     if (this.ghostGulpRollupOptions.useTypeScript) {
       devDependencies = devDependencies.concat([
-        '@league-of-foundry-developers/foundry-vtt-types@fvtt-0.8.8',
+        '@league-of-foundry-developers/foundry-vtt-types',
         'rollup-plugin-typescript2',
         'tslib',
         'typescript',

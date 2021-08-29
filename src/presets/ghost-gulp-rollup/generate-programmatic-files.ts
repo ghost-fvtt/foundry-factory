@@ -26,6 +26,7 @@ export default (
   }
   programmaticFiles[path.join('src', 'styles', `${name}.${ghostGulpRollupOptions.styleType}`)] =
     generateStyle(ghostGulpRollupOptions);
+  programmaticFiles[path.join('src', 'lang', 'en.json')] = JSON.stringify({}, undefined, 2);
 
   return programmaticFiles;
 };
@@ -146,11 +147,12 @@ export function generateManifest(name: string, { type }: Options): Manifest {
     title: name,
     description: '',
     version: '0.0.0',
-    author: '',
+    author: '<your name>',
     authors: [
       {
-        name: '',
-        email: '',
+        name: '<your name>',
+        email: '<optionally your e-mail address>',
+        discord: '<optionally your discord username>',
       },
     ],
     minimumCoreVersion: '0.8.8',
@@ -197,6 +199,7 @@ interface Author {
   name: string;
   email?: string;
   url?: string;
+  discord?: string;
 }
 
 interface Pack {

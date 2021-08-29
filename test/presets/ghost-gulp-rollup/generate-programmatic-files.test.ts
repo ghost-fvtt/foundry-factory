@@ -263,11 +263,12 @@ describe('generateManifest', () => {
         title: 'name-of-the-project',
         description: '',
         version: '0.0.0',
-        author: '',
+        author: '<your name>',
         authors: [
           {
-            name: '',
-            email: '',
+            name: '<your name>',
+            email: '<optionally your e-mail address>',
+            discord: '<optionally your discord username>',
           },
         ],
         minimumCoreVersion: '0.8.8',
@@ -312,11 +313,12 @@ describe('generateManifest', () => {
         title: 'name-of-the-project',
         description: '',
         version: '0.0.0',
-        author: '',
+        author: '<your name>',
         authors: [
           {
-            name: '',
-            email: '',
+            name: '<your name>',
+            email: '<optionally your e-mail address>',
+            discord: '<optionally your discord username>',
           },
         ],
         minimumCoreVersion: '0.8.8',
