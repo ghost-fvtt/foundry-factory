@@ -1,6 +1,7 @@
-import { Options } from '../../options';
-import { Preset } from '../preset';
 import path from 'path';
+
+import type { Options } from '../../options';
+import type { Preset } from '../preset';
 
 export class LeagueJSPreset implements Preset {
   protected name: string;

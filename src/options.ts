@@ -1,6 +1,7 @@
 import type { Command } from 'commander';
 import chalk from 'chalk';
-import { PresetKey } from './presets/presets';
+
+import type { PresetKey } from './presets/presets';
 
 export interface CLIOptions {
   type?: 'module' | 'system';

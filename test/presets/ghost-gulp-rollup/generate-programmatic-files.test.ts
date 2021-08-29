@@ -1,16 +1,17 @@
-import { Options } from '../../../src/options';
 import {
   generateManifest,
   generatePackage,
   generateTemplate,
 } from '../../../src/presets/ghost-gulp-rollup/generate-programmatic-files';
 
+import type { Options } from '../../../src/options';
+
 describe('generatePackageJSON', () => {
   const defaultName = 'name-of-the-project';
 
   const defaultOptions: Options = {
     type: 'module',
-    preset: 'gulp-rollup',
+    preset: 'ghost-gulp-rollup',
     default: false,
     config: true,
     force: false,

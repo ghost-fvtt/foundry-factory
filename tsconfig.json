@@ -8,6 +8,8 @@
     "sourceMap": true,
     "declaration": true,
     "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "importsNotUsedAsValues": "error",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,

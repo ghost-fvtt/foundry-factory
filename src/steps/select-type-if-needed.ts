@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 
-import { Options, ValidatedCLIOptions } from '../options';
+import type { Options, ValidatedCLIOptions } from '../options';
 
 export default async (validatedCLIOptions: ValidatedCLIOptions): Promise<Options> => {
   if (validatedCLIOptions.type !== undefined) {

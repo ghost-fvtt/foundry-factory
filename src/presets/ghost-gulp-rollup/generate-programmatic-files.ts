@@ -1,8 +1,8 @@
 import path from 'path';
 
-import { Options } from '../../options';
-import { TargetFilePath } from '../preset';
-import { GhostGulpRollupOptions } from './ghost-gulp-rollup-preset';
+import type { Options } from '../../options';
+import type { TargetFilePath } from '../preset';
+import type { GhostGulpRollupOptions } from './ghost-gulp-rollup-preset';
 
 export default (
   name: string,
