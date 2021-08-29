@@ -1,6 +1,5 @@
 import chalk from 'chalk';
 
-import { ValidatedCLIOptions } from './options';
 import createAdditionalDirectories from './steps/create-additional-directories';
 import createFilesFromTemplates from './steps/create-files-from-templates';
 import createProgrammaticFiles from './steps/create-programmatic-files';
@@ -11,6 +10,8 @@ import initializeGit from './steps/initialize-git';
 import installDependencies from './steps/install-dependencies';
 import selectTypeIfNeeded from './steps/select-type-if-needed';
 import { version } from './utils/version';
+
+import type { ValidatedCLIOptions } from './options';
 
 export default async (
   name: string,

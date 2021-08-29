@@ -1,8 +1,9 @@
-import fs from 'fs-extra';
 import chalk from 'chalk';
-import ora from 'ora';
-import { Options } from '../options';
+import fs from 'fs-extra';
 import inquirer from 'inquirer';
+import ora from 'ora';
+
+import type { Options } from '../options';
 
 export default async (targetDirectory: string, { force }: Options): Promise<void> => {
   const spinner = ora('Initializing working directory').start();

@@ -4,9 +4,10 @@ import nunjucks from 'nunjucks';
 import ora from 'ora';
 import path from 'path';
 
-import { Options } from '../options';
-import { Preset } from '../presets/preset';
 import { rootPath } from '../utils/file-utils';
+
+import type { Options } from '../options';
+import type { Preset } from '../presets/preset';
 
 export default async (name: string, targetDirectory: string, options: Options, preset: Preset): Promise<void> => {
   if (preset.getTemplateFiles) {

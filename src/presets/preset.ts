@@ -1,4 +1,4 @@
-import { Options } from '../options';
+import type { Options } from '../options';
 
 /**
  * A path to a template file, relative to the template directory.

@@ -1,9 +1,10 @@
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 
-import { Options } from '../options';
-import { Preset, PresetConstructor } from '../presets/preset';
 import { defaultPreset, presets } from '../presets/presets';
+
+import type { Options } from '../options';
+import type { Preset, PresetConstructor } from '../presets/preset';
 
 export default async (name: string, options: Options): Promise<Preset> => {
   try {

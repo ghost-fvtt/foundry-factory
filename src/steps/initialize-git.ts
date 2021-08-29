@@ -3,7 +3,7 @@ import { exec } from 'child_process';
 import ora from 'ora';
 import { promisify } from 'util';
 
-import { Options } from '../options';
+import type { Options } from '../options';
 
 const execAsync = promisify(exec);
 

@@ -1,7 +1,7 @@
 import path from 'path';
 
-import { TargetFilePath, TemplateFilePath } from '../preset';
-import { GhostGulpRollupOptions } from './ghost-gulp-rollup-preset';
+import type { TargetFilePath, TemplateFilePath } from '../preset';
+import type { GhostGulpRollupOptions } from './ghost-gulp-rollup-preset';
 
 export default async (
   name: string,

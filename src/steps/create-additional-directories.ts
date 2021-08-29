@@ -3,7 +3,7 @@ import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
 
-import { Preset } from '../presets/preset';
+import type { Preset } from '../presets/preset';
 
 export default async (targetDirectory: string, preset: Preset): Promise<void> => {
   if (preset.getAdditionalDirectories) {

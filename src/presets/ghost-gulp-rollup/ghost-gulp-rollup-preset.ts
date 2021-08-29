@@ -1,10 +1,11 @@
 import inquirer from 'inquirer';
 import path from 'path';
 
-import { Options } from '../../options';
-import { Preset, TargetFilePath, TemplateFilePath } from '../preset';
 import generateProgrammaticFiles from './generate-programmatic-files';
 import getTemplateFiles from './get-template-files';
+
+import type { Options } from '../../options';
+import type { Preset, TargetFilePath, TemplateFilePath } from '../preset';
 
 export class GhostGulpRollupPreset implements Preset {
   protected name: string;
