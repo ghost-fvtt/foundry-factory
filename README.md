@@ -1,6 +1,6 @@
 # Foundry Factory
 
-[![Checks](https://github.com/ghost-fvtt/foreground-drawings/workflows/Checks/badge.svg)](https://github.com/ghost-fvtt/foreground-drawings/actions)
+[![Checks](https://github.com/ghost-fvtt/foundry-factory/workflows/CI/badge.svg)](https://github.com/ghost-fvtt/foundry-factory/actions)
 [![npm downloads](https://img.shields.io/npm/dm/@ghost-fvtt/foundry-factory?color=orange&logo=npm)](https://www.npmjs.com/package/@ghost-fvtt/foundry-factory)
 ![Repository License](https://img.shields.io/github/license/ghost-fvtt/foundry-factory)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-ghostfvtt-00B9FE?logo=kofi)](https://ko-fi.com/ghostfvtt)
