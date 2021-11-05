@@ -47,7 +47,7 @@ jobs:
           name: dist
           path: dist
 
-  publish-to-npm:
+  publish:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -70,3 +70,16 @@ jobs:
           npm publish --ignore-scripts
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Extract version
+        run: |
+          echo "::set-output name=version::$(jq -r '.version' package.json)"
+        id: extract_version
+
+      - name: Create release
+        id: create_version_release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: false
+          name: ${{steps.extract_version.outputs.version}}
+          token: ${{ secrets.GITHUB_TOKEN }}
