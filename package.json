@@ -32,7 +32,6 @@
     "jest": "^27.3.1",
     "jest-junit": "^13.0.0",
     "lint-staged": "^11.2.6",
-    "pinst": "^2.1.6",
     "prettier": "^2.4.1",
     "rollup": "^2.59.0",
     "rollup-plugin-preserve-shebang": "^1.0.1",
@@ -50,9 +49,7 @@
     "test:watch": "jest --watch",
     "test:ci": "jest --ci --reporters=default --reporters=jest-junit",
     "format": "prettier --write './**/*.(ts|js|json)'",
-    "postinstall": "husky install",
-    "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "prepare": "husky install"
   },
   "contributors": [
     {
