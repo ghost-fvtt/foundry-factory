@@ -122,7 +122,7 @@ async function linkUserData() {
     throw new Error(`Could not find ${chalk.blueBright('{{ type }}.json')}`);
   }
 
-  const linkDirectory = path.resolve(getDataPath(), destinationDirectory, name);
+  const linkDirectory = path.resolve(getDataPath(), 'Data', destinationDirectory, name);
 
   if (argv.clean || argv.c) {
     console.log(chalk.yellow(`Removing build in ${chalk.blueBright(linkDirectory)}.`));

@@ -45,9 +45,9 @@ The default options are JavaScript, linting enabled, no CSS preprocessor, and no
 
 ## Things to adjust manually
 
-- `src/module.json` and `src/system.json` respectively need adjustments for author, url etc.
+- `src/module.json` and `src/system.json` respectively need adjustments for author, URL etc.
 - You should add metadata (such as author etc.) to `package.json`.
-- If you want to use the `bump-version` command, you need to adjust the `getDownloadURL` in `gulpfile.js` the return the
+- If you want to use the `bump-version` command, you need to adjust the `getDownloadURL` in `gulpfile.js` to return the
   correct download URL for a given version.
 
 ## Basic workflow
@@ -67,7 +67,7 @@ Provide the path to your foundry data folder in the `foundryconfig.json` file in
 
 ```json
 {
-  "dataPath": "/absolute/path/to/your/FoundryVTT/Data"
+  "dataPath": "/absolute/path/to/your/FoundryVTT"
 }
 ```
 
@@ -78,8 +78,9 @@ Then run
 npm run link-project
 ```
 
-On Windows, creating symlinks requires administrator privileges so unfortunately
-you need to run the above command in an administrator terminal for it to work.
+On Windows, creating symlinks requires administrator privileges, so
+unfortunately you need to run the above command in an administrator terminal for
+it to work.
 
 ### Run the tests (if testing was set up)
 

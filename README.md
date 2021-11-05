@@ -61,9 +61,8 @@ documentation:
 
 In order to build this project, recent versions of `node` and `npm` are
 required. Most likely using `yarn` also works but only `npm` is officially
-supported. We recommend using the latest lts version of `node`, which is
-`v14.15.5` at the time of writing. If you use `nvm` to manage your `node`
-versions, you can simply run
+supported. We recommend using the latest lts version of `node`. If you use `nvm`
+to manage your `node` versions, you can simply run
 
 ```
 nvm install
