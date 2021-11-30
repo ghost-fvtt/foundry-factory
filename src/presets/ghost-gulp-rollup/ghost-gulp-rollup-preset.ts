@@ -46,7 +46,7 @@ export class GhostGulpRollupPreset implements Preset {
   }
 
   async getDevDependencies(): Promise<string[]> {
-    let devDependencies = ['@rollup/plugin-node-resolve', 'chalk', 'fs-extra', 'gulp', 'rollup', 'semver', 'yargs'];
+    let devDependencies = ['@rollup/plugin-node-resolve', 'fs-extra', 'gulp', 'rollup', 'semver', 'yargs'];
     if (this.ghostGulpRollupOptions.useTypeScript) {
       devDependencies = devDependencies.concat([
         '@league-of-foundry-developers/foundry-vtt-types',
