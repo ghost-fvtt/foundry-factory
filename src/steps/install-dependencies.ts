@@ -81,10 +81,7 @@ async function installWithYarn2(
   dependencies: string[],
   devDependencies: string[],
 ): Promise<void> {
-  await execAsync('yarn set version berry', {
-    cwd: targetDirectory,
-  });
-  await execAsync('yarn set version latest', {
+  await execAsync('yarn set version stable', {
     cwd: targetDirectory,
   });
 
