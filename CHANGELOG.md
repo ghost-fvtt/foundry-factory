@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.5](https://github.com/ghost91-/foundry-factory/compare/v0.7.4...v0.7.5) (2021-11-30)
+
+
+### Features
+
+* remove chalk from ghost's gulp+rollup preset ([58c3cd3](https://github.com/ghost91-/foundry-factory/commit/58c3cd31fb6e4fe6cb38581dba306cad7d09cea8))
+* use the stable yarn version when using yarn2 as package manager ([7ff4f72](https://github.com/ghost91-/foundry-factory/commit/7ff4f725300927648fbc6bb974cc2ac7fe8ef6d0))
+
 ### [0.7.4](https://github.com/ghost91-/foundry-factory/compare/v0.7.3...v0.7.4) (2021-11-05)
 
 ### [0.7.3](https://github.com/ghost91-/foundry-factory/compare/v0.7.2...v0.7.3) (2021-11-05)
