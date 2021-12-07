@@ -16,7 +16,7 @@ It is designed to be extendable so that adding additional presets is quite easy.
 
 ## Usage
 
-You can run Foundry Factory with `npx`:
+In order to Foundry Factory, a recent version of Node.js 14 or higher is required. You can run it with `npx`:
 
 ```
 npx @ghost-fvtt/foundry-factory <project-directory>
