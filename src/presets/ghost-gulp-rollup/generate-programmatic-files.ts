@@ -17,7 +17,7 @@ export default (
     2,
   );
   programmaticFiles[path.join('src', `${options.type}.json`)] = JSON.stringify(
-    generateManifest(name, options),
+    generateManifest(name, options, ghostGulpRollupOptions),
     undefined,
     2,
   );
@@ -44,7 +44,7 @@ export function generatePackage(
     ? `eslint --ext ${codeFileExtensions.join(',')} --fix .`
     : undefined;
   const formatScript = ghostGulpRollupOptions.useLinting
-    ? `prettier --write "./**/*.(${codeFileTypes.join('|')}|json|${ghostGulpRollupOptions.styleType})"`
+    ? `prettier --write "./**/*.(${codeFileTypes.join('|')}|json|yml|${ghostGulpRollupOptions.styleType})"`
     : undefined;
 
   const testScript = ghostGulpRollupOptions.useTesting ? 'jest' : undefined;
@@ -58,14 +58,14 @@ export function generatePackage(
     ghostGulpRollupOptions.useLinting && options.git
       ? {
           [`*.(${codeFileTypes.join('|')})`]: 'eslint --fix',
-          [`*.(json|${ghostGulpRollupOptions.styleType})`]: 'prettier --write',
+          [`*.(json|yml|${ghostGulpRollupOptions.styleType})`]: 'prettier --write',
         }
       : undefined;
 
   return {
     private: true,
     name,
-    version: '0.0.0',
+    version: ghostGulpRollupOptions.useCICD ? undefined : '0.0.0',
     description: '',
     license: '',
     homepage: '',
@@ -105,7 +105,7 @@ export function generatePackage(
 interface Package {
   private: true;
   name: string;
-  version: string;
+  version?: string;
   description: string;
   license: string;
   homepage: string;
@@ -141,12 +141,12 @@ interface Package {
   'lint-staged'?: Partial<Record<string, string>>;
 }
 
-export function generateManifest(name: string, { type }: Options): Manifest {
+export function generateManifest(name: string, { type }: Options, { useCICD }: GhostGulpRollupOptions): Manifest {
   const baseManifest = {
     name: name,
     title: name,
     description: '',
-    version: '0.0.0',
+    version: useCICD ? 'This is auto replaced' : '0.0.0',
     author: '<your name>',
     authors: [
       {
@@ -155,8 +155,8 @@ export function generateManifest(name: string, { type }: Options): Manifest {
         discord: '<optionally your discord username>',
       },
     ],
-    minimumCoreVersion: '0.8.8',
-    compatibleCoreVersion: '0.8.8',
+    minimumCoreVersion: '9.238',
+    compatibleCoreVersion: '9',
     scripts: [],
     esmodules: [`module/${name}.js`],
     styles: [`styles/${name}.css`],
@@ -170,9 +170,9 @@ export function generateManifest(name: string, { type }: Options): Manifest {
       },
     ],
     socket: false,
-    url: '',
-    manifest: '',
-    download: 'https://host/path/to/0.0.0.zip',
+    url: useCICD ? 'This is auto replaced' : '',
+    manifest: useCICD ? 'This is auto replaced' : '',
+    download: useCICD ? 'This is auto replaced' : 'https://host/path/to/0.0.0.zip',
     license: '',
     readme: '',
     bugs: '',
