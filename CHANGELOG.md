@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.6](https://github.com/ghost91-/foundry-factory/compare/v0.7.5...v0.7.6) (2021-12-22)
+
+
+### Features
+
+* add GitHub workflow to ghost's gulp+rollup preset ([fbbddc6](https://github.com/ghost91-/foundry-factory/commit/fbbddc604f7bc02111214db2d74dcdc0294d084e))
+* cleanup ghost's gulp+rollup preset ([d2b1d1e](https://github.com/ghost91-/foundry-factory/commit/d2b1d1e3d646fa170a866af8490c20b94b073adf))
+
 ### [0.7.5](https://github.com/ghost91-/foundry-factory/compare/v0.7.4...v0.7.5) (2021-11-30)
 
 
