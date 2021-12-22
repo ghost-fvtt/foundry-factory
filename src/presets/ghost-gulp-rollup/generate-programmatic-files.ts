@@ -88,7 +88,6 @@ export function generatePackage(
       'link-project': 'gulp link',
       clean: 'gulp clean',
       'clean:link': 'gulp link --clean',
-      'bump-version': 'gulp bumpVersion',
       lint: lintScript,
       'lint:fix': lintFixScript,
       format: formatScript,
@@ -128,7 +127,6 @@ interface Package {
     'link-project': string;
     clean: string;
     'clean:link': string;
-    'bump-version': string;
     lint?: string;
     'lint:fix'?: string;
     format?: string;

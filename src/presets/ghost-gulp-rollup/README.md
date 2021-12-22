@@ -1,12 +1,12 @@
 # ghost's Gulp + Rollup Preset for Foundry Factory
 
 The preset will create a project based on [Gulp] and [Rollup]. It is inspired
-by the project structure that [Foundry Project Creator] but differs from it in
-a couple of aspects.
+by the project structure that [Foundry Project Creator] uses but differs from it
+in a couple of aspects.
 
-## Basic Folder Structure
+## Basic Directory Structure
 
-This preset will create the following basic folder structure
+This preset will create the following basic directory structure
 
 ```
 .
@@ -40,15 +40,17 @@ This preset provides the following configuration options:
 - Option to set up linting (based on [ESLint] and [Prettier])
 - Option to choose a CSS preprocessor ([Less] or [SCSS])
 - Option to set up testing (based on [Jest])
+- Option to set up a CI/CD pipeline (GitHub only for now)
 
-The default options are JavaScript, linting enabled, no CSS preprocessor, and no testing.
+The default options are JavaScript, linting enabled, no CSS preprocessor, no testing, and using a CI/CD pipeline.
 
 ## Things to adjust manually
 
 - `src/module.json` and `src/system.json` respectively need adjustments for author, URL etc.
 - You should add metadata (such as author etc.) to `package.json`.
-- If you want to use the `bump-version` command, you need to adjust the `getDownloadURL` in `gulpfile.js` to return the
-  correct download URL for a given version.
+- Choose a license for the project and add it as `LICENSE` file to the project root and mention it in the Licensing
+  section of your `README.md`. If you don't know which license to choose, take a look at
+  [Choose an open source license].
 
 ## Basic workflow
 
@@ -94,12 +96,6 @@ npm test
 npm run lint
 ```
 
-### Bump the version (example for minor release)
-
-```
-npm run bump-version -- --release minor
-```
-
 [Gulp]: https://gulpjs.com/
 [Rollup]: https://rollupjs.org/
 [Foundry Project Creator]: https://gitlab.com/foundry-projects/foundry-pc/create-foundry-project
@@ -108,3 +104,4 @@ npm run bump-version -- --release minor
 [Less]: http://lesscss.org/
 [SCSS]: https://sass-lang.com/documentation/syntax#scss
 [Jest]: https://jestjs.io/
+[Choose an open source license]: https://choosealicense.com/
