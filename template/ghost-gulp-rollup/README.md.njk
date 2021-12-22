@@ -1,17 +1,17 @@
 # {{ name }}
 
-Add your description here.
+Please add your description here.
 
 ## Installation
 
-Add your installation instructions here.
+Please add your installation instructions here.
 
 ## Development
 
 ### Prerequisites
 
-In order to build this {{ type }}, recent versions of `node` and `npm` are
-required. Most likely using `yarn` also works but only `npm` is officially
+In order to build this {{ type }}, recent versions of `node` and `{% if packageManager == "npm" %}npm{% else %}yarn{% endif %}` are
+required. Most likely, using `{% if packageManager == "npm" %}yarn{% else %}npm{% endif %}` also works, but only `{% if packageManager == "npm" %}npm{% else %}yarn{% endif %}` is officially
 supported. We recommend using the latest lts version of `node`. If you use `nvm`
 to manage your `node` versions, you can simply run
 
@@ -21,10 +21,10 @@ nvm install
 
 in the project's root directory.
 
-You also need to install the the project's dependencies. To do so, run
+You also need to install the project's dependencies. To do so, run
 
 ```
-npm install
+{% if packageManager == "npm" %}npm{% else %}yarn{% endif %} install
 ```
 
 ### Building
@@ -32,13 +32,13 @@ npm install
 You can build the project by running
 
 ```
-npm run build
+{% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} build
 ```
 
 Alternatively, you can run
 
 ```
-npm run build:watch
+{% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} build:watch
 ```
 
 to watch for changes and automatically build as necessary.
@@ -62,16 +62,29 @@ with the following content:
 Then run
 
 ```
-npm run link-project
+{% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} link-project
 ```
 
 On Windows, creating symlinks requires administrator privileges so unfortunately
 you need to run the above command in an administrator terminal for it to work.
-
+{% if useTesting %}
 ### Running the tests
 
 You can run the tests with the following command:
 
 ```
-npm test
+{% if packageManager == "npm" %}npm{% else %}yarn{% endif %} test
 ```
+{% endif %}
+
+## Licensing
+
+This project is being developed under the terms of the
+[LIMITED LICENSE AGREEMENT FOR MODULE DEVELOPMENT] for Foundry Virtual Tabletop.
+
+Please add your licensing information here. Add your chosen license as
+`LICENSE` file to the project root and mention it here.  If you don't know which
+license to choose, take a look at [Choose an open source license].
+
+[LIMITED LICENSE AGREEMENT FOR MODULE DEVELOPMENT]: https://foundryvtt.com/article/license/
+[Choose an open source license]: https://choosealicense.com/
