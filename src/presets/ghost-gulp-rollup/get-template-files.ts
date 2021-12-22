@@ -14,6 +14,7 @@ export default async (
     ...getConfigTemplateFiles(ghostGulpRollupOptions, templateDirectory),
     ...getSourceTemplateFiles(name, templateDirectory, sourceFileExtension),
     ...getTestTemplateFiles(ghostGulpRollupOptions, templateDirectory),
+    ...getCICDTemplateFiles(ghostGulpRollupOptions, templateDirectory),
   };
 };
 
@@ -83,4 +84,18 @@ function getTestTemplateFiles({ useTypeScript, useTesting }: GhostGulpRollupOpti
   return Object.fromEntries(
     testTemplateFiles.map((pair) => [path.join('test', pair[0]), path.join(templateDirectory, 'test', pair[1])]),
   );
+}
+
+function getCICDTemplateFiles({ useCICD }: GhostGulpRollupOptions, templateDirectory: string) {
+  if (!useCICD) {
+    return {};
+  }
+  const workflowFileNames = ['checks.yml', 'release.yml'].map((workflow) =>
+    path.join('.github', 'workflows', workflow),
+  );
+  const wokflowTemplateFiles = workflowFileNames.map((wokflowFileName) => [
+    wokflowFileName,
+    path.join(templateDirectory, `${wokflowFileName}.njk`),
+  ]);
+  return Object.fromEntries(wokflowTemplateFiles);
 }

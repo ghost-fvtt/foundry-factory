@@ -25,6 +25,7 @@ describe('generatePackageJSON', () => {
     useLinting: false,
     useTesting: false,
     styleType: 'css' as const,
+    useCICD: true,
   };
 
   it('includes the name given in the options', () => {
@@ -37,7 +38,6 @@ describe('generatePackageJSON', () => {
     const _package = generatePackage(defaultName, defaultOptions, defaultRollupOptions);
 
     expect(_package.private).toBe(true);
-    expect(_package.version).toBe('0.0.0');
     expect(_package.description).toBe('');
     expect(_package.license).toBe('');
     expect(_package.homepage).toBe('');
@@ -45,6 +45,24 @@ describe('generatePackageJSON', () => {
     expect(_package.bugs).toEqual({ url: '' });
     expect(_package.contributors).toEqual([{ name: '', email: '' }]);
     expect(_package.devDependencies).toEqual({});
+  });
+
+  describe('with cicd not selected', () => {
+    const noCICDOptions = { ...defaultRollupOptions, useCICD: false };
+    it('includes version', () => {
+      const _package = generatePackage(defaultName, defaultOptions, noCICDOptions);
+
+      expect(_package.version).toBe('0.0.0');
+    });
+  });
+
+  describe('with cicd selected', () => {
+    const cicdOptions = { ...defaultRollupOptions, useCICD: false };
+    it('does not include version', () => {
+      const _package = generatePackage(defaultName, defaultOptions, cicdOptions);
+
+      expect(_package.version).toBeUndefined;
+    });
   });
 
   describe('with lint not selected', () => {
@@ -91,7 +109,7 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and css', () => {
           const _package = generatePackage(defaultName, defaultOptions, cssOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|css)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|yml|css)"');
         });
 
         describe('and git initialization', () => {
@@ -100,7 +118,7 @@ describe('generatePackageJSON', () => {
 
             expect(_package['lint-staged']).toEqual({
               '*.(ts|js)': 'eslint --fix',
-              '*.(json|css)': 'prettier --write',
+              '*.(json|yml|css)': 'prettier --write',
             });
           });
         });
@@ -112,7 +130,7 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and less', () => {
           const _package = generatePackage(defaultName, defaultOptions, lessOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|less)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|yml|less)"');
         });
 
         describe('and git initialization', () => {
@@ -121,7 +139,7 @@ describe('generatePackageJSON', () => {
 
             expect(_package['lint-staged']).toEqual({
               '*.(ts|js)': 'eslint --fix',
-              '*.(json|less)': 'prettier --write',
+              '*.(json|yml|less)': 'prettier --write',
             });
           });
         });
@@ -133,7 +151,7 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and scss', () => {
           const _package = generatePackage(defaultName, defaultOptions, sassOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|scss)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|yml|scss)"');
         });
 
         describe('and git initialization', () => {
@@ -142,7 +160,7 @@ describe('generatePackageJSON', () => {
 
             expect(_package['lint-staged']).toEqual({
               '*.(ts|js)': 'eslint --fix',
-              '*.(json|scss)': 'prettier --write',
+              '*.(json|yml|scss)': 'prettier --write',
             });
           });
         });
@@ -165,14 +183,17 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and css', () => {
           const _package = generatePackage(defaultName, defaultOptions, cssOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|css)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|yml|css)"');
         });
 
         describe('and git initialization', () => {
           it('generates a lint-staged configuration for js, json, and css', () => {
             const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, cssOptions);
 
-            expect(_package['lint-staged']).toEqual({ '*.(js)': 'eslint --fix', '*.(json|css)': 'prettier --write' });
+            expect(_package['lint-staged']).toEqual({
+              '*.(js)': 'eslint --fix',
+              '*.(json|yml|css)': 'prettier --write',
+            });
           });
         });
       });
@@ -183,14 +204,17 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and less', () => {
           const _package = generatePackage(defaultName, defaultOptions, lessOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|less)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|yml|less)"');
         });
 
         describe('and git initialization', () => {
           it('generates a lint-staged configuration for js, json, and less', () => {
             const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, lessOptions);
 
-            expect(_package['lint-staged']).toEqual({ '*.(js)': 'eslint --fix', '*.(json|less)': 'prettier --write' });
+            expect(_package['lint-staged']).toEqual({
+              '*.(js)': 'eslint --fix',
+              '*.(json|yml|less)': 'prettier --write',
+            });
           });
         });
       });
@@ -201,14 +225,17 @@ describe('generatePackageJSON', () => {
         it('generates a format script that formats ts, js, json, and scss', () => {
           const _package = generatePackage(defaultName, defaultOptions, sassOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|scss)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|yml|scss)"');
         });
 
         describe('and git initialization', () => {
           it('generates a lint-staged configuration for js, json, and scss', () => {
             const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, sassOptions);
 
-            expect(_package['lint-staged']).toEqual({ '*.(js)': 'eslint --fix', '*.(json|scss)': 'prettier --write' });
+            expect(_package['lint-staged']).toEqual({
+              '*.(js)': 'eslint --fix',
+              '*.(json|yml|scss)': 'prettier --write',
+            });
           });
         });
       });
@@ -252,17 +279,25 @@ describe('generateManifest', () => {
     packageManager: 'npm',
   };
 
+  const defaultRollupOptions = {
+    useTypeScript: false,
+    useLinting: false,
+    useTesting: false,
+    styleType: 'css' as const,
+    useCICD: true,
+  };
+
   describe('with system set', () => {
     const systemOptions = { ...defaultOptions, type: 'system' as const };
 
     it('generates the default system.json', () => {
-      const manifest = generateManifest(defaultName, systemOptions);
+      const manifest = generateManifest(defaultName, systemOptions, defaultRollupOptions);
 
       expect(manifest).toEqual({
         name: 'name-of-the-project',
         title: 'name-of-the-project',
         description: '',
-        version: '0.0.0',
+        version: 'This is auto replaced',
         author: '<your name>',
         authors: [
           {
@@ -271,8 +306,8 @@ describe('generateManifest', () => {
             discord: '<optionally your discord username>',
           },
         ],
-        minimumCoreVersion: '0.8.8',
-        compatibleCoreVersion: '0.8.8',
+        minimumCoreVersion: '9.238',
+        compatibleCoreVersion: '9',
         scripts: [],
         esmodules: [`module/name-of-the-project.js`],
         styles: [`styles/name-of-the-project.css`],
@@ -286,9 +321,9 @@ describe('generateManifest', () => {
           },
         ],
         socket: false,
-        url: '',
-        manifest: '',
-        download: 'https://host/path/to/0.0.0.zip',
+        url: 'This is auto replaced',
+        manifest: 'This is auto replaced',
+        download: 'This is auto replaced',
         license: '',
         readme: '',
         bugs: '',
@@ -306,13 +341,13 @@ describe('generateManifest', () => {
     const systemOptions = { ...defaultOptions, type: 'module' as const };
 
     it('generates the default module.json', () => {
-      const manifest = generateManifest(defaultName, systemOptions);
+      const manifest = generateManifest(defaultName, systemOptions, defaultRollupOptions);
 
       expect(manifest).toEqual({
         name: 'name-of-the-project',
         title: 'name-of-the-project',
         description: '',
-        version: '0.0.0',
+        version: 'This is auto replaced',
         author: '<your name>',
         authors: [
           {
@@ -321,8 +356,8 @@ describe('generateManifest', () => {
             discord: '<optionally your discord username>',
           },
         ],
-        minimumCoreVersion: '0.8.8',
-        compatibleCoreVersion: '0.8.8',
+        minimumCoreVersion: '9.238',
+        compatibleCoreVersion: '9',
         scripts: [],
         esmodules: [`module/name-of-the-project.js`],
         styles: [`styles/name-of-the-project.css`],
@@ -336,9 +371,9 @@ describe('generateManifest', () => {
           },
         ],
         socket: false,
-        url: '',
-        manifest: '',
-        download: 'https://host/path/to/0.0.0.zip',
+        url: 'This is auto replaced',
+        manifest: 'This is auto replaced',
+        download: 'This is auto replaced',
         license: '',
         readme: '',
         bugs: '',

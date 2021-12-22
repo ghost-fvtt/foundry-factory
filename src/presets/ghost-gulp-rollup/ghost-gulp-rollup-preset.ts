@@ -107,23 +107,31 @@ export class GhostGulpRollupPreset implements Preset {
   }
 
   static async create(name: string, options: Options): Promise<GhostGulpRollupPreset> {
+    const choices = [
+      {
+        name: 'TypeScript',
+        value: 'typescript',
+      },
+      { name: 'Linter & Formatter (ESLint & Prettier)', value: 'linter', checked: true },
+      { name: 'Unit Testing (Jest)', value: 'test' },
+      {
+        name: 'CSS Pre-processor (Less / SCSS)',
+        value: 'cssPreProcessor',
+      },
+    ];
+    if (options.git) {
+      choices.push({
+        name: 'CI/CD Pipeline (GitHub only for now)',
+        value: 'cicd',
+        checked: true,
+      });
+    }
     const { features }: { features: string[] } = await inquirer.prompt([
       {
         name: 'features',
         type: 'checkbox',
         message: 'Check the features needed for your project:',
-        choices: [
-          {
-            name: 'TypeScript',
-            value: 'typescript',
-          },
-          { name: 'Linter & Formatter (ESLint & Prettier)', value: 'linter', checked: true },
-          { name: 'Unit Testing (Jest)', value: 'test' },
-          {
-            name: 'CSS Pre-processor (Less / SCSS)',
-            value: 'cssPreProcessor',
-          },
-        ],
+        choices,
       },
     ]);
     const useTypeScript = features.find((it) => it === 'typescript') !== undefined;
@@ -131,12 +139,13 @@ export class GhostGulpRollupPreset implements Preset {
     const useTesting = features.find((it) => it === 'test') !== undefined;
     const useCssPreProcessor = features.find((it) => it === 'cssPreProcessor') !== undefined;
     const styleType = await getStyleType(useCssPreProcessor);
+    const useCICD = features.find((it) => it === 'cicd') !== undefined;
 
-    return new GhostGulpRollupPreset(name, options, { useTypeScript, useLinting, useTesting, styleType });
+    return new GhostGulpRollupPreset(name, options, { useTypeScript, useLinting, useTesting, styleType, useCICD });
   }
 
   static async createDefault(name: string, options: Options): Promise<GhostGulpRollupPreset> {
-    return new GhostGulpRollupPreset(name, options, GhostGulpRollupPreset.defaultRollupOptions);
+    return new GhostGulpRollupPreset(name, options, GhostGulpRollupPreset.getDefaultRollupOptions(options));
   }
 
   static supports(): boolean {
@@ -147,12 +156,15 @@ export class GhostGulpRollupPreset implements Preset {
 
   static readonly documentationLink = 'https://git.io/JZMc0';
 
-  private static defaultRollupOptions = {
-    useTypeScript: false,
-    useLinting: true,
-    useTesting: false,
-    styleType: 'css' as const,
-  };
+  private static getDefaultRollupOptions(options: Options) {
+    return {
+      useTypeScript: false,
+      useLinting: true,
+      useTesting: false,
+      styleType: 'css' as const,
+      useCICD: options.git,
+    };
+  }
 }
 
 async function getStyleType(useCssPreProcessor: boolean): Promise<GhostGulpRollupOptions['styleType']> {
@@ -178,4 +190,5 @@ export interface GhostGulpRollupOptions {
   useLinting: boolean;
   useTesting: boolean;
   styleType: 'css' | 'less' | 'scss';
+  useCICD: boolean;
 }
