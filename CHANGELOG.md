@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/ghost91-/foundry-factory/compare/v0.7.6...v1.0.0) (2022-01-20)
+
+
+### Features
+
+* add support for gitlab pipelines in ghost's gulp+rollup template ([72c8afe](https://github.com/ghost91-/foundry-factory/commit/72c8afed7f5548f67d40b153c63f9f620d35c390))
+* switch to @rollup/plugin-typescript in ghost' gulp+rollup preset ([94e7992](https://github.com/ghost91-/foundry-factory/commit/94e799223f0fed8963a3b3397e5ec7ab35e736ea))
+* update league basic js template to the latest version ([e76846d](https://github.com/ghost91-/foundry-factory/commit/e76846d50f906ce12d8ad62ade6f908eac54dc01))
+
 ### [0.7.6](https://github.com/ghost91-/foundry-factory/compare/v0.7.5...v0.7.6) (2021-12-22)
 
 
