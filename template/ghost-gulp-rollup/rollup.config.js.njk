@@ -1,4 +1,4 @@
-{% if useTypeScript %}const typescript = require('rollup-plugin-typescript2');
+{% if useTypeScript %}const typescript = require('@rollup/plugin-typescript');
 {% endif %}const { nodeResolve } = require('@rollup/plugin-node-resolve');
 
 module.exports = {
@@ -8,5 +8,5 @@ module.exports = {
     format: 'es',
     sourcemap: true,
   },
-  plugins: [nodeResolve(){% if useTypeScript %}, typescript({}){% endif %}],
+  plugins: [nodeResolve(){% if useTypeScript %}, typescript({ noEmitOnError: true }){% endif %}],
 };

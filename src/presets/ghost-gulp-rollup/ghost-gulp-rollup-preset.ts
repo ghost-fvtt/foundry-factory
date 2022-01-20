@@ -50,7 +50,7 @@ export class GhostGulpRollupPreset implements Preset {
     if (this.ghostGulpRollupOptions.useTypeScript) {
       devDependencies = devDependencies.concat([
         '@league-of-foundry-developers/foundry-vtt-types',
-        'rollup-plugin-typescript2',
+        '@rollup/plugin-typescript',
         'tslib',
         'typescript',
       ]);
