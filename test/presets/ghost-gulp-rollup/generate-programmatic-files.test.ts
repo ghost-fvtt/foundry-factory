@@ -25,7 +25,7 @@ describe('generatePackageJSON', () => {
     useLinting: false,
     useTesting: false,
     styleType: 'css' as const,
-    useCICD: true,
+    cicd: 'github' as const,
   };
 
   it('includes the name given in the options', () => {
@@ -48,7 +48,7 @@ describe('generatePackageJSON', () => {
   });
 
   describe('with cicd not selected', () => {
-    const noCICDOptions = { ...defaultRollupOptions, useCICD: false };
+    const noCICDOptions = { ...defaultRollupOptions, cicd: false as const };
     it('includes version', () => {
       const _package = generatePackage(defaultName, defaultOptions, noCICDOptions);
 
@@ -284,7 +284,7 @@ describe('generateManifest', () => {
     useLinting: false,
     useTesting: false,
     styleType: 'css' as const,
-    useCICD: true,
+    cicd: 'github' as const,
   };
 
   describe('with system set', () => {
@@ -306,7 +306,7 @@ describe('generateManifest', () => {
             discord: '<optionally your discord username>',
           },
         ],
-        minimumCoreVersion: '9.238',
+        minimumCoreVersion: '9',
         compatibleCoreVersion: '9',
         scripts: [],
         esmodules: [`module/name-of-the-project.js`],
@@ -356,7 +356,7 @@ describe('generateManifest', () => {
             discord: '<optionally your discord username>',
           },
         ],
-        minimumCoreVersion: '9.238',
+        minimumCoreVersion: '9',
         compatibleCoreVersion: '9',
         scripts: [],
         esmodules: [`module/name-of-the-project.js`],

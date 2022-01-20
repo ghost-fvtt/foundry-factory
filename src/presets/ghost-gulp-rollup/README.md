@@ -40,13 +40,13 @@ This preset provides the following configuration options:
 - Option to set up linting (based on [ESLint] and [Prettier])
 - Option to choose a CSS preprocessor ([Less] or [SCSS])
 - Option to set up testing (based on [Jest])
-- Option to set up a CI/CD pipeline (GitHub only for now)
+- Option to set up a CI/CD pipeline (GitHub or GitLab)
 
 The default options are JavaScript, linting enabled, no CSS preprocessor, no testing, and using a CI/CD pipeline.
 
 ## Things to adjust manually
 
-- `src/module.json` and `src/system.json` respectively need adjustments for author, URL etc.
+- `src/module.json` and `src/system.json` respectively need adjustments for author, description etc.
 - You should add metadata (such as author etc.) to `package.json`.
 - Choose a license for the project and add it as `LICENSE` file to the project root and mention it in the Licensing
   section of your `README.md`. If you don't know which license to choose, take a look at
@@ -96,6 +96,23 @@ npm test
 npm run lint
 ```
 
+## CI Pipeline
+
+### GitHub
+
+The workflow for GitHub works basically the same as the workflow of the [League Basic JS Module Template], please follow
+the instructions given there.
+
+### GitLab
+
+In order to create a versioned release, simply create / push a new tag that follows the pattern
+`v<number>.<number>.<number>`. This triggers a pipeline run that automatically builds the package and creates a release
+that has a `module.zip` / `system.zip` and a `module.json` / `system.json` attached to it. These files are set up so
+that they work in the same way as in the [League Basic JS Module Template], so you can follow the instructions given
+there to list the release on the Foundry VTT package admin page.
+
+If you want to provide release notes, you can then edit the created release to add a description.
+
 [Gulp]: https://gulpjs.com/
 [Rollup]: https://rollupjs.org/
 [Foundry Project Creator]: https://gitlab.com/foundry-projects/foundry-pc/create-foundry-project
@@ -105,3 +122,4 @@ npm run lint
 [SCSS]: https://sass-lang.com/documentation/syntax#scss
 [Jest]: https://jestjs.io/
 [Choose an open source license]: https://choosealicense.com/
+[League Basic JS Module Template]: https://github.com/League-of-Foundry-Developers/FoundryVTT-Module-Template
