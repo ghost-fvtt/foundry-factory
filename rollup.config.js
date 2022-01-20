@@ -1,5 +1,5 @@
 import shebang from 'rollup-plugin-preserve-shebang';
-import typescript from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
 
 export default {
   input: 'src/index.ts',
@@ -9,6 +9,6 @@ export default {
     format: 'es',
     sourcemap: true,
   },
-  plugins: [typescript({}), shebang()],
+  plugins: [typescript({ noEmitOnError: true }), shebang()],
   external: ['chalk', 'child_process', 'commander', 'fs-extra', 'inquirer', 'nunjucks', 'ora', 'path', 'url', 'util'],
 };
