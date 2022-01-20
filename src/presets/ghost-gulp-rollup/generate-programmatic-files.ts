@@ -65,7 +65,7 @@ export function generatePackage(
   return {
     private: true,
     name,
-    version: ghostGulpRollupOptions.useCICD ? undefined : '0.0.0',
+    version: ghostGulpRollupOptions.cicd ? undefined : '0.0.0',
     description: '',
     license: '',
     homepage: '',
@@ -139,12 +139,12 @@ interface Package {
   'lint-staged'?: Partial<Record<string, string>>;
 }
 
-export function generateManifest(name: string, { type }: Options, { useCICD }: GhostGulpRollupOptions): Manifest {
+export function generateManifest(name: string, { type }: Options, { cicd }: GhostGulpRollupOptions): Manifest {
   const baseManifest = {
     name: name,
     title: name,
     description: '',
-    version: useCICD ? 'This is auto replaced' : '0.0.0',
+    version: cicd ? 'This is auto replaced' : '0.0.0',
     author: '<your name>',
     authors: [
       {
@@ -153,7 +153,7 @@ export function generateManifest(name: string, { type }: Options, { useCICD }: G
         discord: '<optionally your discord username>',
       },
     ],
-    minimumCoreVersion: '9.238',
+    minimumCoreVersion: '9',
     compatibleCoreVersion: '9',
     scripts: [],
     esmodules: [`module/${name}.js`],
@@ -168,9 +168,9 @@ export function generateManifest(name: string, { type }: Options, { useCICD }: G
       },
     ],
     socket: false,
-    url: useCICD ? 'This is auto replaced' : '',
-    manifest: useCICD ? 'This is auto replaced' : '',
-    download: useCICD ? 'This is auto replaced' : 'https://host/path/to/0.0.0.zip',
+    url: cicd ? 'This is auto replaced' : '',
+    manifest: cicd ? 'This is auto replaced' : '',
+    download: cicd ? 'This is auto replaced' : 'https://host/path/to/0.0.0.zip',
     license: '',
     readme: '',
     bugs: '',

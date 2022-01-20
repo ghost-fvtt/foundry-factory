@@ -121,8 +121,8 @@ export class GhostGulpRollupPreset implements Preset {
     ];
     if (options.git) {
       choices.push({
-        name: 'CI/CD Pipeline (GitHub only for now)',
-        value: 'cicd',
+        name: 'CI/CD Pipeline (GitHub / GitLab)',
+        value: 'useCICD',
         checked: true,
       });
     }
@@ -139,9 +139,10 @@ export class GhostGulpRollupPreset implements Preset {
     const useTesting = features.find((it) => it === 'test') !== undefined;
     const useCssPreProcessor = features.find((it) => it === 'cssPreProcessor') !== undefined;
     const styleType = await getStyleType(useCssPreProcessor);
-    const useCICD = features.find((it) => it === 'cicd') !== undefined;
+    const useCICD = features.find((it) => it === 'useCICD') !== undefined;
+    const cicd = useCICD ? await getCICDType() : false;
 
-    return new GhostGulpRollupPreset(name, options, { useTypeScript, useLinting, useTesting, styleType, useCICD });
+    return new GhostGulpRollupPreset(name, options, { useTypeScript, useLinting, useTesting, styleType, cicd });
   }
 
   static async createDefault(name: string, options: Options): Promise<GhostGulpRollupPreset> {
@@ -162,7 +163,7 @@ export class GhostGulpRollupPreset implements Preset {
       useLinting: true,
       useTesting: false,
       styleType: 'css' as const,
-      useCICD: options.git,
+      cicd: options.git ? ('github' as const) : (false as const),
     };
   }
 }
@@ -175,7 +176,7 @@ async function getStyleType(useCssPreProcessor: boolean): Promise<GhostGulpRollu
     {
       name: 'styleType',
       type: 'list',
-      message: 'Pick a CSS pre-processor',
+      message: 'Pick a CSS pre-processor:',
       choices: [
         { name: 'Sass (.scss)', value: 'scss' },
         { name: 'Less', value: 'less' },
@@ -185,10 +186,25 @@ async function getStyleType(useCssPreProcessor: boolean): Promise<GhostGulpRollu
   return styleType;
 }
 
+async function getCICDType(): Promise<'github' | 'gitlab'> {
+  const { cicd }: { cicd: 'github' | 'gitlab' } = await inquirer.prompt([
+    {
+      name: 'cicd',
+      type: 'list',
+      message: 'Pick a CI/CD type:',
+      choices: [
+        { name: 'GitHub', value: 'github' },
+        { name: 'GitLab', value: 'gitlab' },
+      ],
+    },
+  ]);
+  return cicd;
+}
+
 export interface GhostGulpRollupOptions {
   useTypeScript: boolean;
   useLinting: boolean;
   useTesting: boolean;
   styleType: 'css' | 'less' | 'scss';
-  useCICD: boolean;
+  cicd: false | 'github' | 'gitlab';
 }

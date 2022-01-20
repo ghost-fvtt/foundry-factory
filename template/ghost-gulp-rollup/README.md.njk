@@ -65,7 +65,7 @@ Then run
 {% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} link-project
 ```
 
-On Windows, creating symlinks requires administrator privileges so unfortunately
+On Windows, creating symlinks requires administrator privileges, so unfortunately
 you need to run the above command in an administrator terminal for it to work.
 {% if useTesting %}
 ### Running the tests
@@ -75,8 +75,22 @@ You can run the tests with the following command:
 ```
 {% if packageManager == "npm" %}npm{% else %}yarn{% endif %} test
 ```
-{% endif %}
+{% endif %}{% if cicd == "github" %}
+### Creating a release
 
+The workflow works basically the same as the workflow of the [League Basic JS Module Template], please follow the
+instructions given there.
+{% elif cicd == "gitlab"%}
+### Creating a release
+
+In order to create a versioned release, simply create / push a new tag that follows the pattern
+`v<number>.<number>.<number>`. This triggers a pipeline run that automatically builds the package and creates a release
+that has a `module.zip` / `system.zip` and a `module.json` / `system.json` attached to it. These files are set up so
+that they work in the same way as in the [League Basic JS Module Template], so you can follow the instructions given
+there to list the release on the Foundry VTT package admin page.
+
+If you want to provide release notes, you can then edit the created release to add a description.
+{% endif %}
 ## Licensing
 
 This project is being developed under the terms of the
@@ -85,6 +99,7 @@ This project is being developed under the terms of the
 Please add your licensing information here. Add your chosen license as
 `LICENSE` file to the project root and mention it here.  If you don't know which
 license to choose, take a look at [Choose an open source license].
-
+{% if not cicd == false %}
+[League Basic JS Module Template]: https://github.com/League-of-Foundry-Developers/FoundryVTT-Module-Template{% endif %}
 [LIMITED LICENSE AGREEMENT FOR MODULE DEVELOPMENT]: https://foundryvtt.com/article/license/
 [Choose an open source license]: https://choosealicense.com/
