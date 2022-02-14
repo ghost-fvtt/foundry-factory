@@ -1,5 +1,10 @@
 image: node:lts
 
+variables:
+  PACKAGE_NAME: {{name}}
+  PACKAGE_TYPE: {{type}}
+  PACKAGE_REGISTRY_URL: $CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/$PACKAGE_NAME
+
 stages:
   - build
   - prepare-release
@@ -32,6 +37,15 @@ test:
     reports:
       junit:
         - junit.xml
+{% endif %}{% if useTypeScript %}
+typecheck:
+  stage: build
+  before_script:
+    - {% if packageManager == "npm" %}npm ci --cache .npm --prefer-offline{% else %}yarn install --immutable{% endif %}
+  script:
+    - {% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} typecheck
+  cache:
+    <<: *global_cache
 {% endif %}
 build:
   stage: build
@@ -43,10 +57,10 @@ build:
     jq '.version = $version | .url = $url | .manifest = $manifest | .download = $download' \
     --arg version "${CI_COMMIT_TAG:1}" \
     --arg url "$CI_PROJECT_URL" \
-    --arg manifest "$CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/{{name}}/latest/{{type}}.json" \
-    --arg download "$CI_PROJECT_URL/-/releases/$CI_COMMIT_TAG/downloads/{{type}}.zip" \
-    src/{{type}}.json > src/tmp.$$.json
-    mv src/tmp.$$.json src/{{type}}.json
+    --arg manifest "$PACKAGE_REGISTRY_URL/latest/$PACKAGE_TYPE.json" \
+    --arg download "$CI_PROJECT_URL/-/releases/$CI_COMMIT_TAG/downloads/$PACKAGE_TYPE.zip" \
+    src/$PACKAGE_TYPE.json > src/tmp.$$.json
+    mv src/tmp.$$.json src/$PACKAGE_TYPE.json
     {% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} build
   cache:
     <<: *global_cache
@@ -63,10 +77,10 @@ publish-artifacts:
     - apk add zip curl
   script: |
     cd dist
-    zip -r ../{{type}}.zip .
+    zip -r ../$PACKAGE_TYPE.zip .
     cd ..
-    curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file {{type}}.zip "$CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/{{name}}/$CI_COMMIT_TAG/{{type}}.zip"
-    curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file dist/{{type}}.json "$CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/{{name}}/$CI_COMMIT_TAG/{{type}}.json"
+    curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file $PACKAGE_TYPE.zip "$PACKAGE_REGISTRY_URL/$CI_COMMIT_TAG/$PACKAGE_TYPE.zip"
+    curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file dist/$PACKAGE_TYPE.json "$PACKAGE_REGISTRY_URL/$CI_COMMIT_TAG/$PACKAGE_TYPE.json"
   rules:
     - if: '$CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/'
 
@@ -80,16 +94,16 @@ release:
   release:
     name: ${CI_COMMIT_TAG:1}
     tag_name: $CI_COMMIT_TAG
-    description: "**Installation:** To manually install this release, please use the following manifest URL: $CI_PROJECT_URL/-/releases/$CI_COMMIT_TAG/downloads/{{type}}.json"
+    description: "**Installation:** To manually install this release, please use the following manifest URL: $CI_PROJECT_URL/-/releases/$CI_COMMIT_TAG/downloads/$PACKAGE_TYPE.json"
     assets:
       links:
-        - name: "{{type}}.zip"
-          url: "$CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/{{name}}/$CI_COMMIT_TAG/{{type}}.zip"
-          filepath: /{{type}}.zip
+        - name: "$PACKAGE_TYPE.zip"
+          url: "$PACKAGE_REGISTRY_URL/$CI_COMMIT_TAG/$PACKAGE_TYPE.zip"
+          filepath: /$PACKAGE_TYPE.zip
           link_type: package
-        - name: "{{type}}.json"
-          url: "$CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/{{name}}/$CI_COMMIT_TAG/{{type}}.json"
-          filepath: /{{type}}.json
+        - name: "$PACKAGE_TYPE.json"
+          url: "$PACKAGE_REGISTRY_URL/$CI_COMMIT_TAG/$PACKAGE_TYPE.json"
+          filepath: /$PACKAGE_TYPE.json
           link_type: other
 
 publish-latest-manifest:
@@ -99,6 +113,6 @@ publish-latest-manifest:
     - apk update
     - apk add zip curl
   script: |
-    curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file dist/{{type}}.json "$CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/{{name}}/latest/{{type}}.json"
+    curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file dist/$PACKAGE_TYPE.json "$PACKAGE_REGISTRY_URL/latest/$PACKAGE_TYPE.json"
   rules:
     - if: '$CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/'

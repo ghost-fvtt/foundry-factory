@@ -8,5 +8,5 @@ export default () => ({
     format: 'es',
     sourcemap: true,
   },
-  plugins: [nodeResolve(){% if useTypeScript %}, typescript({ noEmitOnError: true }){% endif %}],
+  plugins: [nodeResolve(){% if useTypeScript %}, typescript(){% endif %}],
 });

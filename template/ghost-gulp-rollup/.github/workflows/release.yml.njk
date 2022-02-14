@@ -5,6 +5,7 @@ on:
     types: [published]
 
 env:
+  package_type: {{type}}
   node_version: 16
 
 jobs:{% if useLinting %}
@@ -77,6 +78,41 @@ jobs:{% if useLinting %}
 
       - name: Test
         run: {% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} test:ci
+{% endif %}{% if useTypeScript %}
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: {% raw %}${{ env.node_version }}{% endraw %}
+{% if packageManager == "npm" %}{% raw %}
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        with:
+          path: .npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-{% endraw %}
+{% else %}{% raw %}
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        with:
+          path: .yarn/cache
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-{% endraw %}
+{% endif %}
+      - name: Install dependencies
+        run: {% if packageManager == "npm" %}npm ci --cache .npm --prefer-offline{% else %}yarn install --immutable{% endif %}
+
+      - name: Typecheck
+        run: {% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} typecheck
 {% endif %}
   build:
     runs-on: ubuntu-latest
@@ -118,12 +154,12 @@ jobs:{% if useLinting %}
         id: sub_manifest_link_version
         uses: microsoft/variable-substitution@v1
         with:
-          files: 'src/{{type}}.json'
+          files: {% raw %}'src/${{ env.package_type }}.json'{% endraw %}
         env:
-          version: {% raw %}${{steps.get_version.outputs.version-without-v}}{% endraw %}
-          url: {% raw %}https://github.com/${{github.repository}}{% endraw %}
-          manifest: {% raw %}https://github.com/${{github.repository}}/releases/latest/download/{% endraw %}{{type}}.json
-          download: {% raw %}https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/{% endraw %}{{type}}.zip
+          version: {% raw %}${{ steps.get_version.outputs.version-without-v }}{% endraw %}
+          url: {% raw %}https://github.com/${{ github.repository }}{% endraw %}
+          manifest: {% raw %}https://github.com/${{ github.repository }}/releases/latest/download/${{ env.package_type }}.json{% endraw %}
+          download: {% raw %}https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/${{ env.package_type }}.zip{% endraw %}
 
       - name: Build
         run: {% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} build
@@ -137,7 +173,8 @@ jobs:{% if useLinting %}
   publish:
     needs:{% if useLinting %}
       - lint{% endif %}{% if useTesting %}
-      - test{% endif %}
+      - test{% endif %}{% if useTypeScript %}
+      - typecheck{% endif %}
       - build
     runs-on: ubuntu-latest
     steps:
@@ -152,7 +189,7 @@ jobs:{% if useLinting %}
 
       - name: Create zip file
         working-directory: ./dist
-        run: zip -r ../{{type}}.zip .
+        run: {% raw %}zip -r ../${{ env.package_type }}.zip .{% endraw %}
 
       - name: Create release
         id: create_version_release
@@ -161,5 +198,5 @@ jobs:{% if useLinting %}
           allowUpdates: true
           name: {% raw %}${{ github.event.release.name }}{% endraw %}
           token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
-          artifacts: "./dist/{{type}}.json, ./{{type}}.zip"
-
+          artifacts: {% raw %}"./dist/${{ env.package_type }}.json, ./${{ env.package_type }}.zip"{% endraw %}
+          body: {% raw %}${{ github.event.release.body }}{% endraw %}

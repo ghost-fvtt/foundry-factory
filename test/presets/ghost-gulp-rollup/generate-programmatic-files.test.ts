@@ -90,6 +90,11 @@ describe('generatePackageJSON', () => {
     describe('and typescript selected', () => {
       const typescriptOptions = { ...lintingOptions, useTypeScript: true };
 
+      it('generates typecheck script', () => {
+        const _package = generatePackage(defaultName, defaultOptions, typescriptOptions);
+        expect(_package.scripts.typecheck).toBe('tsc --noEmit');
+      });
+
       it('generates lint scripts that lint ts, js, and cjs', () => {
         const _package = generatePackage(defaultName, defaultOptions, typescriptOptions);
 

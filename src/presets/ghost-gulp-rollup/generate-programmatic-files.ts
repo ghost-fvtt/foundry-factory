@@ -39,6 +39,7 @@ export function generatePackage(
   const codeFileTypes = ghostGulpRollupOptions.useTypeScript ? ['ts', 'js', 'cjs'] : ['js', 'cjs'];
   const codeFileExtensions = codeFileTypes.map((fileType) => `.${fileType}`);
 
+  const typecheckScript = ghostGulpRollupOptions.useTypeScript ? `tsc --noEmit` : undefined;
   const lintScript = ghostGulpRollupOptions.useLinting ? `eslint --ext ${codeFileExtensions.join(',')} .` : undefined;
   const lintFixScript = ghostGulpRollupOptions.useLinting
     ? `eslint --ext ${codeFileExtensions.join(',')} --fix .`
@@ -89,6 +90,7 @@ export function generatePackage(
       'link-project': 'gulp link',
       clean: 'gulp clean',
       'clean:link': 'gulp link --clean',
+      typecheck: typecheckScript,
       lint: lintScript,
       'lint:fix': lintFixScript,
       format: formatScript,
@@ -129,6 +131,7 @@ interface Package {
     'link-project': string;
     clean: string;
     'clean:link': string;
+    typecheck?: string;
     lint?: string;
     'lint:fix'?: string;
     format?: string;
