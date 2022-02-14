@@ -45,6 +45,7 @@ describe('generatePackageJSON', () => {
     expect(_package.bugs).toEqual({ url: '' });
     expect(_package.contributors).toEqual([{ name: '', email: '' }]);
     expect(_package.devDependencies).toEqual({});
+    expect(_package.type).toEqual('module');
   });
 
   describe('with cicd not selected', () => {
@@ -89,11 +90,11 @@ describe('generatePackageJSON', () => {
     describe('and typescript selected', () => {
       const typescriptOptions = { ...lintingOptions, useTypeScript: true };
 
-      it('generates lint scripts that lint ts and js', () => {
+      it('generates lint scripts that lint ts, js, and cjs', () => {
         const _package = generatePackage(defaultName, defaultOptions, typescriptOptions);
 
-        expect(_package.scripts.lint).toBe('eslint --ext .ts,.js .');
-        expect(_package.scripts['lint:fix']).toBe('eslint --ext .ts,.js --fix .');
+        expect(_package.scripts.lint).toBe('eslint --ext .ts,.js,.cjs .');
+        expect(_package.scripts['lint:fix']).toBe('eslint --ext .ts,.js,.cjs --fix .');
       });
 
       describe('and not git initialization', () => {
@@ -106,18 +107,18 @@ describe('generatePackageJSON', () => {
       describe('and no CSS preprocessor selected', () => {
         const cssOptions = { ...typescriptOptions, styleType: 'css' as const };
 
-        it('generates a format script that formats ts, js, json, and css', () => {
+        it('generates a format script that formats ts, js, cjs, json, and css', () => {
           const _package = generatePackage(defaultName, defaultOptions, cssOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|yml|css)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|cjs|json|yml|css)"');
         });
 
         describe('and git initialization', () => {
-          it('generates a lint-staged configuration for ts, js, json, and css', () => {
+          it('generates a lint-staged configuration for ts, js, cjs, json, and css', () => {
             const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, cssOptions);
 
             expect(_package['lint-staged']).toEqual({
-              '*.(ts|js)': 'eslint --fix',
+              '*.(ts|js|cjs)': 'eslint --fix',
               '*.(json|yml|css)': 'prettier --write',
             });
           });
@@ -127,18 +128,18 @@ describe('generatePackageJSON', () => {
       describe('and less selected as CSS preprocessor', () => {
         const lessOptions = { ...typescriptOptions, styleType: 'less' as const };
 
-        it('generates a format script that formats ts, js, json, and less', () => {
+        it('generates a format script that formats ts, js, cjs, json, and less', () => {
           const _package = generatePackage(defaultName, defaultOptions, lessOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|yml|less)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|cjs|json|yml|less)"');
         });
 
         describe('and git initialization', () => {
-          it('generates a lint-staged configuration for ts, js, json, and less', () => {
+          it('generates a lint-staged configuration for ts, js, cjs, json, and less', () => {
             const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, lessOptions);
 
             expect(_package['lint-staged']).toEqual({
-              '*.(ts|js)': 'eslint --fix',
+              '*.(ts|js|cjs)': 'eslint --fix',
               '*.(json|yml|less)': 'prettier --write',
             });
           });
@@ -148,18 +149,18 @@ describe('generatePackageJSON', () => {
       describe('and sass selected as CSS preprocessor', () => {
         const sassOptions = { ...typescriptOptions, styleType: 'scss' as const };
 
-        it('generates a format script that formats ts, js, json, and scss', () => {
+        it('generates a format script that formats ts, js, cjs, json, and scss', () => {
           const _package = generatePackage(defaultName, defaultOptions, sassOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|json|yml|scss)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(ts|js|cjs|json|yml|scss)"');
         });
 
         describe('and git initialization', () => {
-          it('generates a lint-staged configuration for ts, js, json, and scss', () => {
+          it('generates a lint-staged configuration for ts, js, cjs, json, and scss', () => {
             const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, sassOptions);
 
             expect(_package['lint-staged']).toEqual({
-              '*.(ts|js)': 'eslint --fix',
+              '*.(ts|js|cjs)': 'eslint --fix',
               '*.(json|yml|scss)': 'prettier --write',
             });
           });
@@ -170,28 +171,28 @@ describe('generatePackageJSON', () => {
     describe('and typescript not selected', () => {
       const noTypescriptOptions = { ...lintingOptions, useTypeScript: false };
 
-      it('generates lint scripts that lint js', () => {
+      it('generates lint scripts that lint js and cjs', () => {
         const _package = generatePackage(defaultName, defaultOptions, noTypescriptOptions);
 
-        expect(_package.scripts.lint).toBe('eslint --ext .js .');
-        expect(_package.scripts['lint:fix']).toBe('eslint --ext .js --fix .');
+        expect(_package.scripts.lint).toBe('eslint --ext .js,.cjs .');
+        expect(_package.scripts['lint:fix']).toBe('eslint --ext .js,.cjs --fix .');
       });
 
       describe('and no CSS preprocessor selected', () => {
         const cssOptions = { ...noTypescriptOptions, styleType: 'css' as const };
 
-        it('generates a format script that formats ts, js, json, and css', () => {
+        it('generates a format script that formats ts, js, cjs, json, and css', () => {
           const _package = generatePackage(defaultName, defaultOptions, cssOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|yml|css)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|cjs|json|yml|css)"');
         });
 
         describe('and git initialization', () => {
-          it('generates a lint-staged configuration for js, json, and css', () => {
+          it('generates a lint-staged configuration for js, cjs, json, and css', () => {
             const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, cssOptions);
 
             expect(_package['lint-staged']).toEqual({
-              '*.(js)': 'eslint --fix',
+              '*.(js|cjs)': 'eslint --fix',
               '*.(json|yml|css)': 'prettier --write',
             });
           });
@@ -201,18 +202,18 @@ describe('generatePackageJSON', () => {
       describe('and less selected as CSS preprocessor', () => {
         const lessOptions = { ...noTypescriptOptions, styleType: 'less' as const };
 
-        it('generates a format script that formats ts, js, json, and less', () => {
+        it('generates a format script that formats ts, js, cjs, json, and less', () => {
           const _package = generatePackage(defaultName, defaultOptions, lessOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|yml|less)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|cjs|json|yml|less)"');
         });
 
         describe('and git initialization', () => {
-          it('generates a lint-staged configuration for js, json, and less', () => {
+          it('generates a lint-staged configuration for js, cjs, json, and less', () => {
             const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, lessOptions);
 
             expect(_package['lint-staged']).toEqual({
-              '*.(js)': 'eslint --fix',
+              '*.(js|cjs)': 'eslint --fix',
               '*.(json|yml|less)': 'prettier --write',
             });
           });
@@ -222,18 +223,18 @@ describe('generatePackageJSON', () => {
       describe('and sass selected as CSS preprocessor', () => {
         const sassOptions = { ...noTypescriptOptions, styleType: 'scss' as const };
 
-        it('generates a format script that formats ts, js, json, and scss', () => {
+        it('generates a format script that formats ts, js, cjs, json, and scss', () => {
           const _package = generatePackage(defaultName, defaultOptions, sassOptions);
 
-          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|json|yml|scss)"');
+          expect(_package.scripts.format).toBe('prettier --write "./**/*.(js|cjs|json|yml|scss)"');
         });
 
         describe('and git initialization', () => {
-          it('generates a lint-staged configuration for js, json, and scss', () => {
+          it('generates a lint-staged configuration for js, cjs, json, and scss', () => {
             const _package = generatePackage(defaultName, { ...defaultOptions, git: true }, sassOptions);
 
             expect(_package['lint-staged']).toEqual({
-              '*.(js)': 'eslint --fix',
+              '*.(js|cjs)': 'eslint --fix',
               '*.(json|yml|scss)': 'prettier --write',
             });
           });

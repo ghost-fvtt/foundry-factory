@@ -26,13 +26,13 @@ module.exports = {
 
   overrides: [{% if useTypeScript %}
     {
-      files: ['./*.js'],
+      files: ['./*.cjs'],
       rules: {
         '@typescript-eslint/no-var-requires': 'off',
       },
     },{% else %}
     {
-      files: ['./*.js'],
+      files: ['./*.js', './*.cjs'],
       env: {
         node: true,
       },

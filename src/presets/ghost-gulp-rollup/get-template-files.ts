@@ -41,7 +41,7 @@ function getConfigTemplateFiles(
   }
 
   if (useLinting) {
-    configFileNames.push('.eslintignore', '.prettierignore', '.prettierrc.js', '.eslintrc.js');
+    configFileNames.push('.eslintignore', '.prettierignore', '.prettierrc.cjs', '.eslintrc.cjs');
     if (useTypeScript) {
       configFileNames.push('tsconfig.eslint.json');
     }

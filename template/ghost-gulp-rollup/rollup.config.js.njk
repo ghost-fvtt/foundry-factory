@@ -1,7 +1,7 @@
-{% if useTypeScript %}const typescript = require('@rollup/plugin-typescript');
-{% endif %}const { nodeResolve } = require('@rollup/plugin-node-resolve');
+{% if useTypeScript %}import typescript from '@rollup/plugin-typescript';
+{% endif %}import { nodeResolve } from '@rollup/plugin-node-resolve';
 
-module.exports = {
+export default () => ({
   input: 'src/module/{{ name }}.{% if useTypeScript %}ts{% else %}js{% endif %}',
   output: {
     dir: 'dist/module',
@@ -9,4 +9,4 @@ module.exports = {
     sourcemap: true,
   },
   plugins: [nodeResolve(){% if useTypeScript %}, typescript({ noEmitOnError: true }){% endif %}],
-};
+});
