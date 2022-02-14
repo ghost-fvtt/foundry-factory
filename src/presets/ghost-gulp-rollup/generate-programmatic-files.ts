@@ -36,7 +36,7 @@ export function generatePackage(
   options: Options,
   ghostGulpRollupOptions: GhostGulpRollupOptions,
 ): Package {
-  const codeFileTypes = ghostGulpRollupOptions.useTypeScript ? ['ts', 'js'] : ['js'];
+  const codeFileTypes = ghostGulpRollupOptions.useTypeScript ? ['ts', 'js', 'cjs'] : ['js', 'cjs'];
   const codeFileExtensions = codeFileTypes.map((fileType) => `.${fileType}`);
 
   const lintScript = ghostGulpRollupOptions.useLinting ? `eslint --ext ${codeFileExtensions.join(',')} .` : undefined;
@@ -82,6 +82,7 @@ export function generatePackage(
         email: '',
       },
     ],
+    type: 'module',
     scripts: {
       build: 'gulp build',
       'build:watch': 'gulp watch',
@@ -121,6 +122,7 @@ interface Package {
       email: string;
     },
   ];
+  type: 'module' | 'commonjs';
   scripts: {
     build: string;
     'build:watch': string;
