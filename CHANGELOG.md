@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/ghost91-/foundry-factory/compare/v1.0.0...v1.1.0) (2022-02-14)
+
+
+### Features
+
+* **ghost's gulp+rollup preset:** extract typechecking into a separate ci step ([7c308e6](https://github.com/ghost91-/foundry-factory/commit/7c308e6c2bb931afe87d0ea16290327ccc43f505))
+
+
+### Bug Fixes
+
+* **ghost's gulp+rollup preset:** fix testing ([0f50a9d](https://github.com/ghost91-/foundry-factory/commit/0f50a9d5a1f948e30d9421ecd567488e00c654a0))
+* **ghost's gulp+rollup preset:** make build:watch work when using TypeScript ([73dd0ec](https://github.com/ghost91-/foundry-factory/commit/73dd0eca2aafd92f80ed0ca17152f579169a1d71))
+
 ## [1.0.0](https://github.com/ghost91-/foundry-factory/compare/v0.7.6...v1.0.0) (2022-01-20)
 
 
