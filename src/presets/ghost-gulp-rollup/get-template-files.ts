@@ -23,13 +23,14 @@ function getConfigTemplateFiles(
   templateDirectory: string,
 ): Record<TargetFilePath, TemplateFilePath> {
   const configFileNames = [
-    'rollup.config.js',
-    'README.md',
     '.editorconfig',
-    '.nvmrc',
     '.gitignore',
-    'gulpfile.js',
+    '.gulp.json',
+    '.nvmrc',
     'foundryconfig.json',
+    'gulpfile.cjs',
+    'README.md',
+    'rollup.config.cjs',
   ];
 
   if (useTesting) {
@@ -79,7 +80,7 @@ function getTestTemplateFiles({ useTypeScript, useTesting }: GhostGulpRollupOpti
   const testTemplateFiles: [string, string][] = [[`example.test.${useTypeScript ? 'ts' : 'js'}`, 'example.test.njk']];
 
   if (useTypeScript) {
-    testTemplateFiles.push(['tsconfig.test.json', 'tsconfig.test.json.njk']);
+    testTemplateFiles.push(['tsconfig.json', 'tsconfig.json.njk']);
   }
   return Object.fromEntries(
     testTemplateFiles.map((pair) => [path.join('test', pair[0]), path.join(templateDirectory, 'test', pair[1])]),

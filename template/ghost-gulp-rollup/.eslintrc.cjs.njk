@@ -3,7 +3,8 @@ module.exports = {
 
 {% endif %}  parserOptions: {
     ecmaVersion: 2020,
-    sourceType: 'module',
+    sourceType: 'module',{% if useTypeScript %}
+    project: './tsconfig.eslint.json',{% endif %}
   },
 
   env: {
