@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/ghost91-/foundry-factory/compare/v1.1.0...v1.1.1) (2022-02-17)
+
+
+### Bug Fixes
+
+* **ghost' gulp+rollup preset:** fix compatibility with yarn2/3 ([0a5d3ca](https://github.com/ghost91-/foundry-factory/commit/0a5d3caf36c5463f018ab6d5d91c74968ebf3d75))
+
 ## [1.1.0](https://github.com/ghost91-/foundry-factory/compare/v1.0.0...v1.1.0) (2022-02-14)
 
 
