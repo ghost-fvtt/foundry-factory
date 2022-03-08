@@ -1,17 +1,17 @@
-const fs = require('fs-extra');
-const gulp = require('gulp');{% if styleType == 'less' %}
-const less = require('gulp-less');{% elif styleType == 'scss' %}
-const sass = require('gulp-dart-sass');{% endif %}
-const sourcemaps = require('gulp-sourcemaps');
-const path = require('node:path');
-const buffer = require('vinyl-buffer');
-const source = require('vinyl-source-stream');
-const yargs = require('yargs');
-const { hideBin } = require('yargs/helpers');
+import fs from 'fs-extra'
+import gulp from 'gulp'{% if styleType == 'less' %}
+import less from 'gulp-less'{% elif styleType == 'scss' %}
+import sass from 'gulp-dart-sass'{% endif %}
+import sourcemaps from 'gulp-sourcemaps'
+import path from 'node:path'
+import buffer from 'vinyl-buffer'
+import source from 'vinyl-source-stream'
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
 
-const rollupStream = require('@rollup/stream');
+import rollupStream from '@rollup/stream'
 
-const rollupConfig = require('./rollup.config.cjs');
+import rollupConfig from './rollup.config.mjs'
 
 /********************/
 /*  CONFIGURATION   */
@@ -71,7 +71,7 @@ async function copyFiles() {
 /**
  * Watch for changes for each build step
  */
-function watch() {
+export function watch() {
   gulp.watch(`${sourceDirectory}/**/*.${sourceFileExtension}`, { ignoreInitial: false }, buildCode);
   gulp.watch(`${stylesDirectory}/**/*.${stylesExtension}`, { ignoreInitial: false }, buildStyles);
   gulp.watch(
@@ -81,7 +81,7 @@ function watch() {
   );
 }
 
-const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, copyFiles));
+export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, copyFiles));
 
 /********************/
 /*      CLEAN       */
@@ -90,7 +90,7 @@ const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, copyFiles
 /**
  * Remove built files from `dist` folder while ignoring source files
  */
-async function clean() {
+export async function clean() {
   const files = [...staticFiles, 'module'];
 
   if (fs.existsSync(`${stylesDirectory}/${name}.${stylesExtension}`)) {
@@ -129,7 +129,7 @@ function getDataPath() {
 /**
  * Link build to User Data folder
  */
-async function link() {
+export async function link() {
   let destinationDirectory;
   if (fs.existsSync(path.resolve(sourceDirectory, '{{ type }}.json'))) {
     destinationDirectory = '{{ type }}s';
@@ -156,10 +156,3 @@ async function link() {
     await fs.symlink(path.resolve(distDirectory), linkDirectory);
   }
 }
-
-module.exports = {
-  watch,
-  build,
-  clean,
-  link
-};

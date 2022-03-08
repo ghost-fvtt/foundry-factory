@@ -122,7 +122,11 @@ export class GhostGulpRollupPreset implements Preset {
         name: 'TypeScript',
         value: 'typescript',
       },
-      { name: 'Linter & Formatter (ESLint & Prettier)', value: 'linter', checked: true },
+      {
+        name: 'Linter & Formatter (ESLint & Prettier)',
+        value: 'linter',
+        checked: true,
+      },
       { name: 'Unit Testing (Jest)', value: 'test' },
       {
         name: 'CSS Pre-processor (Less / SCSS)',
@@ -152,7 +156,13 @@ export class GhostGulpRollupPreset implements Preset {
     const useCICD = features.find((it) => it === 'useCICD') !== undefined;
     const cicd = useCICD ? await getCICDType() : false;
 
-    return new GhostGulpRollupPreset(name, options, { useTypeScript, useLinting, useTesting, styleType, cicd });
+    return new GhostGulpRollupPreset(name, options, {
+      useTypeScript,
+      useLinting,
+      useTesting,
+      styleType,
+      cicd,
+    });
   }
 
   static async createDefault(name: string, options: Options): Promise<GhostGulpRollupPreset> {

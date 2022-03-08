@@ -28,9 +28,9 @@ function getConfigTemplateFiles(
     '.gulp.json',
     '.nvmrc',
     'foundryconfig.json',
-    'gulpfile.cjs',
+    'gulpfile.mjs',
     'README.md',
-    'rollup.config.cjs',
+    'rollup.config.mjs',
   ];
 
   if (useTesting) {
