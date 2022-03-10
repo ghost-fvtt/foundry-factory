@@ -21,9 +21,7 @@ export default async (targetDirectory: string, options: Options): Promise<void> 
   }
   try {
     try {
-      await execAsync('git rev-parse --show-toplevel', {
-        cwd: targetDirectory,
-      });
+      await execAsync('git rev-parse --show-toplevel', { cwd: targetDirectory });
       spinner.succeed(chalk.green('Existing git repository detected.'));
       return;
     } catch (err) {

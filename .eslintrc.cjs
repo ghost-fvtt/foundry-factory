@@ -5,7 +5,7 @@ module.exports = {
     ecmaVersion: 2020,
     project: './tsconfig.eslint.json',
     sourceType: 'module',
-    extraFileExtensions: ['.cjs', '.mjs'],
+    extraFileExtensions: ['.cjs'],
   },
 
   extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
