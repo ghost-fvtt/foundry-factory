@@ -3,6 +3,7 @@ module.exports = {
 
 {% endif %}  parserOptions: {
     ecmaVersion: 2020,
+    extraFileExtensions: ['.cjs', '.mjs'],
     sourceType: 'module',{% if useTypeScript %}
     project: './tsconfig.eslint.json',{% endif %}
   },
@@ -33,7 +34,7 @@ module.exports = {
       },
     },{% else %}
     {
-      files: ['./*.js', './*.cjs'],
+      files: ['./*.js', './*.cjs', './*.mjs'],
       env: {
         node: true,
       },

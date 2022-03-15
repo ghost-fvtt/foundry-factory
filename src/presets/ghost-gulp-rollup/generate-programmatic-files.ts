@@ -36,7 +36,7 @@ export function generatePackage(
   options: Options,
   ghostGulpRollupOptions: GhostGulpRollupOptions,
 ): Package {
-  const codeFileTypes = ghostGulpRollupOptions.useTypeScript ? ['ts', 'js', 'cjs'] : ['js', 'cjs'];
+  const codeFileTypes = ghostGulpRollupOptions.useTypeScript ? ['ts', 'js', 'cjs', 'mjs'] : ['js', 'cjs', 'mjs'];
   const codeFileExtensions = codeFileTypes.map((fileType) => `.${fileType}`);
 
   const typecheckScript = ghostGulpRollupOptions.useTypeScript ? `tsc --noEmit` : undefined;

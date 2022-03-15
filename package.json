@@ -43,12 +43,12 @@
   "scripts": {
     "build": "rollup -c",
     "build:watch": "rollup -c --watch",
-    "lint": "eslint --ext .ts,.js,.cjs .",
-    "lint:fix": "eslint --ext .ts,.js,.cjs --fix .",
+    "lint": "eslint --ext .ts,.js,.cjs,.mjs .",
+    "lint:fix": "eslint --ext .ts,.js,.cjs,.mjs --fix .",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --ci --reporters=default --reporters=jest-junit",
-    "format": "prettier --write './**/*.(ts|js|json)'",
+    "format": "prettier --write './**/*.(ts|js|cjs|mjs|json)'",
     "prepare": "husky install"
   },
   "contributors": [
@@ -79,7 +79,7 @@
     "access": "public"
   },
   "lint-staged": {
-    "*.(cjs|js|ts)": "eslint --fix",
+    "*.(cjs|mjs|js|ts)": "eslint --fix",
     "*.(json)": "prettier --write"
   }
 }
