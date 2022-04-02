@@ -33,7 +33,7 @@
     "jest": "27.5.1",
     "jest-junit": "13.0.0",
     "lint-staged": "12.3.7",
-    "prettier": "2.6.1",
+    "prettier": "2.6.2",
     "rollup": "2.70.1",
     "rollup-plugin-preserve-shebang": "1.0.1",
     "ts-jest": "27.1.4",
