@@ -34,7 +34,7 @@
     "jest-junit": "13.2.0",
     "lint-staged": "12.4.1",
     "prettier": "2.6.2",
-    "rollup": "2.71.0",
+    "rollup": "2.71.1",
     "rollup-plugin-preserve-shebang": "1.0.1",
     "ts-jest": "27.1.4",
     "tslib": "2.4.0",
