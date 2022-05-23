@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/ghost91-/foundry-factory/compare/v1.1.1...v1.2.0) (2022-05-23)
+
+
+### Features
+
+* allow usage of .mjs ([cf772ef](https://github.com/ghost91-/foundry-factory/commit/cf772ef63434d10614b2dd9b5b090f3270247e08))
+* improve generated gitlab ci pipeline ([d55dc17](https://github.com/ghost91-/foundry-factory/commit/d55dc175dd958bfcdf38f3c638d523fe91f043ff))
+
+
+### Bug Fixes
+
+* **deps:** update commitlint monorepo to v17 ([a85eb2f](https://github.com/ghost91-/foundry-factory/commit/a85eb2f6ceb64f5fc39bbe2346bd873a58241f8c))
+* formatting and some mjs fixes ([18c7006](https://github.com/ghost91-/foundry-factory/commit/18c7006564fa39337f0376b1b2e0b84dfae3af41))
+
 ### [1.1.1](https://github.com/ghost91-/foundry-factory/compare/v1.1.0...v1.1.1) (2022-02-17)
 
 
