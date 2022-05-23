@@ -57,7 +57,7 @@ build:
     jq '.version = $version | .url = $url | .manifest = $manifest | .download = $download' \
     --arg version "${CI_COMMIT_TAG:1}" \
     --arg url "$CI_PROJECT_URL" \
-    --arg manifest "$PACKAGE_REGISTRY_URL/latest/$PACKAGE_TYPE.json" \
+    --arg manifest "$CI_PROJECT_URL/-/releases/permalink/latest/$PACKAGE_TYPE.json" \
     --arg download "$CI_PROJECT_URL/-/releases/$CI_COMMIT_TAG/downloads/$PACKAGE_TYPE.zip" \
     src/$PACKAGE_TYPE.json > src/tmp.$$.json
     mv src/tmp.$$.json src/$PACKAGE_TYPE.json
@@ -105,14 +105,3 @@ release:
           url: "$PACKAGE_REGISTRY_URL/$CI_COMMIT_TAG/$PACKAGE_TYPE.json"
           filepath: /$PACKAGE_TYPE.json
           link_type: other
-
-publish-latest-manifest:
-  stage: publish
-  image: alpine:latest
-  before_script:
-    - apk update
-    - apk add zip curl
-  script: |
-    curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file dist/$PACKAGE_TYPE.json "$PACKAGE_REGISTRY_URL/latest/$PACKAGE_TYPE.json"
-  rules:
-    - if: '$CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+$/'
