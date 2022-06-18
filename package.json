@@ -13,7 +13,7 @@
     "chalk": "^5.0.0",
     "commander": "^9.0.0",
     "fs-extra": "^10.0.0",
-    "inquirer": "^8.2.0",
+    "inquirer": "^9.0.0",
     "nunjucks": "^3.2.3",
     "ora": "^6.0.1",
     "standard-version": "^9.3.2"
