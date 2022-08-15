@@ -1,12 +1,15 @@
 {
-  "name": "{{name}}",
+  "id": "{{name}}",
   "title": "New Module",
   "description": "",
   "version": "This is auto replaced",
   "library": "false",
-  "manifestPlusVersion": "1.0.0",
-  "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "9",
+  "manifestPlusVersion": "1.2.0",
+  "compatibility": {
+    "minimum": 10,
+    "verified": 10,
+    "maximum": 11
+  },
   "authors": [
     {
       "name": "The League of Extraordinary FVTT Developers",
@@ -14,20 +17,18 @@
       "discord": "discordID#0001"
     }
   ],
-  "dependencies": [
-
-  ],
-  "conflicts": [
-
-  ],
+  "relationships": {
+    "systems": [],
+    "requires": []
+  },
   "esmodules": [
-    "/scripts/module.js"
+    "scripts/module.js"
   ],
   "scripts": [
-    "/scripts/lib/lib.js"
+    "scripts/lib/lib.js"
   ],
   "styles": [
-    "/styles/module.css"
+    "styles/module.css"
   ],
   "languages": [
     {
@@ -39,6 +40,8 @@
   "url": "This is auto replaced",
   "manifest": "This is auto replaced",
   "download": "This is auto replaced",
+  "license": "LICENSE",
+  "readme": "README.md",
   "media": [
     {
       "type": "icon",
