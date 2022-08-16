@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/ghost91-/foundry-factory/compare/v1.2.0...v1.3.0) (2022-08-16)
+
+
+### Features
+
+* update for Foundry VTT v10 ([5cd0e2b](https://github.com/ghost91-/foundry-factory/commit/5cd0e2b594659d08448b0881bb9b6e418fd1b234))
+* update league-js template ([2e18654](https://github.com/ghost91-/foundry-factory/commit/2e18654d6040e5feaa1779c0ca9aabd904790dc7))
+
+
+### Bug Fixes
+
+* **deps:** update dependency inquirer to v9 ([052cfa2](https://github.com/ghost91-/foundry-factory/commit/052cfa27329a237af1ad2cf2f1aee6273da26896))
+
 ## [1.2.0](https://github.com/ghost91-/foundry-factory/compare/v1.1.1...v1.2.0) (2022-05-23)
 
 
