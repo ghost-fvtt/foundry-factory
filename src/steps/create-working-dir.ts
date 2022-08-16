@@ -5,7 +5,7 @@ import ora from 'ora';
 
 import type { Options } from '../options';
 
-export default async (targetDirectory: string, { force }: Options): Promise<void> => {
+export const createWorkingDir = async (targetDirectory: string, { force }: Options): Promise<void> => {
   const spinner = ora('Initializing working directory').start();
 
   try {

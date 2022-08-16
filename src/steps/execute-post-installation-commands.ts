@@ -7,7 +7,7 @@ import type { Preset } from '../presets/preset';
 
 const execAsync = promisify(exec);
 
-export default async (targetDirectory: string, preset: Preset): Promise<void> => {
+export const executePostInstallationCommands = async (targetDirectory: string, preset: Preset): Promise<void> => {
   if (preset.getPostInstallationCommands) {
     const spinner = ora('Executing post installation commands').start();
     try {

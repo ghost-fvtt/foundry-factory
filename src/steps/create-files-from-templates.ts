@@ -9,13 +9,18 @@ import { rootPath } from '../utils/file-utils';
 import type { Options } from '../options';
 import type { Preset } from '../presets/preset';
 
-export default async (name: string, targetDirectory: string, options: Options, preset: Preset): Promise<void> => {
+export const createFilesFromTemplates = async (
+  packageId: string,
+  targetDirectory: string,
+  options: Options,
+  preset: Preset,
+): Promise<void> => {
   if (preset.getTemplateFiles) {
     const spinner = ora(`Creating files from templates`).start();
     try {
       const templateFiles = await preset.getTemplateFiles();
       const templateVariables = {
-        name,
+        packageId,
         ...options,
         ...(preset.getTemplateVariables ? await preset.getTemplateVariables() : {}),
       };

@@ -6,13 +6,13 @@ import { defaultPreset, presets } from '../presets/presets';
 import type { Options } from '../options';
 import type { Preset, PresetConstructor } from '../presets/preset';
 
-export default async (name: string, options: Options): Promise<Preset> => {
+export const getPreset = async (packageId: string, options: Options): Promise<Preset> => {
   try {
     const presetConstructor = await getPresetConstructor(options);
     if (options.config) {
-      return presetConstructor.create(name, options);
+      return presetConstructor.create(packageId, options);
     } else {
-      return presetConstructor.createDefault(name, options);
+      return presetConstructor.createDefault(packageId, options);
     }
   } catch (err) {
     console.error(chalk.red(err));

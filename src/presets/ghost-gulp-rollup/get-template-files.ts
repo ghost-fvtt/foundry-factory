@@ -3,8 +3,8 @@ import path from 'path';
 import type { TargetFilePath, TemplateFilePath } from '../preset';
 import type { GhostGulpRollupOptions } from './ghost-gulp-rollup-preset';
 
-export default async (
-  name: string,
+export const getTemplateFiles = async (
+  packageId: string,
   ghostGulpRollupOptions: GhostGulpRollupOptions,
 ): Promise<Record<TargetFilePath, TemplateFilePath>> => {
   const templateDirectory = 'ghost-gulp-rollup';
@@ -12,7 +12,7 @@ export default async (
 
   return {
     ...getConfigTemplateFiles(ghostGulpRollupOptions, templateDirectory),
-    ...getSourceTemplateFiles(name, templateDirectory, sourceFileExtension),
+    ...getSourceTemplateFiles(packageId, templateDirectory, sourceFileExtension),
     ...getTestTemplateFiles(ghostGulpRollupOptions, templateDirectory),
     ...getCICDTemplateFiles(ghostGulpRollupOptions, templateDirectory),
   };
@@ -55,7 +55,7 @@ function getConfigTemplateFiles(
   return Object.fromEntries(configTemplateFiles);
 }
 
-function getSourceTemplateFiles(name: string, templateDirectory: string, sourceFileExtension: string) {
+function getSourceTemplateFiles(packageId: string, templateDirectory: string, sourceFileExtension: string) {
   const relativeSourceDirectory = path.join('src', 'module');
   const templateFileNames = ['entryPoint.njk', 'preloadTemplates.njk', 'settings.njk'];
 
@@ -63,14 +63,14 @@ function getSourceTemplateFiles(name: string, templateDirectory: string, sourceF
     templateFileNames
       .map((templateFileName) => path.join(relativeSourceDirectory, templateFileName))
       .map((templateFilePath) => [
-        getNameForSourceTemplate(templateFilePath, sourceFileExtension, name),
+        getNameForSourceTemplate(templateFilePath, sourceFileExtension, packageId),
         path.join(templateDirectory, templateFilePath),
       ]),
   );
 }
 
-function getNameForSourceTemplate(fileName: string, sourceFileExtension: string, name: string): string {
-  return fileName.replace('entryPoint.njk', `${name}.njk`).replace('.njk', sourceFileExtension);
+function getNameForSourceTemplate(fileName: string, sourceFileExtension: string, packageId: string): string {
+  return fileName.replace('entryPoint.njk', `${packageId}.njk`).replace('.njk', sourceFileExtension);
 }
 
 function getTestTemplateFiles({ useTypeScript, useTesting }: GhostGulpRollupOptions, templateDirectory: string) {

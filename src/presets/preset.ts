@@ -57,17 +57,17 @@ export interface Preset {
 export interface PresetConstructor {
   /**
    * Create a new preset, possibly interactively configuring it.
-   * @param name The name of the project being created
+   * @param packageId The id of the project being created
    * @param options The passed command line options
    */
-  create(name: string, options: Options): Promise<Preset>;
+  create(packageId: string, options: Options): Promise<Preset>;
 
   /**
    * Create a new preset, using the default configuration of the preset.
-   * @param name The name of the project being created
+   * @param packageId The id of the project being created
    * @param options The passed command line options
    */
-  createDefault(name: string, options: Options): Promise<Preset>;
+  createDefault(packageId: string, options: Options): Promise<Preset>;
 
   /**
    * Whether or not the preset supports the given options. This will be used to decide if the preset should be displayed

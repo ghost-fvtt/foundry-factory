@@ -17,7 +17,7 @@ import rollupConfig from './rollup.config.mjs'
 /*  CONFIGURATION   */
 /********************/
 
-const name = '{{ name }}';
+const packageId = '{{ packageId }}';
 const sourceDirectory = './src';
 const distDirectory = './dist';
 const stylesDirectory = `${sourceDirectory}/styles`;
@@ -39,7 +39,7 @@ function buildCode() {
     .on('bundle', (bundle) => {
       cache = bundle;
     })
-    .pipe(source(`${name}.js`))
+    .pipe(source(`${packageId}.js`))
     .pipe(buffer())
     .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(sourcemaps.write('.'))
@@ -51,7 +51,7 @@ function buildCode() {
  */
 function buildStyles() {
   return gulp
-    .src(`${stylesDirectory}/${name}.${stylesExtension}`)
+    .src(`${stylesDirectory}/${packageId}.${stylesExtension}`)
 {%if styleType == 'scss' %}    .pipe(sass().on('error', sass.logError))
 {% elif styleType == 'less' %}    .pipe(less())
 {% endif %}    .pipe(gulp.dest(`${distDirectory}/styles`));
@@ -93,7 +93,7 @@ export const build = gulp.series(clean, gulp.parallel(buildCode, buildStyles, co
 export async function clean() {
   const files = [...staticFiles, 'module'];
 
-  if (fs.existsSync(`${stylesDirectory}/${name}.${stylesExtension}`)) {
+  if (fs.existsSync(`${stylesDirectory}/${packageId}.${stylesExtension}`)) {
     files.push('styles');
   }
 
@@ -137,7 +137,7 @@ export async function link() {
     throw new Error('Could not find {{ type }}.json');
   }
 
-  const linkDirectory = path.resolve(getDataPath(), 'Data', destinationDirectory, name);
+  const linkDirectory = path.resolve(getDataPath(), 'Data', destinationDirectory, packageId);
 
   const argv = yargs(hideBin(process.argv)).option("clean", {
     alias: "c",

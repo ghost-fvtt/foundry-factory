@@ -5,7 +5,7 @@ import path from 'path';
 
 import type { Preset } from '../presets/preset';
 
-export default async (targetDirectory: string, preset: Preset): Promise<void> => {
+export const createAdditionalDirectories = async (targetDirectory: string, preset: Preset): Promise<void> => {
   if (preset.getAdditionalDirectories) {
     const spinner = ora(`Creating additional directories`).start();
     try {

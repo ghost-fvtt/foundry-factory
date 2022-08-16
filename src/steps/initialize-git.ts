@@ -7,7 +7,7 @@ import type { Options } from '../options';
 
 const execAsync = promisify(exec);
 
-export default async (targetDirectory: string, options: Options): Promise<void> => {
+export const initializeGit = async (targetDirectory: string, options: Options): Promise<void> => {
   if (!options.git) {
     return;
   }

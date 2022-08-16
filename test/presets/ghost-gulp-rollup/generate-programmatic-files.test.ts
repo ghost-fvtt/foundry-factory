@@ -38,12 +38,14 @@ describe('generatePackageJSON', () => {
     const _package = generatePackage(defaultName, defaultOptions, defaultRollupOptions);
 
     expect(_package.private).toBe(true);
-    expect(_package.description).toBe('');
-    expect(_package.license).toBe('');
-    expect(_package.homepage).toBe('');
-    expect(_package.repository).toEqual({ type: 'git', url: '' });
-    expect(_package.bugs).toEqual({ url: '' });
-    expect(_package.contributors).toEqual([{ name: '', email: '' }]);
+    expect(_package.description).toBe('<description of the package>');
+    expect(_package.license).toBe(
+      '<please choose an appropriate license. https://choosealicense.com/ is a great place to get more information if you are unsure>',
+    );
+    expect(_package.homepage).toBe('<optionally the URL to your repository or another homepage>');
+    expect(_package.repository).toEqual({ type: 'git', url: '<optionally the URL to your repository>' });
+    expect(_package.bugs).toEqual({ url: '<optionally the URL to your issues list>' });
+    expect(_package.contributors).toEqual([{ name: '<your name>', email: '<optionally your e-mail address>' }]);
     expect(_package.devDependencies).toEqual({});
     expect(_package.type).toEqual('module');
   });
@@ -308,18 +310,17 @@ describe('generateManifest', () => {
     cicd: 'github' as const,
   };
 
-  describe('with system set', () => {
+  describe('with type system', () => {
     const systemOptions = { ...defaultOptions, type: 'system' as const };
 
     it('generates the default system.json', () => {
       const manifest = generateManifest(defaultName, systemOptions, defaultRollupOptions);
 
       expect(manifest).toEqual({
-        name: 'name-of-the-project',
-        title: 'name-of-the-project',
-        description: '',
+        id: 'name-of-the-project',
+        title: '<human readable title for name-of-the-project>',
+        description: '<description of the package>',
         version: 'This is auto replaced',
-        author: '<your name>',
         authors: [
           {
             name: '<your name>',
@@ -327,13 +328,15 @@ describe('generateManifest', () => {
             discord: '<optionally your discord username>',
           },
         ],
-        minimumCoreVersion: '9',
-        compatibleCoreVersion: '9',
+        compatibility: {
+          minimum: '10',
+          verified: '10',
+        },
         scripts: [],
         esmodules: [`module/name-of-the-project.js`],
         styles: [`styles/name-of-the-project.css`],
         packs: [],
-        dependencies: [],
+        relationships: { conflicts: [], requires: [] },
         languages: [
           {
             lang: 'en',
@@ -345,31 +348,32 @@ describe('generateManifest', () => {
         url: 'This is auto replaced',
         manifest: 'This is auto replaced',
         download: 'This is auto replaced',
-        license: '',
-        readme: '',
-        bugs: '',
-        changelog: '',
-        initiative: '',
+        license:
+          '<please choose an appropriate license. https://choosealicense.com/ is a great place to get more information if you are unsure>',
+        readme: '<optionally the URL to your readme>',
+        bugs: '<optionally the URL to your issue list>',
+        changelog: '<optionally the URL to your changelog>',
+        background: '<optionally a relative filepath to a background image to use for worlds created with this system>',
+        initiative: '<inititative roll formula for your system>',
         gridDistance: 1,
-        gridUnits: '',
-        primaryTokenAttribute: '',
-        secondaryTokenAttribute: '',
+        gridUnits: 'm',
+        primaryTokenAttribute: '<optionally the attribute to use as primary resource in tokens by default>',
+        secondaryTokenAttribute: '<optionally the attribute to use as secondary resource in tokens by default>',
       });
     });
   });
 
-  describe('with system not set', () => {
+  describe('with type module', () => {
     const systemOptions = { ...defaultOptions, type: 'module' as const };
 
     it('generates the default module.json', () => {
       const manifest = generateManifest(defaultName, systemOptions, defaultRollupOptions);
 
       expect(manifest).toEqual({
-        name: 'name-of-the-project',
-        title: 'name-of-the-project',
-        description: '',
+        id: 'name-of-the-project',
+        title: '<human readable title for name-of-the-project>',
+        description: '<description of the package>',
         version: 'This is auto replaced',
-        author: '<your name>',
         authors: [
           {
             name: '<your name>',
@@ -377,13 +381,18 @@ describe('generateManifest', () => {
             discord: '<optionally your discord username>',
           },
         ],
-        minimumCoreVersion: '9',
-        compatibleCoreVersion: '9',
+        bugs: '<optionally the URL to your issue list>',
+        changelog: '<optionally the URL to your changelog>',
+        compatibility: {
+          minimum: '10',
+          verified: '10',
+        },
         scripts: [],
-        esmodules: [`module/name-of-the-project.js`],
-        styles: [`styles/name-of-the-project.css`],
+        esmodules: ['module/name-of-the-project.js'],
+        styles: ['styles/name-of-the-project.css'],
         packs: [],
-        dependencies: [],
+        readme: '<optionally the URL to your readme>',
+        relationships: { conflicts: [], requires: [], systems: [] },
         languages: [
           {
             lang: 'en',
@@ -395,11 +404,8 @@ describe('generateManifest', () => {
         url: 'This is auto replaced',
         manifest: 'This is auto replaced',
         download: 'This is auto replaced',
-        license: '',
-        readme: '',
-        bugs: '',
-        changelog: '',
-        system: [],
+        license:
+          '<please choose an appropriate license. https://choosealicense.com/ is a great place to get more information if you are unsure>',
         library: false,
       });
     });

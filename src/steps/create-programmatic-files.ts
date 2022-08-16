@@ -5,7 +5,7 @@ import path from 'path';
 
 import type { Preset } from '../presets/preset';
 
-export default async (targetDirectory: string, preset: Preset): Promise<void> => {
+export const createProgrammaticFiles = async (targetDirectory: string, preset: Preset): Promise<void> => {
   if (preset.getProgrammaticFiles) {
     const spinner = ora(`Creating programmatic files`).start();
     try {
