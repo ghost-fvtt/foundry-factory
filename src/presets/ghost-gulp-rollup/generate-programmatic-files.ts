@@ -4,27 +4,27 @@ import type { Options } from '../../options';
 import type { TargetFilePath } from '../preset';
 import type { GhostGulpRollupOptions } from './ghost-gulp-rollup-preset';
 
-export default (
-  name: string,
+export const generateProgrammaticFiles = (
+  packageId: string,
   options: Options,
   ghostGulpRollupOptions: GhostGulpRollupOptions,
 ): Record<TargetFilePath, string> => {
   const programmaticFiles: Record<string, string> = {};
 
   programmaticFiles['package.json'] = JSON.stringify(
-    generatePackage(name, options, ghostGulpRollupOptions),
+    generatePackage(packageId, options, ghostGulpRollupOptions),
     undefined,
     2,
   );
   programmaticFiles[path.join('src', `${options.type}.json`)] = JSON.stringify(
-    generateManifest(name, options, ghostGulpRollupOptions),
+    generateManifest(packageId, options, ghostGulpRollupOptions),
     undefined,
     2,
   );
   if (options.type === 'system') {
     programmaticFiles[path.join('src', 'template.json')] = JSON.stringify(generateTemplate(), undefined, 2);
   }
-  programmaticFiles[path.join('src', 'styles', `${name}.${ghostGulpRollupOptions.styleType}`)] =
+  programmaticFiles[path.join('src', 'styles', `${packageId}.${ghostGulpRollupOptions.styleType}`)] =
     generateStyle(ghostGulpRollupOptions);
   programmaticFiles[path.join('src', 'lang', 'en.json')] = JSON.stringify({}, undefined, 2);
 
@@ -32,7 +32,7 @@ export default (
 };
 
 export function generatePackage(
-  name: string,
+  packageId: string,
   options: Options,
   ghostGulpRollupOptions: GhostGulpRollupOptions,
 ): Package {
@@ -65,22 +65,23 @@ export function generatePackage(
 
   return {
     private: true,
-    name,
+    name: packageId,
     version: ghostGulpRollupOptions.cicd ? undefined : '0.0.0',
-    description: '',
-    license: '',
-    homepage: '',
+    description: '<description of the package>',
+    license:
+      '<please choose an appropriate license. https://choosealicense.com/ is a great place to get more information if you are unsure>',
+    homepage: '<optionally the URL to your repository or another homepage>',
     repository: {
       type: 'git',
-      url: '',
+      url: '<optionally the URL to your repository>',
     },
     bugs: {
-      url: '',
+      url: '<optionally the URL to your issues list>',
     },
     contributors: [
       {
-        name: '',
-        email: '',
+        name: '<your name>',
+        email: '<optionally your e-mail address>',
       },
     ],
     type: 'module',
@@ -144,13 +145,11 @@ interface Package {
   'lint-staged'?: Partial<Record<string, string>>;
 }
 
-export function generateManifest(name: string, { type }: Options, { cicd }: GhostGulpRollupOptions): Manifest {
+export function generateManifest(packageId: string, { type }: Options, { cicd }: GhostGulpRollupOptions): Manifest {
   const baseManifest = {
-    name: name,
-    title: name,
-    description: '',
-    version: cicd ? 'This is auto replaced' : '0.0.0',
-    author: '<your name>',
+    id: packageId,
+    title: `<human readable title for ${packageId}>`,
+    description: '<description of the package>',
     authors: [
       {
         name: '<your name>',
@@ -158,13 +157,21 @@ export function generateManifest(name: string, { type }: Options, { cicd }: Ghos
         discord: '<optionally your discord username>',
       },
     ],
-    minimumCoreVersion: '9',
-    compatibleCoreVersion: '9',
+    url: cicd ? 'This is auto replaced' : '',
+    license:
+      '<please choose an appropriate license. https://choosealicense.com/ is a great place to get more information if you are unsure>',
+    readme: '<optionally the URL to your readme>',
+    bugs: '<optionally the URL to your issue list>',
+    changelog: '<optionally the URL to your changelog>',
+    version: cicd ? 'This is auto replaced' : '0.0.0',
+    compatibility: {
+      minimum: '10',
+      verified: '10',
+    },
     scripts: [],
-    esmodules: [`module/${name}.js`],
-    styles: [`styles/${name}.css`],
+    esmodules: [`module/${packageId}.js`],
+    styles: [`styles/${packageId}.css`],
     packs: [],
-    dependencies: [],
     languages: [
       {
         lang: 'en',
@@ -172,30 +179,44 @@ export function generateManifest(name: string, { type }: Options, { cicd }: Ghos
         path: 'lang/en.json',
       },
     ],
+    relationships: {
+      ...(type !== 'system' ? { systems: [] } : {}),
+      requires: [],
+      conflicts: [],
+    },
     socket: false,
-    url: cicd ? 'This is auto replaced' : '',
     manifest: cicd ? 'This is auto replaced' : '',
     download: cicd ? 'This is auto replaced' : 'https://host/path/to/0.0.0.zip',
-    license: '',
-    readme: '',
-    bugs: '',
-    changelog: '',
   };
 
   const moduleManifestProps = {
-    system: [],
     library: false,
   };
 
   const systemManifestProps = {
-    initiative: '',
+    background: '<optionally a relative filepath to a background image to use for worlds created with this system>',
+    initiative: '<inititative roll formula for your system>',
     gridDistance: 1,
-    gridUnits: '',
-    primaryTokenAttribute: '',
-    secondaryTokenAttribute: '',
+    gridUnits: 'm',
+    primaryTokenAttribute: '<optionally the attribute to use as primary resource in tokens by default>',
+    secondaryTokenAttribute: '<optionally the attribute to use as secondary resource in tokens by default>',
   };
 
-  return type === 'system' ? { ...baseManifest, ...systemManifestProps } : { ...baseManifest, ...moduleManifestProps };
+  return { ...baseManifest, ...(type === 'system' ? systemManifestProps : moduleManifestProps) };
+}
+
+interface PackageCompatibility {
+  minimum?: string;
+  verified?: string;
+  maximum?: string;
+}
+
+interface RelatedPackage<PackageType extends 'world' | 'system' | 'module' = 'world' | 'system' | 'module'> {
+  id: string;
+  type: PackageType;
+  manifest?: string;
+  compatibility?: PackageCompatibility;
+  reason?: string;
 }
 
 interface Author {
@@ -203,60 +224,77 @@ interface Author {
   email?: string;
   url?: string;
   discord?: string;
+  flags?: Record<string, unknown>;
+}
+
+interface Media {
+  type?: string;
+  url?: string;
+  caption?: string;
+  loop?: boolean;
+  thumbnail?: string;
+  flags?: Record<string, unknown>;
 }
 
 interface Pack {
   name: string;
-  label: string;
-  system: string;
-  module: string;
   path: string;
-  entity: 'Actor' | 'Item' | 'JournalEntry' | 'Macro' | 'Playlist' | 'RollTable' | 'Scene';
-}
-
-interface Dependency {
-  name: string;
-  type?: 'module' | 'system' | 'world';
-  manifest?: string;
+  label: string;
+  private?: boolean;
+  type: 'Actor' | 'Cards' | 'Item' | 'JournalEntry' | 'Macro' | 'Playlist' | 'RollTable' | 'Scene' | 'Adventure';
+  system?: string;
+  flags?: Record<string, unknown>;
 }
 
 interface Language {
   lang: string;
-  name: string;
+  name?: string;
   path: string;
+  system?: string;
+  module?: string;
+  flags?: Record<string, unknown>;
 }
 
-interface BaseManifest {
-  name: string;
-  title: string;
-  description: string;
-  version: string;
-  author: string;
+interface Relationships {
+  systems?: RelatedPackage<'system'>[];
+  requires?: RelatedPackage[];
+  conflicts?: RelatedPackage[];
+  flags?: Record<string, unknown>;
+}
+
+interface BasePackage {
+  id: string;
+  title?: string;
+  description?: string;
   authors?: Author[];
-  minimumCoreVersion: string;
-  compatibleCoreVersion?: string;
-  scripts?: string[];
-  esmodules?: string[];
-  styles?: string[];
-  packs?: Pack[];
-  dependencies?: Dependency[];
-  languages?: Language[];
-  socket?: boolean;
   url?: string;
-  manifest?: string;
-  download?: string;
   license?: string;
   readme?: string;
   bugs?: string;
   changelog?: string;
+  flags?: Record<string, unknown>;
+  media?: Media[];
+  version?: string;
+  compatibility?: PackageCompatibility;
+  scripts?: string[];
+  esmodules?: string[];
+  styles?: string[];
+  languages?: Language[];
+  packs?: Pack[];
+  relationships?: Relationships;
+  socket?: boolean;
+  manifest?: string;
+  download?: string;
+  protected?: boolean;
 }
 
-interface ModuleManifest extends BaseManifest {
-  system?: string | string[];
+interface BaseModule extends BasePackage {
+  coreTranslation?: boolean;
   library?: boolean;
 }
 
-interface SystemManifest extends BaseManifest {
+interface BaseSystem extends BasePackage {
+  background?: string;
   initiative?: string;
   gridDistance?: number;
   gridUnits?: string;
@@ -264,7 +302,7 @@ interface SystemManifest extends BaseManifest {
   secondaryTokenAttribute?: string;
 }
 
-type Manifest = ModuleManifest | SystemManifest;
+type Manifest = BaseModule | BaseSystem;
 
 export function generateTemplate(): Template {
   return {
@@ -279,15 +317,17 @@ export function generateTemplate(): Template {
   };
 }
 
-interface Entity {
+interface SystemDefintion {
   types: string[];
   templates: Record<string, unknown>;
   [key: string]: unknown;
 }
 
 interface Template {
-  Actor: Entity;
-  Item: Entity;
+  Actor: SystemDefintion;
+  Item: SystemDefintion;
+  Cards?: SystemDefintion;
+  Card?: SystemDefintion;
 }
 
 function generateStyle({ styleType }: GhostGulpRollupOptions) {

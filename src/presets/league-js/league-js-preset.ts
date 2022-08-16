@@ -4,11 +4,11 @@ import type { Options } from '../../options';
 import type { Preset } from '../preset';
 
 export class LeagueJSPreset implements Preset {
-  protected name: string;
+  protected packageId: string;
   protected options: Options;
 
-  constructor(name: string, options: Options) {
-    this.name = name;
+  constructor(packageId: string, options: Options) {
+    this.packageId = packageId;
     this.options = options;
   }
 
@@ -27,12 +27,12 @@ export class LeagueJSPreset implements Preset {
     );
   }
 
-  static async create(name: string, options: Options): Promise<LeagueJSPreset> {
-    return new LeagueJSPreset(name, options);
+  static async create(packageId: string, options: Options): Promise<LeagueJSPreset> {
+    return new LeagueJSPreset(packageId, options);
   }
 
-  static async createDefault(name: string, options: Options): Promise<LeagueJSPreset> {
-    return new LeagueJSPreset(name, options);
+  static async createDefault(PackageId: string, options: Options): Promise<LeagueJSPreset> {
+    return new LeagueJSPreset(PackageId, options);
   }
 
   static supports(options: Options): boolean {

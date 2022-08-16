@@ -8,7 +8,11 @@ import type { Preset } from '../presets/preset';
 
 const execAsync = promisify(exec);
 
-export default async (targetDirectory: string, { deps, packageManager }: Options, preset: Preset): Promise<void> => {
+export const installDependencies = async (
+  targetDirectory: string,
+  { deps, packageManager }: Options,
+  preset: Preset,
+): Promise<void> => {
   if (!deps || (!preset.getDependencies && !preset.getDevDependencies)) {
     return;
   }

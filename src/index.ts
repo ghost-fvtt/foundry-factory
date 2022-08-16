@@ -2,7 +2,7 @@
 import { Command, Option } from 'commander';
 import path from 'path';
 
-import createProject from './create-project';
+import { createProject } from './create-project';
 import { CLIOptions, packageManagers, validateOptions as validateOptions } from './options';
 import { presets } from './presets/presets';
 import { version } from './utils/version';
@@ -31,8 +31,8 @@ program
   .action(async (projectDirectory: string, options: CLIOptions, program: Command) => {
     if (validateOptions(options, program)) {
       const targetDirectory = path.resolve(projectDirectory);
-      const name = path.basename(targetDirectory);
-      createProject(name, targetDirectory, options);
+      const packageId = path.basename(targetDirectory);
+      createProject(packageId, targetDirectory, options);
     }
   });
 

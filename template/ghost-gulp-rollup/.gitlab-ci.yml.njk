@@ -1,7 +1,7 @@
 image: node:lts
 
 variables:
-  PACKAGE_NAME: {{name}}
+  PACKAGE_NAME: {{packageId}}
   PACKAGE_TYPE: {{type}}
   PACKAGE_REGISTRY_URL: $CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/$PACKAGE_NAME
 

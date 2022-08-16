@@ -1,29 +1,28 @@
 import inquirer from 'inquirer';
 import path from 'path';
 
-import generateProgrammaticFiles from './generate-programmatic-files';
-import getTemplateFiles from './get-template-files';
-
 import type { Options } from '../../options';
 import type { Preset, TargetFilePath, TemplateFilePath } from '../preset';
+import { generateProgrammaticFiles } from './generate-programmatic-files';
+import { getTemplateFiles } from './get-template-files';
 
 export class GhostGulpRollupPreset implements Preset {
-  protected name: string;
+  protected packageId: string;
   protected options: Options;
   protected ghostGulpRollupOptions: GhostGulpRollupOptions;
 
-  constructor(name: string, options: Options, ghostGulpRollupOptions: GhostGulpRollupOptions) {
-    this.name = name;
+  constructor(packageId: string, options: Options, ghostGulpRollupOptions: GhostGulpRollupOptions) {
+    this.packageId = packageId;
     this.options = options;
     this.ghostGulpRollupOptions = ghostGulpRollupOptions;
   }
 
   async getProgrammaticFiles(): Promise<Record<TargetFilePath, string>> {
-    return generateProgrammaticFiles(this.name, this.options, this.ghostGulpRollupOptions);
+    return generateProgrammaticFiles(this.packageId, this.options, this.ghostGulpRollupOptions);
   }
 
   async getTemplateFiles(): Promise<Record<TargetFilePath, TemplateFilePath>> {
-    return getTemplateFiles(this.name, this.ghostGulpRollupOptions);
+    return getTemplateFiles(this.packageId, this.ghostGulpRollupOptions);
   }
 
   async getTemplateVariables(): Promise<Record<string, unknown>> {
@@ -116,7 +115,7 @@ export class GhostGulpRollupPreset implements Preset {
       : [];
   }
 
-  static async create(name: string, options: Options): Promise<GhostGulpRollupPreset> {
+  static async create(packageId: string, options: Options): Promise<GhostGulpRollupPreset> {
     const choices = [
       {
         name: 'TypeScript',
@@ -152,11 +151,11 @@ export class GhostGulpRollupPreset implements Preset {
     const useCICD = features.find((it) => it === 'useCICD') !== undefined;
     const cicd = useCICD ? await getCICDType() : false;
 
-    return new GhostGulpRollupPreset(name, options, { useTypeScript, useLinting, useTesting, styleType, cicd });
+    return new GhostGulpRollupPreset(packageId, options, { useTypeScript, useLinting, useTesting, styleType, cicd });
   }
 
-  static async createDefault(name: string, options: Options): Promise<GhostGulpRollupPreset> {
-    return new GhostGulpRollupPreset(name, options, GhostGulpRollupPreset.getDefaultRollupOptions(options));
+  static async createDefault(packageId: string, options: Options): Promise<GhostGulpRollupPreset> {
+    return new GhostGulpRollupPreset(packageId, options, GhostGulpRollupPreset.getDefaultRollupOptions(options));
   }
 
   static supports(): boolean {

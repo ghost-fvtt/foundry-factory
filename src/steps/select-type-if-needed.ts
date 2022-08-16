@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 
 import type { Options, ValidatedCLIOptions } from '../options';
 
-export default async (validatedCLIOptions: ValidatedCLIOptions): Promise<Options> => {
+export const selectTypeIfNeeded = async (validatedCLIOptions: ValidatedCLIOptions): Promise<Options> => {
   if (validatedCLIOptions.type !== undefined) {
     return validatedCLIOptions as Options;
   }

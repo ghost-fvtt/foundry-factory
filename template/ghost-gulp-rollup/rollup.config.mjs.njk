@@ -2,7 +2,7 @@
 {% endif %}import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default () => ({
-  input: 'src/module/{{ name }}.{% if useTypeScript %}ts{% else %}js{% endif %}',
+  input: 'src/module/{{ packageId }}.{% if useTypeScript %}ts{% else %}js{% endif %}',
   output: {
     dir: 'dist/module',
     format: 'es',
