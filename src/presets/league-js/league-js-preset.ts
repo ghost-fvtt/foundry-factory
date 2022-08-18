@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Johannes Loher
+//
+// SPDX-License-Identifier: MIT
+
 import path from 'path';
 
 import type { Options } from '../../options';

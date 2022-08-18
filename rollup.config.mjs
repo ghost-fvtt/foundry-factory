@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Johannes Loher
+//
+// SPDX-License-Identifier: MIT
+
 import shebang from 'rollup-plugin-preserve-shebang';
 import typescript from '@rollup/plugin-typescript';
 

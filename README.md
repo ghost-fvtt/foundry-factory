@@ -1,8 +1,14 @@
+<!--
+SPDX-FileCopyrightText: 2022 Johannes Loher
+
+SPDX-License-Identifier: MIT
+-->
+
 # Foundry Factory
 
 [![Checks](https://github.com/ghost-fvtt/foundry-factory/workflows/CI/badge.svg)](https://github.com/ghost-fvtt/foundry-factory/actions)
 [![npm downloads](https://img.shields.io/npm/dm/@ghost-fvtt/foundry-factory?color=orange&logo=npm)](https://www.npmjs.com/package/@ghost-fvtt/foundry-factory)
-![Repository License](https://img.shields.io/github/license/ghost-fvtt/foundry-factory)
+[![REUSE status](https://api.reuse.software/badge/github.com/ghost-fvtt/foundry-factory)](https://api.reuse.software/info/github.com/ghost-fvtt/foundry-factory)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-ghostfvtt-00B9FE?logo=kofi)](https://ko-fi.com/ghostfvtt)
 
 
@@ -138,13 +144,14 @@ couple of things you need to do:
 
 ## Licensing
 
-This software project is licensed under the MIT License, a copy of which can be
-found under [LICENSE](./LICENSE).
+This project uses [REUSE] to specify the used licenses. Currently, everything is
+licensed under the [MIT] license. More information (including the copyright
+holders) can be found in the individual files.
 
 ## Acknowledgment
 
 While this is not a fork of [Foundry Project Creator], a lot of inspiration was
-taken from it. You could think if it more as a rewrite with a couple of
+taken from it. You could think of it more as a rewrite with a couple of
 different design goals.
 
 Credit for the name "Foundry Factory" goes to [BadIdeasBureau].
@@ -154,5 +161,7 @@ Credit for the name "Foundry Factory" goes to [BadIdeasBureau].
 [Rollup]: https://rollupjs.org/
 [issue tracker]: https://github.com/ghost91-/foundry-factory/issues
 [Nunjucks]: https://mozilla.github.io/nunjucks/
+[REUSE]: https://reuse.software/
+[MIT]: LICENSES/MIT.txt
 [Foundry Project Creator]: https://gitlab.com/foundry-projects/foundry-pc/create-foundry-project
 [BadIdeasBureau]: https://github.com/BadIdeasBureau

@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2022 Johannes Loher
+
+SPDX-License-Identifier: MIT
+-->
+
 # ghost's Gulp + Rollup Preset for Foundry Factory
 
 The preset will create a project based on [Gulp] and [Rollup]. It is inspired

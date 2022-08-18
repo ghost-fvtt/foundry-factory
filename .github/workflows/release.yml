@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Johannes Loher
+#
+# SPDX-License-Identifier: MIT
+
 name: Release
 
 on: workflow_dispatch
@@ -9,10 +13,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: install node
+      - name: Install node
         uses: actions/setup-node@v3.4.1
         with:
           node-version: ${{ env.node_version }}
@@ -38,11 +42,23 @@ jobs:
       - name: Build
         run: npm run build
 
-  release:
-    needs: build
+  reuse:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: REUSE Compliance Check
+        uses: fsfe/reuse-action@v1
+
+  release:
+    needs:
+      - build
+      - reuse
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
           fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
