@@ -128,13 +128,13 @@ export class GhostGulpRollupPreset implements Preset {
       { name: 'Linter & Formatter (ESLint & Prettier)', value: 'linter', checked: true },
       { name: 'Unit Testing (Jest)', value: 'test' },
       {
-        name: 'CSS Pre-processor (Less / SCSS)',
+        name: 'CSS Pre-processor (Less/SCSS)',
         value: 'cssPreProcessor',
       },
     ];
     if (options.git) {
       choices.push({
-        name: 'CI/CD Pipeline (GitHub / GitLab)',
+        name: 'CI/CD Pipeline (GitHub/GitLab)',
         value: 'useCICD',
         checked: true,
       });
@@ -191,7 +191,7 @@ async function getStyleType(useCssPreProcessor: boolean): Promise<GhostGulpRollu
       type: 'list',
       message: 'Pick a CSS pre-processor:',
       choices: [
-        { name: 'Sass (.scss)', value: 'scss' },
+        { name: 'SCSS', value: 'scss' },
         { name: 'Less', value: 'less' },
       ],
     },

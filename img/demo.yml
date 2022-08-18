@@ -161,7 +161,7 @@ records:
   - delay: 750
     content: "\e[?1l\e>\e[?2004l\r\r\n\e]0;ghost@home: foundry-factory demo\a"
   - delay: 500
-    content: "\e[1m\e[36mFoundry Factory 1.3.0\e[39m\e[22m\r\n"
+    content: "\e[1m\e[36mFoundry Factory 1.3.1\e[39m\e[22m\r\n"
   - delay: 9
     content: "\e[?25l"
   - delay: 9
@@ -179,25 +179,25 @@ records:
   - delay: 1000
     content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mPlease pick a preset (links point to the documentation of the preset):\e[22m\e[0m \e[0m\e[36mghost's\e[39m\r\n\e[36m Gulp + Rollup Preset\e[39m\e[21D\e[21C\r\n\e[?25h\e[?25l"
   - delay: 35
-    content: "\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to \r\ntoggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection, and \e[36m\e[1m<enter>\e[22m\e[39m to proceed)\r\n\e[36m❯◯ TypeScript\e[39m\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n ◯ Unit Testing (Jest)\r\n ◯ CSS Pre-processor (Less / SCSS)\r\n \e[32m◉\e[39m CI/CD Pipeline (GitHub / GitLab)\e[35D\e[35C"
+    content: "\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to \r\ntoggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection, and \e[36m\e[1m<enter>\e[22m\e[39m to proceed)\r\n\e[36m❯◯ TypeScript\e[39m\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n ◯ Unit Testing (Jest)\r\n ◯ CSS Pre-processor (Less/SCSS)\r\n \e[32m◉\e[39m CI/CD Pipeline (GitHub/GitLab)\e[35D\e[35C"
     # enter -> Check features (> TypeScript)
   - delay: 1000
-    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to \r\ntoggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection, and \e[36m\e[1m<enter>\e[22m\e[39m to proceed)\r\n ◯ TypeScript\r\n\e[36m❯\e[32m◉\e[39m\e[36m Linter & Formatter (ESLint & Prettier)\e[39m\r\n ◯ Unit Testing (Jest)\r\n ◯ CSS Pre-processor (Less / SCSS)\r\n \e[32m◉\e[39m CI/CD Pipeline (GitHub / GitLab)\e[35D\e[35C"
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to \r\ntoggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection, and \e[36m\e[1m<enter>\e[22m\e[39m to proceed)\r\n ◯ TypeScript\r\n\e[36m❯\e[32m◉\e[39m\e[36m Linter & Formatter (ESLint & Prettier)\e[39m\r\n ◯ Unit Testing (Jest)\r\n ◯ CSS Pre-processor (Less/SCSS)\r\n \e[32m◉\e[39m CI/CD Pipeline (GitHub/GitLab)\e[35D\e[35C"
     # down -> (> Linter...)
   - delay: 500
-    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to \r\ntoggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection, and \e[36m\e[1m<enter>\e[22m\e[39m to proceed)\r\n ◯ TypeScript\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n\e[36m❯◯ Unit Testing (Jest)\e[39m\r\n ◯ CSS Pre-processor (Less / SCSS)\r\n \e[32m◉\e[39m CI/CD Pipeline (GitHub / GitLab)\e[35D\e[35C"
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to \r\ntoggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection, and \e[36m\e[1m<enter>\e[22m\e[39m to proceed)\r\n ◯ TypeScript\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n\e[36m❯◯ Unit Testing (Jest)\e[39m\r\n ◯ CSS Pre-processor (Less/SCSS)\r\n \e[32m◉\e[39m CI/CD Pipeline (GitHub/GitLab)\e[35D\e[35C"
     # down -> (> Unit Testing)
   - delay: 500
-    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to \r\ntoggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection, and \e[36m\e[1m<enter>\e[22m\e[39m to proceed)\r\n ◯ TypeScript\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n ◯ Unit Testing (Jest)\r\n\e[36m❯◯ CSS Pre-processor (Less / SCSS)\e[39m\r\n \e[32m◉\e[39m CI/CD Pipeline (GitHub / GitLab)\e[35D\e[35C"
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to \r\ntoggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection, and \e[36m\e[1m<enter>\e[22m\e[39m to proceed)\r\n ◯ TypeScript\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n ◯ Unit Testing (Jest)\r\n\e[36m❯◯ CSS Pre-processor (Less/SCSS)\e[39m\r\n \e[32m◉\e[39m CI/CD Pipeline (GitHub/GitLab)\e[35D\e[35C"
     # down -> (> CSS Pre-processor)
   - delay: 750
-    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to \r\ntoggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection, and \e[36m\e[1m<enter>\e[22m\e[39m to proceed)\r\n ◯ TypeScript\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n ◯ Unit Testing (Jest)\r\n\e[36m❯\e[32m◉\e[39m\e[36m CSS Pre-processor (Less / SCSS)\e[39m\r\n \e[32m◉\e[39m CI/CD Pipeline (GitHub / GitLab)\e[35D\e[35C"
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m(Press \e[36m\e[1m<space>\e[22m\e[39m to select, \e[36m\e[1m<a>\e[22m\e[39m to \r\ntoggle all, \e[36m\e[1m<i>\e[22m\e[39m to invert selection, and \e[36m\e[1m<enter>\e[22m\e[39m to proceed)\r\n ◯ TypeScript\r\n \e[32m◉\e[39m Linter & Formatter (ESLint & Prettier)\r\n ◯ Unit Testing (Jest)\r\n\e[36m❯\e[32m◉\e[39m\e[36m CSS Pre-processor (Less/SCSS)\e[39m\r\n \e[32m◉\e[39m CI/CD Pipeline (GitHub/GitLab)\e[35D\e[35C"
     # space -> (> CSS Pre-processor)
   - delay: 750
-    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m\e[36mLinter & Formatter (ESLint & \e[39m\r\n\e[36mPrettier), CSS Pre-processor (Less / SCSS), CI/CD Pipeline (GitHub / GitLab)\e[39m\e[76D\e[71C\r\n\e[?25h\e[?25l\e[32m?\e[39m \e[1mPick a CSS pre-processor:\e[22m\e[0m \e[0m\e[2m(Use arrow keys)\e[22m\r\n\e[36m❯ Sass (.scss)\e[39m \r\n  Less \e[7D\e[7C"
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mCheck the features needed for your project:\e[22m\e[0m \e[0m\e[36mLinter & Formatter (ESLint & \e[39m\r\n\e[36mPrettier), CSS Pre-processor (Less/SCSS), CI/CD Pipeline (GitHub/GitLab)\e[39m\e[76D\e[71C\r\n\e[?25h\e[?25l\e[32m?\e[39m \e[1mPick a CSS pre-processor:\e[22m\e[0m \e[0m\e[2m(Use arrow keys)\e[22m\r\n\e[36m❯ SCSS\e[39m \r\n  Less \e[7D\e[7C"
     # enter -> Pick a Pre-processor (> Sass)
   - delay: 1000
-    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mPick a CSS pre-processor:\e[22m\e[0m \e[0m\r\n  Sass (.scss) \r\n\e[36m❯ Less\e[39m \e[7D\e[7C"
+    content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mPick a CSS pre-processor:\e[22m\e[0m \e[0m\r\n  SCSS \r\n\e[36m❯ Less\e[39m \e[7D\e[7C"
     # down -> (> LESS)
   - delay: 750
     content: "\e[2K\e[1A\e[2K\e[1A\e[2K\e[G\e[32m?\e[39m \e[1mPick a CSS pre-processor:\e[22m\e[0m \e[0m\e[36mLess\e[39m\e[32D\e[32C\r\n\e[?25h\e[?25l\e[32m?\e[39m \e[1mPick a CI/CD type:\e[22m\e[0m \e[0m\e[2m(Use arrow keys)\e[22m\r\n\e[36m❯ GitHub\e[39m \r\n  GitLab \e[9D\e[9C"
