@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/ghost91-/foundry-factory/compare/v1.3.0...v1.3.1) (2022-08-18)
+
+
+### Bug Fixes
+
+* correct some spelling mistakes ([8873929](https://github.com/ghost91-/foundry-factory/commit/88739291e5e1d0601398bea8c208a7d3c484a9c8))
+
 ## [1.3.0](https://github.com/ghost91-/foundry-factory/compare/v1.2.0...v1.3.0) (2022-08-16)
 
 
