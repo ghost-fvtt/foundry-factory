@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Johannes Loher
+//
+// SPDX-License-Identifier: MIT
+
 import chalk from 'chalk';
 import fs from 'fs-extra';
 import inquirer from 'inquirer';

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Johannes Loher
+//
+// SPDX-License-Identifier: MIT
+
 import { dirname, resolve } from 'path';
 import { URL, fileURLToPath } from 'url';
 

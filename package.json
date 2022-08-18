@@ -73,7 +73,9 @@
   ],
   "files": [
     "template",
-    "dist"
+    "dist",
+    "LICENSES",
+    ".reuse"
   ],
   "publishConfig": {
     "access": "public"

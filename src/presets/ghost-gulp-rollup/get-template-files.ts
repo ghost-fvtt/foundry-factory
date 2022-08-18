@@ -1,3 +1,8 @@
+// SPDX-FileCopyrightText: 2022 Johannes Loher
+// SPDX-FileCopyrightText: 2022 David Archibald
+//
+// SPDX-License-Identifier: MIT
+
 import path from 'path';
 
 import type { TargetFilePath, TemplateFilePath } from '../preset';

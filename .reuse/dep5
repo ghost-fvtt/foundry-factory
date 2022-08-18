@@ -1,0 +1,4 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: foundry-factory
+Upstream-Contact: Johannes Loher <johannes.loher@fg4f.de>
+Source: https://github.com/ghost-fvtt/foundry-factory

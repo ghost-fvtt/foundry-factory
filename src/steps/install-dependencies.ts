@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Johannes Loher
+//
+// SPDX-License-Identifier: MIT
+
 import chalk from 'chalk';
 import { exec } from 'child_process';
 import ora from 'ora';
