@@ -22,7 +22,7 @@
     "@rollup/plugin-typescript": "8.4.0",
     "@types/fs-extra": "9.0.13",
     "@types/inquirer": "9.0.1",
-    "@types/jest": "28.1.7",
+    "@types/jest": "28.1.8",
     "@types/nunjucks": "3.2.1",
     "@typescript-eslint/eslint-plugin": "5.34.0",
     "@typescript-eslint/parser": "5.34.0",
