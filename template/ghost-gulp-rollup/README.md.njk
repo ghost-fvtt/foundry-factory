@@ -56,7 +56,7 @@ the built {{ type }} to your local Foundry VTT installation's data folder. In
 order to do so, first add a file called `foundryconfig.json` to the project root
 with the following content:
 
-```
+```json
 {
   "dataPath": "/absolute/path/to/your/FoundryVTT"
 }
@@ -67,12 +67,33 @@ with the following content:
 
 Then run
 
-```
+```shellscript
 {% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} link-project
 ```
 
-On Windows, creating symlinks requires administrator privileges, so unfortunately
-you need to run the above command in an administrator terminal for it to work.
+On Windows, creating symlinks requires administrator privileges, so
+unfortunately you need to run the above command in an administrator terminal for
+it to work.
+
+You can also specify multiple profiles in the `foundryconfig.json` to link to
+different data folders:
+
+```json
+{
+  "dataPath": "/absolute/path/to/your/FoundryVTT",
+  "profiles": {
+    "some-profile-name": {
+      "dataPath": "/absolute/path/to/another/FoundryVTT"
+    }
+  }
+}
+```
+
+In order to link to the data folder specified in a profile, run
+
+```shellscript
+{% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} link-project {% if packageManager == "npm" %}-- {% endif %}-p some-profile-name
+```
 {% if useTesting %}
 ### Running the tests
 

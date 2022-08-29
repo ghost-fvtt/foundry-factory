@@ -116,18 +116,27 @@ export async function clean() {
 
 /**
  * Get the data path of Foundry VTT based on what is configured in `foundryconfig.json`
+ * @param {string|undefined} [profile]  The profile to use
  */
-function getDataPath() {
-  const config = fs.readJSONSync('foundryconfig.json');
+function getDataPath(profile) {
+  const { profiles, ...defaultConfig } = fs.readJSONSync('foundryconfig.json');
+  const profileConfig = profiles?.[profile];
+  if (profile !== undefined && profileConfig === undefined) {
+    throw new Error(`Profile ${profile} is not defined in foundryconfig.json`);
+  }
 
-  if (config?.dataPath) {
-    if (!fs.existsSync(path.resolve(config.dataPath))) {
-      throw new Error('User Data path invalid, no Data directory found');
+  const config = { ...defaultConfig, ...profileConfig };
+  const dataPath = config.dataPath;
+
+  const profileMessage = profile !== undefined ? ` (profile: ${profile})` : '';
+  if (dataPath) {
+    if (!fs.existsSync(path.resolve(dataPath))) {
+      throw new Error(`dataPath '${dataPath} does not exist${profileMessage}`);
     }
 
-    return path.resolve(config.dataPath);
+    return path.resolve(dataPath);
   } else {
-    throw new Error('No User Data path defined in foundryconfig.json');
+    throw new Error(`No dataPath defined in foundryconfig.json${profileMessage}`);
   }
 }
 
@@ -135,6 +144,19 @@ function getDataPath() {
  * Link build to User Data folder
  */
 export async function link() {
+  const argv = yargs(hideBin(process.argv))
+    .option('clean', {
+      alias: 'c',
+      type: 'boolean',
+      default: false,
+    })
+    .option('profile', {
+      alias: 'p',
+      type: 'string',
+    }).argv;
+  const clean = argv.c;
+  const profile = argv.p;
+
   let destinationDirectory;
   if (fs.existsSync(path.resolve(sourceDirectory, '{{ type }}.json'))) {
     destinationDirectory = '{{ type }}s';
@@ -142,14 +164,7 @@ export async function link() {
     throw new Error('Could not find {{ type }}.json');
   }
 
-  const linkDirectory = path.resolve(getDataPath(), 'Data', destinationDirectory, packageId);
-
-  const argv = yargs(hideBin(process.argv)).option("clean", {
-    alias: "c",
-    type: "boolean",
-    default: false,
-  }).argv;
-  const clean = argv.c;
+  const linkDirectory = path.resolve(getDataPath(profile), 'Data', destinationDirectory, packageId);
 
   if (clean) {
     console.log(`Removing build in ${linkDirectory}.`);

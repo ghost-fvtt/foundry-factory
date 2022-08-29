@@ -82,13 +82,33 @@ Provide the path to your foundry data folder in the `foundryconfig.json` file in
 (if you are using Windows, make sure to use `\` as a path separator instead of `/`)
 
 Then run
-```
+```shellscript
 npm run link-project
 ```
 
 On Windows, creating symlinks requires administrator privileges, so
 unfortunately you need to run the above command in an administrator terminal for
 it to work.
+
+You can also specify multiple profiles in the `foundryconfig.json` to link to
+different data folders:
+
+```json
+{
+  "dataPath": "/absolute/path/to/your/FoundryVTT",
+  "profiles": {
+    "some-profile-name": {
+      "dataPath": "/absolute/path/to/another/FoundryVTT"
+    }
+  }
+}
+```
+
+In order to link to the data folder specified in a profile, run
+
+```shellscript
+npm run link-project -- -p some-profile-name
+```
 
 ### Run the tests (if testing was set up)
 
