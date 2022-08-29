@@ -75,7 +75,7 @@ Provide the path to your foundry data folder in the `foundryconfig.json` file in
 
 ```json
 {
-  "dataPath": "/absolute/path/to/your/FoundryVTT"
+  "dataPath": ["/absolute/path/to/your/FoundryVTT"]
 }
 ```
 
@@ -89,6 +89,9 @@ npm run link-project
 On Windows, creating symlinks requires administrator privileges, so
 unfortunately you need to run the above command in an administrator terminal for
 it to work.
+
+You can also link to multiple data folders by specifying multiple paths in the
+`dataPath` array.
 
 ### Run the tests (if testing was set up)
 
