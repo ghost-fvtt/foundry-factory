@@ -58,7 +58,7 @@ with the following content:
 
 ```
 {
-  "dataPath": "/absolute/path/to/your/FoundryVTT"
+  "dataPath": ["/absolute/path/to/your/FoundryVTT"]
 }
 ```
 
@@ -71,8 +71,12 @@ Then run
 {% if packageManager == "npm" %}npm run{% else %}yarn{% endif %} link-project
 ```
 
-On Windows, creating symlinks requires administrator privileges, so unfortunately
-you need to run the above command in an administrator terminal for it to work.
+On Windows, creating symlinks requires administrator privileges, so
+unfortunately you need to run the above command in an administrator terminal for
+it to work.
+
+You can also link to multiple data folders by specifying multiple paths in the
+`dataPath` array.
 {% if useTesting %}
 ### Running the tests
 
