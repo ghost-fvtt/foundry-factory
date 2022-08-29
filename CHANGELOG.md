@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/ghost91-/foundry-factory/compare/v1.3.1...v1.4.0) (2022-08-29)
+
+
+### Features
+
+* allow specifying multiple dataPaths in ghost'' gulp+rollup template ([f37aa0e](https://github.com/ghost91-/foundry-factory/commit/f37aa0e0ff9b16c3d304dba32a0c1994b01a7b87)), closes [#318](https://github.com/ghost91-/foundry-factory/issues/318)
+
 ### [1.3.1](https://github.com/ghost91-/foundry-factory/compare/v1.3.0...v1.3.1) (2022-08-18)
 
 
