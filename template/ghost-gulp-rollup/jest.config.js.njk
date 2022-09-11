@@ -4,10 +4,5 @@
 
 export default {
 {% if useTypeScript %}  preset: 'ts-jest',
-{% endif %}  testEnvironment: 'node',{% if useTypeScript %}
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/test/tsconfig.json',
-    },
-  },{% endif %}
+{% endif %}  testEnvironment: 'jsdom',
 };
