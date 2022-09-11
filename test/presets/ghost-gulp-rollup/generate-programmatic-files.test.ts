@@ -3,6 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
+import { describe, expect, it } from '@jest/globals';
+
 import {
   generateManifest,
   generatePackage,
