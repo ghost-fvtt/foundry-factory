@@ -91,10 +91,10 @@ export class GhostGulpRollupPreset implements Preset {
       }
     }
     if (this.ghostGulpRollupOptions.useTesting) {
-      devDependencies = devDependencies.concat(['jest', 'jest-junit']);
+      devDependencies = devDependencies.concat(['jest', 'jest-environment-jsdom', 'jest-junit']);
 
       if (this.ghostGulpRollupOptions.useTypeScript) {
-        devDependencies = devDependencies.concat(['@types/jest', 'ts-jest']);
+        devDependencies = devDependencies.concat(['ts-jest']);
       }
     }
     if (this.ghostGulpRollupOptions.styleType === 'less') {
