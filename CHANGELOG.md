@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/ghost91-/foundry-factory/compare/v1.4.0...v1.4.1) (2022-09-11)
+
+
+### Bug Fixes
+
+* update for jest 29 compatibility ([b64ce4d](https://github.com/ghost91-/foundry-factory/commit/b64ce4d3e9b0ef5ebf3fabfc431c15c4290bfcfe))
+
 ## [1.4.0](https://github.com/ghost91-/foundry-factory/compare/v1.3.1...v1.4.0) (2022-08-29)
 
 
