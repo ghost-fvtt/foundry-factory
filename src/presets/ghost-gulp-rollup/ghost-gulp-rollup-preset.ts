@@ -55,7 +55,7 @@ export class GhostGulpRollupPreset implements Preset {
       'fs-extra',
       'gulp',
       'gulp-sourcemaps',
-      'rollup',
+      'rollup@2',
       'vinyl-buffer',
       'vinyl-source-stream',
       'yargs',
