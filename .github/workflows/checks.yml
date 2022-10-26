@@ -14,12 +14,12 @@ on:
     branches:
       - '*'
 
-env:
-  node_version: 16
-
 jobs:
   check:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [16, 18]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -27,7 +27,7 @@ jobs:
       - name: install node
         uses: actions/setup-node@v3.5.1
         with:
-          node-version: ${{ env.node_version }}
+          node-version: ${{ matrix.node_version }}
 
       - name: Cache Node.js modules
         uses: actions/cache@v3
@@ -44,17 +44,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: REUSE Compliance Check
+        uses: fsfe/reuse-action@v1
+
       - name: Test
         run: npm run test:ci
 
       - name: Build
         run: npm run build
-
-  reuse:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: REUSE Compliance Check
-        uses: fsfe/reuse-action@v1
