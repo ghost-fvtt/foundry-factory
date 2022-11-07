@@ -21,7 +21,7 @@
   "devDependencies": {
     "@rollup/plugin-typescript": "9.0.2",
     "@types/fs-extra": "9.0.13",
-    "@types/inquirer": "9.0.2",
+    "@types/inquirer": "9.0.3",
     "@types/nunjucks": "3.2.1",
     "@typescript-eslint/eslint-plugin": "5.42.0",
     "@typescript-eslint/parser": "5.42.0",
