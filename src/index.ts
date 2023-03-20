@@ -8,7 +8,7 @@ import { Command, Option } from 'commander';
 import path from 'path';
 
 import { createProject } from './create-project';
-import { CLIOptions, packageManagers, validateOptions as validateOptions } from './options';
+import { type CLIOptions, packageManagers, validateOptions } from './options';
 import { presets } from './presets/presets';
 import { version } from './utils/version';
 

@@ -8,7 +8,7 @@
     "declaration": true,
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
