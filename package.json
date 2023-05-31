@@ -35,7 +35,7 @@
     "rollup-plugin-preserve-shebang": "1.0.1",
     "tslib": "2.5.2",
     "typescript": "5.0.4",
-    "vitest": "0.31.2"
+    "vitest": "0.31.3"
   },
   "scripts": {
     "build": "rollup -c",
