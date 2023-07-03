@@ -61,7 +61,7 @@ jobs:
           git config user.email "<>"
 
       - name: Bump version
-        uses: qzb/standard-version-action@v1.0.10
+        uses: qzb/standard-version-action@v1.0.13
 
       - name: Push changes
         uses: ad-m/github-push-action@master
