@@ -33,7 +33,7 @@
     "prettier": "2.8.8",
     "rollup": "3.26.3",
     "rollup-plugin-preserve-shebang": "1.0.1",
-    "tslib": "2.6.0",
+    "tslib": "2.6.1",
     "typescript": "5.1.6",
     "vitest": "0.33.0"
   },
