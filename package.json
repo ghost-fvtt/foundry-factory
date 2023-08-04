@@ -31,7 +31,7 @@
     "husky": "8.0.3",
     "lint-staged": "13.2.3",
     "prettier": "2.8.8",
-    "rollup": "3.27.1",
+    "rollup": "3.27.2",
     "rollup-plugin-preserve-shebang": "1.0.1",
     "tslib": "2.6.1",
     "typescript": "5.1.6",
