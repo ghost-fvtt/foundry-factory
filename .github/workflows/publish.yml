@@ -79,7 +79,7 @@ jobs:
         run: npm ci --cache .npm --prefer-offline
 
       - name: Download production artifacts for publication
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
