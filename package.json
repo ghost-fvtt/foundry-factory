@@ -15,7 +15,7 @@
     "fs-extra": "^11.0.0",
     "inquirer": "^9.0.0",
     "nunjucks": "^3.2.3",
-    "ora": "^7.0.0",
+    "ora": "^8.0.0",
     "standard-version": "^9.3.2"
   },
   "devDependencies": {
