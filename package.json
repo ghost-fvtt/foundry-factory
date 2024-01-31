@@ -29,7 +29,7 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "4.2.1",
     "husky": "9.0.7",
-    "lint-staged": "15.2.0",
+    "lint-staged": "15.2.1",
     "prettier": "2.8.8",
     "rollup": "4.9.6",
     "rollup-plugin-preserve-shebang": "1.0.1",
