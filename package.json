@@ -11,7 +11,7 @@
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
     "chalk": "^5.0.0",
-    "commander": "^11.0.0",
+    "commander": "^12.0.0",
     "fs-extra": "^11.0.0",
     "inquirer": "^9.0.0",
     "nunjucks": "^3.2.3",
