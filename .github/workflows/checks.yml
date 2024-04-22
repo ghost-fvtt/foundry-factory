@@ -22,7 +22,7 @@ jobs:
         node_version: [16, 18]
     steps:
       - name: Checkout code
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
 
       - name: install node
         uses: actions/setup-node@v4.0.2
