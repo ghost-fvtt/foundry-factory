@@ -19,7 +19,7 @@
     "standard-version": "^9.3.2"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "12.1.0",
+    "@rollup/plugin-typescript": "12.1.1",
     "@types/fs-extra": "11.0.4",
     "@types/inquirer": "9.0.7",
     "@types/nunjucks": "3.2.6",
