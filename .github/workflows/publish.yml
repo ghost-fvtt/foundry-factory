@@ -40,7 +40,7 @@ jobs:
         run: npm run lint
 
       - name: REUSE Compliance Check
-        uses: fsfe/reuse-action@v4
+        uses: fsfe/reuse-action@v5
 
       - name: Test
         run: npm run test:ci
